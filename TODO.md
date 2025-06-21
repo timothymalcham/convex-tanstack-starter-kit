@@ -1,6 +1,6 @@
 # TODO - Convex TanStack Starter Kit
 
-## <� Core Infrastructure
+## Core Infrastructure
 
 ### Authentication & Authorization
 - [ ] Set up Convex Auth with email/password authentication
@@ -31,7 +31,7 @@
 - [ ] Create data export functions
 - [ ] Add batch operations for admin tasks
 
-## <� Frontend Components & UI
+## Frontend Components & UI
 
 ### Design System
 - [ ] Set up TailwindCSS configuration
@@ -59,7 +59,7 @@
 - [ ] Create scroll-triggered animations
 - [ ] Add gesture handling for mobile
 
-## =� Core Application Features
+## Core Application Features
 
 ### User Dashboard
 - [ ] Create authenticated dashboard layout
@@ -80,6 +80,7 @@
 - [ ] Build FAQ section
 
 ### Example CRUD Application
+- [ ] Remove existing "board/boards" route, pages, components, etc.
 - [ ] Create todo/task management example
 - [ ] Build list view with pagination
 - [ ] Add create/edit task forms
@@ -89,7 +90,7 @@
 - [ ] Add task categories/tags
 - [ ] Implement task sharing between users
 
-## =� Billing & Payments
+## Billing & Payments
 
 ### Stripe Integration
 - [ ] Set up Stripe configuration
@@ -108,7 +109,7 @@
 - [ ] Add donation/tip functionality
 - [ ] Create affiliate program support
 
-## =� Communication & Notifications
+## Communication & Notifications
 
 ### Email System
 - [ ] Set up Resend for email delivery
@@ -135,7 +136,8 @@
 - [ ] Implement toast queuing
 - [ ] Add action buttons to toasts
 
-## = Data Management & Analytics
+## =
+ Data Management & Analytics
 
 ### Search & Filtering
 - [ ] Implement full-text search with Convex search indexes
@@ -161,7 +163,7 @@
 - [ ] Add bulk data operations
 - [ ] Create data migration tools
 
-## =� Developer Experience
+## Developer Experience
 
 ### Code Quality & Testing
 - [ ] Set up Biome for linting and formatting
@@ -197,7 +199,7 @@
 - [ ] Create user-friendly error pages
 - [ ] Add retry mechanisms
 
-## =� Deployment & DevOps
+## Deployment & DevOps
 
 ### CI/CD Pipeline
 - [ ] Set up GitHub Actions workflows
@@ -223,7 +225,7 @@
 - [ ] Add alerting for critical issues
 - [ ] Create uptime monitoring
 
-## =� Documentation & Examples
+## Documentation & Examples
 
 ### Developer Documentation
 - [ ] Create comprehensive README
@@ -271,7 +273,7 @@
 - [ ] Add data encryption
 - [ ] Implement 2FA support
 
-## <� Polish & Production Readiness
+## Polish & Production Readiness
 
 ### Performance Optimization
 - [ ] Add code splitting
