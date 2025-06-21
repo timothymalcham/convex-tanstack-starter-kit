@@ -26,7 +26,7 @@
 - [x] Progress
 - [x] Radio
 - [x] Scroll Area
-- [ ] Select
+- [x] Select
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
