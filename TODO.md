@@ -2,10 +2,14 @@
 
 - [x] Setup baseUI (https://base-ui.com/react/overview/quick-start)
 - [x] Upgrade to tailwind v4
-- [ ] Assemble all the basic baseUI components in src/components/ui
+- [ ] Assemble all the basic baseUI components in src/components/ui:
 - [x] Button
 - [x] Field
 - [x] Accordion
+- [x] Alert dialog
+- [x] Avatar
+- [ ] Checkbox
+- [ ] Make sure all component have comments/docs showing example usage
 
 ## Core Infrastructure
 
