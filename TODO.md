@@ -8,7 +8,9 @@
 - [x] Accordion
 - [x] Alert dialog
 - [x] Avatar
-- [ ] Checkbox
+- [x] Checkbox
+- [x] Checkbox Group
+- [ ] Collapsible
 - [ ] Make sure all component have comments/docs showing example usage
 
 ## Core Infrastructure
