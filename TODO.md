@@ -11,7 +11,8 @@
 - [x] Checkbox
 - [x] Checkbox Group
 - [x] Collapsible
-- [ ] Context Menu
+- [x] Context Menu
+- [ ] Dialog
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
