@@ -23,7 +23,8 @@
 - [x] Number field
 - [x] Popover
 - [x] Preview card
-- [ ] Progress
+- [x] Progress
+- [ ] Radio
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
