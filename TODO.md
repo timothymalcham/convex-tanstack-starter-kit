@@ -17,6 +17,7 @@
 - [x] Form   
 - [x] Input
 - [x] Menu
+- [x] Menubar
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
