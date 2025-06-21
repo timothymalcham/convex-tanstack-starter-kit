@@ -19,6 +19,9 @@
 - [x] Menu
 - [x] Menubar
 - [x] Meter
+- [x] nav menu
+- [x] Number field
+- [ ] Popover
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
