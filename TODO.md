@@ -24,7 +24,9 @@
 - [x] Popover
 - [x] Preview card
 - [x] Progress
-- [ ] Radio
+- [x] Radio
+- [x] Scroll Area
+- [ ] Select
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
