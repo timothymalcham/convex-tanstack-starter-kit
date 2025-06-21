@@ -21,8 +21,9 @@
 - [x] Meter
 - [x] nav menu
 - [x] Number field
-- [ ] Popover
-- [ ] Preview card
+- [x] Popover
+- [x] Preview card
+- [ ] Progress
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
