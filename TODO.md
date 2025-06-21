@@ -5,7 +5,7 @@
 - [ ] Assemble all the basic baseUI components in src/components/ui
 - [x] Button
 - [x] Field
-- [ ] Accordion
+- [x] Accordion
 
 ## Core Infrastructure
 
