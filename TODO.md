@@ -18,6 +18,7 @@
 - [x] Input
 - [x] Menu
 - [x] Menubar
+- [x] Meter
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
