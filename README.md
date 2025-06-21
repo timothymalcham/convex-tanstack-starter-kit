@@ -40,3 +40,11 @@ This starter kit takes a maximalist approach, it contains a lot of features. Del
   npm run seed
   npm run dev
 ```
+
+This example uses Convex with TanStack Query and TanStack Start to provide
+
+- Typesafe TanStack Query options factories like `convexQuery` for use with `useQuery`, `useSuspenseQuery` etc.
+- Live-updating queries: updates come in over a WebSocket instead of requiring polling
+- Automatic query invalidation: when a mutation succeeds all queries it affects update automatically
+- Selective optimistic update rollback: when a mutation succeeds only its update will be rolled back, with other optimistic updates reapplied
+- Consistent snapshot reads of database state: /messages will never return a foreign key for a /user that doesn't exist until the next fetch
