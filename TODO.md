@@ -10,8 +10,9 @@
 - [x] Avatar
 - [x] Checkbox
 - [x] Checkbox Group
-- [ ] Collapsible
-- [ ] Make sure all component have comments/docs showing example usage
+- [x] Collapsible
+- [ ] Context Menu
+- [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
 
