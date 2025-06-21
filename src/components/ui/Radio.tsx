@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { RadioGroup as BaseRadioGroup, Radio as BaseRadio } from '@base-ui-components/react/radio'
+import { Radio as BaseRadio } from '@base-ui-components/react/radio'
+import { RadioGroup as BaseRadioGroup } from '@base-ui-components/react/radio-group'
 import { twMerge } from 'tailwind-merge'
 
 /**
@@ -333,7 +334,7 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
         )}
         {...props}
       >
-        <span 
+        <span
           className={twMerge(
             'rounded-full bg-white opacity-0 transition-opacity duration-150',
             'group-data-[checked]:opacity-100',

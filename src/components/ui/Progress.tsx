@@ -143,7 +143,6 @@ import { twMerge } from 'tailwind-merge'
  *     <Progress.Label className="font-medium">Deployment Progress</Progress.Label>
  *     <Progress.Track className="relative mt-2">
  *       <Progress.Indicator />
- *       {/* Step markers */}
  *       {processSteps.map((step, index) => (
  *         <div 
  *           key={step.name}
@@ -325,7 +324,7 @@ const ProgressValue = React.forwardRef<HTMLSpanElement, ProgressValueProps>(
       >
         {children || ((value, max) => {
           if (value == null) return '—'
-          const percentage = Math.round((value / max) * 100)
+          const percentage = Math.round((parseInt(value, 10) / (max ?? 1)) * 100)
           return showPercentage ? `${percentage}%` : `${value}/${max}`
         })}
       </BaseProgress.Value>
