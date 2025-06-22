@@ -1,19 +1,19 @@
-import * as React from 'react'
-import { Radio as BaseRadio } from '@base-ui-components/react/radio'
-import { RadioGroup as BaseRadioGroup } from '@base-ui-components/react/radio-group'
-import { twMerge } from 'tailwind-merge'
+import * as React from "react";
+import { Radio as BaseRadio } from "@base-ui-components/react/radio";
+import { RadioGroup as BaseRadioGroup } from "@base-ui-components/react/radio-group";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Radio Component
- * 
+ *
  * A customizable radio button for forms with support for radio groups,
  * allowing users to select one option from a set of mutually exclusive choices.
- * 
+ *
  * @example
  * ```jsx
  * import { RadioGroup, Radio } from '@/components/ui/Radio'
  * import { Field } from '@/components/ui/Field'
- * 
+ *
  * // Basic radio group
  * <RadioGroup.Root defaultValue="medium">
  *   <div className="space-y-2">
@@ -31,7 +31,7 @@ import { twMerge } from 'tailwind-merge'
  *     </Radio.Root>
  *   </div>
  * </RadioGroup.Root>
- * 
+ *
  * // With Field component for forms
  * <Field.Root>
  *   <Field.Label>Choose your plan</Field.Label>
@@ -44,7 +44,7 @@ import { twMerge } from 'tailwind-merge'
  *           <div className="text-sm text-gray-600">$9/month • Up to 5 projects</div>
  *         </div>
  *       </Radio.Root>
- *       
+ *
  *       <Radio.Root value="pro" className="flex items-start gap-3 p-3 border rounded hover:bg-gray-50">
  *         <Radio.Indicator />
  *         <div>
@@ -52,7 +52,7 @@ import { twMerge } from 'tailwind-merge'
  *           <div className="text-sm text-gray-600">$29/month • Unlimited projects</div>
  *         </div>
  *       </Radio.Root>
- *       
+ *
  *       <Radio.Root value="enterprise" className="flex items-start gap-3 p-3 border rounded hover:bg-gray-50">
  *         <Radio.Indicator />
  *         <div>
@@ -66,10 +66,10 @@ import { twMerge } from 'tailwind-merge'
  *     You can change your plan anytime
  *   </Field.Description>
  * </Field.Root>
- * 
+ *
  * // Controlled radio group
  * const [selectedColor, setSelectedColor] = React.useState('blue')
- * 
+ *
  * <div className="space-y-3">
  *   <label className="text-sm font-medium">Choose a color</label>
  *   <RadioGroup.Root value={selectedColor} onValueChange={setSelectedColor}>
@@ -81,7 +81,7 @@ import { twMerge } from 'tailwind-merge'
  *           <span>Red</span>
  *         </div>
  *       </Radio.Root>
- *       
+ *
  *       <Radio.Root value="blue" className="flex items-center gap-2">
  *         <Radio.Indicator />
  *         <div className="flex items-center gap-2">
@@ -89,7 +89,7 @@ import { twMerge } from 'tailwind-merge'
  *           <span>Blue</span>
  *         </div>
  *       </Radio.Root>
- *       
+ *
  *       <Radio.Root value="green" className="flex items-center gap-2">
  *         <Radio.Indicator />
  *         <div className="flex items-center gap-2">
@@ -99,12 +99,12 @@ import { twMerge } from 'tailwind-merge'
  *       </Radio.Root>
  *     </div>
  *   </RadioGroup.Root>
- *   
+ *
  *   <div className="text-sm text-gray-600">
  *     Selected: {selectedColor}
  *   </div>
  * </div>
- * 
+ *
  * // Radio cards for settings
  * <RadioGroup.Root defaultValue="auto">
  *   <div className="grid grid-cols-1 gap-3">
@@ -120,7 +120,7 @@ import { twMerge } from 'tailwind-merge'
  *         </div>
  *       </div>
  *     </Radio.Root>
- *     
+ *
  *     <Radio.Root value="dark" className="flex items-center gap-3 p-4 border-2 rounded-lg hover:border-blue-200 data-[checked]:border-blue-500 data-[checked]:bg-blue-50">
  *       <Radio.Indicator />
  *       <div className="flex items-center gap-3">
@@ -133,7 +133,7 @@ import { twMerge } from 'tailwind-merge'
  *         </div>
  *       </div>
  *     </Radio.Root>
- *     
+ *
  *     <Radio.Root value="auto" className="flex items-center gap-3 p-4 border-2 rounded-lg hover:border-blue-200 data-[checked]:border-blue-500 data-[checked]:bg-blue-50">
  *       <Radio.Indicator />
  *       <div className="flex items-center gap-3">
@@ -148,7 +148,7 @@ import { twMerge } from 'tailwind-merge'
  *     </Radio.Root>
  *   </div>
  * </RadioGroup.Root>
- * 
+ *
  * // Survey/questionnaire style
  * <div className="space-y-6">
  *   <div>
@@ -172,7 +172,7 @@ import { twMerge } from 'tailwind-merge'
  *     </RadioGroup.Root>
  *   </div>
  * </div>
- * 
+ *
  * // Disabled options
  * <RadioGroup.Root defaultValue="standard">
  *   <div className="space-y-2">
@@ -180,28 +180,28 @@ import { twMerge } from 'tailwind-merge'
  *       <Radio.Indicator />
  *       <span className="ml-2">Basic Shipping (5-7 days)</span>
  *     </Radio.Root>
- *     
+ *
  *     <Radio.Root value="standard">
  *       <Radio.Indicator />
  *       <span className="ml-2">Standard Shipping (3-5 days)</span>
  *     </Radio.Root>
- *     
+ *
  *     <Radio.Root value="express" disabled>
  *       <Radio.Indicator />
  *       <span className="ml-2">Express Shipping (1-2 days) - Not available</span>
  *     </Radio.Root>
- *     
+ *
  *     <Radio.Root value="overnight" disabled>
  *       <Radio.Indicator />
  *       <span className="ml-2">Overnight Shipping - Not available</span>
  *     </Radio.Root>
  *   </div>
  * </RadioGroup.Root>
- * 
+ *
  * // In a form with validation
  * const [paymentMethod, setPaymentMethod] = React.useState('')
  * const [error, setError] = React.useState('')
- * 
+ *
  * const handleSubmit = (e) => {
  *   e.preventDefault()
  *   if (!paymentMethod) {
@@ -211,7 +211,7 @@ import { twMerge } from 'tailwind-merge'
  *   setError('')
  *   // Process form
  * }
- * 
+ *
  * <form onSubmit={handleSubmit} className="space-y-4">
  *   <Field.Root>
  *     <Field.Label required>Payment Method</Field.Label>
@@ -224,7 +224,7 @@ import { twMerge } from 'tailwind-merge'
  *             <span>Credit Card</span>
  *           </div>
  *         </Radio.Root>
- *         
+ *
  *         <Radio.Root value="paypal" className="flex items-center gap-3 p-3 border rounded">
  *           <Radio.Indicator />
  *           <div className="flex items-center gap-2">
@@ -232,7 +232,7 @@ import { twMerge } from 'tailwind-merge'
  *             <span>PayPal</span>
  *           </div>
  *         </Radio.Root>
- *         
+ *
  *         <Radio.Root value="bank" className="flex items-center gap-3 p-3 border rounded">
  *           <Radio.Indicator />
  *           <div className="flex items-center gap-2">
@@ -244,8 +244,8 @@ import { twMerge } from 'tailwind-merge'
  *     </RadioGroup.Root>
  *     {error && <Field.Error>{error}</Field.Error>}
  *   </Field.Root>
- *   
- *   <button 
+ *
+ *   <button
  *     type="submit"
  *     className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
  *   >
@@ -256,102 +256,92 @@ import { twMerge } from 'tailwind-merge'
  */
 
 interface RadioGroupRootProps extends React.ComponentPropsWithoutRef<typeof BaseRadioGroup.Root> {
-  className?: string
+    className?: string;
 }
 
-const RadioGroupRoot = React.forwardRef<HTMLDivElement, RadioGroupRootProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseRadioGroup.Root
-        ref={ref}
-        className={twMerge('group', className)}
-        {...props}
-      />
-    )
-  }
-)
-RadioGroupRoot.displayName = 'RadioGroup.Root'
+const RadioGroupRoot = React.forwardRef<HTMLDivElement, RadioGroupRootProps>(({ className, ...props }, ref) => {
+    return <BaseRadioGroup.Root ref={ref} className={twMerge("group", className)} {...props} />;
+});
+RadioGroupRoot.displayName = "RadioGroup.Root";
 
 interface RadioRootProps extends React.ComponentPropsWithoutRef<typeof BaseRadio.Root> {
-  className?: string
-  size?: 'sm' | 'md' | 'lg'
+    className?: string;
+    size?: "sm" | "md" | "lg";
 }
 
-const RadioRoot = React.forwardRef<HTMLButtonElement, RadioRootProps>(
-  ({ className, size = 'md', ...props }, ref) => {
+const RadioRoot = React.forwardRef<HTMLButtonElement, RadioRootProps>(({ className, size = "md", ...props }, ref) => {
     return (
-      <BaseRadio.Root
-        ref={ref}
-        className={twMerge(
-          'group inline-flex cursor-pointer items-center gap-2',
-          'focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded',
-          'disabled:cursor-not-allowed disabled:opacity-50',
-          'transition-colors duration-150',
-          className
-        )}
-        data-size={size}
-        {...props}
-      />
-    )
-  }
-)
-RadioRoot.displayName = 'Radio.Root'
+        <BaseRadio.Root
+            ref={ref}
+            className={twMerge(
+                "group inline-flex cursor-pointer items-center gap-2",
+                "focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded",
+                "disabled:cursor-not-allowed disabled:opacity-50",
+                "transition-colors duration-150",
+                className,
+            )}
+            data-size={size}
+            {...props}
+        />
+    );
+});
+RadioRoot.displayName = "Radio.Root";
 
 interface RadioIndicatorProps extends React.ComponentPropsWithoutRef<typeof BaseRadio.Indicator> {
-  className?: string
-  size?: 'sm' | 'md' | 'lg'
+    className?: string;
+    size?: "sm" | "md" | "lg";
 }
 
 const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
-  ({ className, size = 'md', ...props }, ref) => {
-    const sizeStyles = {
-      sm: 'h-4 w-4',
-      md: 'h-5 w-5',
-      lg: 'h-6 w-6'
-    }
+    ({ className, size = "md", ...props }, ref) => {
+        const sizeStyles = {
+            sm: "h-4 w-4",
+            md: "h-5 w-5",
+            lg: "h-6 w-6",
+        };
 
-    const dotSizeStyles = {
-      sm: 'h-2 w-2',
-      md: 'h-2.5 w-2.5',
-      lg: 'h-3 w-3'
-    }
+        const dotSizeStyles = {
+            sm: "h-2 w-2",
+            md: "h-2.5 w-2.5",
+            lg: "h-3 w-3",
+        };
 
-    return (
-      <BaseRadio.Indicator
-        ref={ref}
-        className={twMerge(
-          'relative flex shrink-0 items-center justify-center rounded-full border-2',
-          'border-gray-300 bg-white transition-all duration-150',
-          'group-hover:border-gray-400',
-          'group-focus:border-blue-500',
-          'group-data-[checked]:border-blue-600 group-data-[checked]:bg-blue-600',
-          'group-disabled:cursor-not-allowed group-disabled:opacity-50',
-          'dark:border-gray-600 dark:bg-gray-900',
-          'dark:group-hover:border-gray-500',
-          'dark:group-data-[checked]:border-blue-500 dark:group-data-[checked]:bg-blue-500',
-          sizeStyles[size],
-          className
-        )}
-        {...props}
-      >
-        <span
-          className={twMerge(
-            'rounded-full bg-white opacity-0 transition-opacity duration-150',
-            'group-data-[checked]:opacity-100',
-            dotSizeStyles[size]
-          )}
-        />
-      </BaseRadio.Indicator>
-    )
-  }
-)
-RadioIndicator.displayName = 'Radio.Indicator'
+        return (
+            <BaseRadio.Indicator
+                ref={ref}
+                className={twMerge(
+                    "relative flex shrink-0 items-center justify-center rounded-full border-2",
+                    "border-gray-300 bg-white transition-all duration-150",
+                    "group-hover:border-gray-400",
+                    "group-focus:border-blue-500",
+                    "group-data-[checked]:border-blue-600 group-data-[checked]:bg-blue-600",
+                    "group-disabled:cursor-not-allowed group-disabled:opacity-50",
+                    "dark:border-gray-600 dark:bg-gray-900",
+                    "dark:group-hover:border-gray-500",
+                    "dark:group-data-[checked]:border-blue-500 dark:group-data-[checked]:bg-blue-500",
+                    sizeStyles[size],
+                    className,
+                )}
+                {...props}
+            >
+                <span
+                    className={twMerge(
+                        "rounded-full bg-white opacity-0 transition-opacity duration-150",
+                        "group-data-[checked]:opacity-100",
+                        dotSizeStyles[size],
+                    )}
+                />
+            </BaseRadio.Indicator>
+        );
+    },
+);
+RadioIndicator.displayName = "Radio.Indicator";
 
 export const RadioGroup = {
-  Root: RadioGroupRoot,
-}
+    Root: RadioGroupRoot,
+};
 
 export const Radio = {
-  Root: RadioRoot,
-  Indicator: RadioIndicator,
-}
+    Root: RadioRoot,
+    Indicator: RadioIndicator,
+};

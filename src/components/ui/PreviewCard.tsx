@@ -1,17 +1,17 @@
-import * as React from 'react'
-import { PreviewCard as BasePreviewCard } from '@base-ui-components/react/preview-card'
-import { twMerge } from 'tailwind-merge'
+import * as React from "react";
+import { PreviewCard as BasePreviewCard } from "@base-ui-components/react/preview-card";
+import { twMerge } from "tailwind-merge";
 
 /**
  * PreviewCard Component
- * 
+ *
  * A popup that appears when a link is hovered, showing a rich preview for sighted users.
  * Perfect for link previews, user profiles, product details, and contextual information.
- * 
+ *
  * @example
  * ```jsx
  * import { PreviewCard, PreviewCardContent } from '@/components/ui/PreviewCard'
- * 
+ *
  * // Basic link preview
  * <PreviewCard.Root>
  *   <PreviewCard.Trigger href="https://example.com">
@@ -19,9 +19,9 @@ import { twMerge } from 'tailwind-merge'
  *   </PreviewCard.Trigger>
  *   <PreviewCardContent>
  *     <div className="space-y-3">
- *       <img 
- *         src="/website-preview.jpg" 
- *         alt="Website preview" 
+ *       <img
+ *         src="/website-preview.jpg"
+ *         alt="Website preview"
  *         className="w-full h-32 object-cover rounded"
  *       />
  *       <div>
@@ -36,7 +36,7 @@ import { twMerge } from 'tailwind-merge'
  *     </div>
  *   </PreviewCardContent>
  * </PreviewCard.Root>
- * 
+ *
  * // User profile preview
  * <PreviewCard.Root>
  *   <PreviewCard.Trigger href="/users/johndoe" className="text-blue-600 hover:underline">
@@ -44,9 +44,9 @@ import { twMerge } from 'tailwind-merge'
  *   </PreviewCard.Trigger>
  *   <PreviewCardContent>
  *     <div className="flex items-start gap-3">
- *       <img 
- *         src="/users/johndoe.jpg" 
- *         alt="John Doe" 
+ *       <img
+ *         src="/users/johndoe.jpg"
+ *         alt="John Doe"
  *         className="w-12 h-12 rounded-full"
  *       />
  *       <div className="space-y-2">
@@ -55,7 +55,7 @@ import { twMerge } from 'tailwind-merge'
  *           <p className="text-sm text-gray-600">Senior Developer</p>
  *         </div>
  *         <p className="text-sm">
- *           Full-stack developer with 8+ years of experience 
+ *           Full-stack developer with 8+ years of experience
  *           in React, Node.js, and cloud architecture.
  *         </p>
  *         <div className="flex gap-4 text-xs text-gray-500">
@@ -67,7 +67,7 @@ import { twMerge } from 'tailwind-merge'
  *     </div>
  *   </PreviewCardContent>
  * </PreviewCard.Root>
- * 
+ *
  * // Product preview
  * <PreviewCard.Root>
  *   <PreviewCard.Trigger href="/products/laptop-pro" className="font-medium text-gray-900">
@@ -76,9 +76,9 @@ import { twMerge } from 'tailwind-merge'
  *   <PreviewCardContent showArrow>
  *     <PreviewCard.Arrow />
  *     <div className="space-y-3">
- *       <img 
- *         src="/products/macbook-pro.jpg" 
- *         alt="MacBook Pro" 
+ *       <img
+ *         src="/products/macbook-pro.jpg"
+ *         alt="MacBook Pro"
  *         className="w-full h-40 object-cover rounded"
  *       />
  *       <div>
@@ -101,7 +101,7 @@ import { twMerge } from 'tailwind-merge'
  *     </div>
  *   </PreviewCardContent>
  * </PreviewCard.Root>
- * 
+ *
  * // Article preview
  * <PreviewCard.Root>
  *   <PreviewCard.Trigger href="/blog/react-best-practices" className="text-blue-600 hover:underline">
@@ -109,9 +109,9 @@ import { twMerge } from 'tailwind-merge'
  *   </PreviewCard.Trigger>
  *   <PreviewCardContent side="top">
  *     <article className="space-y-3">
- *       <img 
- *         src="/blog/react-cover.jpg" 
- *         alt="Article cover" 
+ *       <img
+ *         src="/blog/react-cover.jpg"
+ *         alt="Article cover"
  *         className="w-full h-24 object-cover rounded"
  *       />
  *       <div>
@@ -119,7 +119,7 @@ import { twMerge } from 'tailwind-merge'
  *           React Best Practices for 2024: Performance, Security, and Maintainability
  *         </h3>
  *         <p className="text-sm text-gray-600 mt-2 line-clamp-3">
- *           Discover the latest React patterns and techniques that will help you 
+ *           Discover the latest React patterns and techniques that will help you
  *           build faster, more secure, and maintainable applications this year.
  *         </p>
  *       </div>
@@ -133,7 +133,7 @@ import { twMerge } from 'tailwind-merge'
  *     </article>
  *   </PreviewCardContent>
  * </PreviewCard.Root>
- * 
+ *
  * // GitHub repository preview
  * <PreviewCard.Root>
  *   <PreviewCard.Trigger href="https://github.com/facebook/react" className="font-mono text-blue-600">
@@ -152,7 +152,7 @@ import { twMerge } from 'tailwind-merge'
  *           </p>
  *         </div>
  *       </div>
- *       
+ *
  *       <div className="flex gap-4 text-sm">
  *         <div className="flex items-center gap-1">
  *           <span className="w-3 h-3 bg-yellow-400 rounded-full"></span>
@@ -165,14 +165,14 @@ import { twMerge } from 'tailwind-merge'
  *           🍴 45k
  *         </div>
  *       </div>
- *       
+ *
  *       <div className="text-xs text-gray-500">
  *         Updated 2 hours ago
  *       </div>
  *     </div>
  *   </PreviewCardContent>
  * </PreviewCard.Root>
- * 
+ *
  * // Custom delay configuration
  * <PreviewCard.Root openDelay={300} closeDelay={100}>
  *   <PreviewCard.Trigger href="/docs/api-reference" className="text-purple-600">
@@ -193,7 +193,7 @@ import { twMerge } from 'tailwind-merge'
  *     </div>
  *   </PreviewCardContent>
  * </PreviewCard.Root>
- * 
+ *
  * // Large preview card
  * <PreviewCard.Root>
  *   <PreviewCard.Trigger href="/case-studies/startup-success" className="text-green-600 font-medium">
@@ -201,15 +201,15 @@ import { twMerge } from 'tailwind-merge'
  *   </PreviewCard.Trigger>
  *   <PreviewCardContent className="max-w-md">
  *     <div className="space-y-4">
- *       <img 
- *         src="/case-studies/growth-chart.png" 
- *         alt="Growth chart" 
+ *       <img
+ *         src="/case-studies/growth-chart.png"
+ *         alt="Growth chart"
  *         className="w-full h-32 object-cover rounded"
  *       />
  *       <div>
  *         <h3 className="font-bold text-lg">From Startup to Scale-up</h3>
  *         <p className="text-gray-600 mt-2">
- *           How TechCorp achieved 10x revenue growth in 18 months using 
+ *           How TechCorp achieved 10x revenue growth in 18 months using
  *           our platform and strategic consulting services.
  *         </p>
  *       </div>
@@ -235,154 +235,144 @@ import { twMerge } from 'tailwind-merge'
 
 interface PreviewCardRootProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Root> {}
 
-const PreviewCardRoot = BasePreviewCard.Root
-PreviewCardRoot.displayName = 'PreviewCard.Root'
+const PreviewCardRoot = BasePreviewCard.Root;
+PreviewCardRoot.displayName = "PreviewCard.Root";
 
 interface PreviewCardTriggerProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Trigger> {
-  className?: string
+    className?: string;
 }
 
 const PreviewCardTrigger = React.forwardRef<HTMLAnchorElement, PreviewCardTriggerProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BasePreviewCard.Trigger
-        ref={ref}
-        className={twMerge(
-          'text-blue-600 hover:text-blue-800 hover:underline',
-          'focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded',
-          'transition-colors duration-150',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-PreviewCardTrigger.displayName = 'PreviewCard.Trigger'
+    ({ className, ...props }, ref) => {
+        return (
+            <BasePreviewCard.Trigger
+                ref={ref}
+                className={twMerge(
+                    "text-blue-600 hover:text-blue-800 hover:underline",
+                    "focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded",
+                    "transition-colors duration-150",
+                    className,
+                )}
+                {...props}
+            />
+        );
+    },
+);
+PreviewCardTrigger.displayName = "PreviewCard.Trigger";
 
 interface PreviewCardPortalProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Portal> {}
 
-const PreviewCardPortal = BasePreviewCard.Portal
+const PreviewCardPortal = BasePreviewCard.Portal;
 
 interface PreviewCardBackdropProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Backdrop> {
-  className?: string
+    className?: string;
 }
 
 const PreviewCardBackdrop = React.forwardRef<HTMLDivElement, PreviewCardBackdropProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BasePreviewCard.Backdrop
-        ref={ref}
-        className={twMerge(
-          'fixed inset-0 z-40 bg-black/5 backdrop-blur-sm',
-          'data-[starting-style]:opacity-0 data-[ending-style]:opacity-0',
-          'animate-in fade-in-0 duration-200',
-          'data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:duration-200',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-PreviewCardBackdrop.displayName = 'PreviewCard.Backdrop'
+    ({ className, ...props }, ref) => {
+        return (
+            <BasePreviewCard.Backdrop
+                ref={ref}
+                className={twMerge(
+                    "fixed inset-0 z-40 bg-black/5 backdrop-blur-sm",
+                    "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+                    "animate-in fade-in-0 duration-200",
+                    "data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:duration-200",
+                    className,
+                )}
+                {...props}
+            />
+        );
+    },
+);
+PreviewCardBackdrop.displayName = "PreviewCard.Backdrop";
 
 interface PreviewCardPositionerProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Positioner> {
-  className?: string
+    className?: string;
 }
 
 const PreviewCardPositioner = React.forwardRef<HTMLDivElement, PreviewCardPositionerProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BasePreviewCard.Positioner
-        ref={ref}
-        className={twMerge('z-50', className)}
-        {...props}
-      />
-    )
-  }
-)
-PreviewCardPositioner.displayName = 'PreviewCard.Positioner'
+    ({ className, ...props }, ref) => {
+        return <BasePreviewCard.Positioner ref={ref} className={twMerge("z-50", className)} {...props} />;
+    },
+);
+PreviewCardPositioner.displayName = "PreviewCard.Positioner";
 
 interface PreviewCardPopupProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Popup> {
-  className?: string
+    className?: string;
 }
 
-const PreviewCardPopup = React.forwardRef<HTMLDivElement, PreviewCardPopupProps>(
-  ({ className, ...props }, ref) => {
+const PreviewCardPopup = React.forwardRef<HTMLDivElement, PreviewCardPopupProps>(({ className, ...props }, ref) => {
     return (
-      <BasePreviewCard.Popup
-        ref={ref}
-        className={twMerge(
-          'max-w-sm overflow-hidden rounded-lg border bg-white p-4 shadow-xl',
-          'dark:border-gray-800 dark:bg-gray-950',
-          'data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:translate-y-1',
-          'data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:translate-y-1',
-          'animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-1 duration-200',
-          'data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95 data-[ending-style]:slide-out-to-bottom-1 data-[ending-style]:duration-150',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-PreviewCardPopup.displayName = 'PreviewCard.Popup'
+        <BasePreviewCard.Popup
+            ref={ref}
+            className={twMerge(
+                "max-w-sm overflow-hidden rounded-lg border bg-white p-4 shadow-xl",
+                "dark:border-gray-800 dark:bg-gray-950",
+                "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:translate-y-1",
+                "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:translate-y-1",
+                "animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-1 duration-200",
+                "data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95 data-[ending-style]:slide-out-to-bottom-1 data-[ending-style]:duration-150",
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+PreviewCardPopup.displayName = "PreviewCard.Popup";
 
 interface PreviewCardArrowProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Arrow> {
-  className?: string
+    className?: string;
 }
 
-const PreviewCardArrow = React.forwardRef<HTMLDivElement, PreviewCardArrowProps>(
-  ({ className, ...props }, ref) => {
+const PreviewCardArrow = React.forwardRef<HTMLDivElement, PreviewCardArrowProps>(({ className, ...props }, ref) => {
     return (
-      <BasePreviewCard.Arrow
-        ref={ref}
-        className={twMerge(
-          'h-2 w-2 rotate-45 border border-gray-200 bg-white',
-          'dark:border-gray-800 dark:bg-gray-950',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-PreviewCardArrow.displayName = 'PreviewCard.Arrow'
+        <BasePreviewCard.Arrow
+            ref={ref}
+            className={twMerge(
+                "h-2 w-2 rotate-45 border border-gray-200 bg-white",
+                "dark:border-gray-800 dark:bg-gray-950",
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+PreviewCardArrow.displayName = "PreviewCard.Arrow";
 
 // Compound component for better DX
 interface PreviewCardContentProps {
-  children: React.ReactNode
-  className?: string
-  side?: 'top' | 'right' | 'bottom' | 'left'
-  align?: 'start' | 'center' | 'end'
-  showArrow?: boolean
-  showBackdrop?: boolean
+    children: React.ReactNode;
+    className?: string;
+    side?: "top" | "right" | "bottom" | "left";
+    align?: "start" | "center" | "end";
+    showArrow?: boolean;
+    showBackdrop?: boolean;
 }
 
 export const PreviewCardContent = React.forwardRef<HTMLDivElement, PreviewCardContentProps>(
-  ({ children, className, side = 'bottom', align = 'center', showArrow = false, showBackdrop = false }, ref) => {
-    return (
-      <PreviewCardPortal>
-        {showBackdrop && <PreviewCardBackdrop />}
-        <PreviewCardPositioner side={side} align={align}>
-          <PreviewCardPopup ref={ref} className={className}>
-            {showArrow && <PreviewCardArrow />}
-            {children}
-          </PreviewCardPopup>
-        </PreviewCardPositioner>
-      </PreviewCardPortal>
-    )
-  }
-)
-PreviewCardContent.displayName = 'PreviewCardContent'
+    ({ children, className, side = "bottom", align = "center", showArrow = false, showBackdrop = false }, ref) => {
+        return (
+            <PreviewCardPortal>
+                {showBackdrop && <PreviewCardBackdrop />}
+                <PreviewCardPositioner side={side} align={align}>
+                    <PreviewCardPopup ref={ref} className={className}>
+                        {showArrow && <PreviewCardArrow />}
+                        {children}
+                    </PreviewCardPopup>
+                </PreviewCardPositioner>
+            </PreviewCardPortal>
+        );
+    },
+);
+PreviewCardContent.displayName = "PreviewCardContent";
 
 export const PreviewCard = {
-  Root: PreviewCardRoot,
-  Trigger: PreviewCardTrigger,
-  Portal: PreviewCardPortal,
-  Backdrop: PreviewCardBackdrop,
-  Positioner: PreviewCardPositioner,
-  Popup: PreviewCardPopup,
-  Arrow: PreviewCardArrow,
-}
+    Root: PreviewCardRoot,
+    Trigger: PreviewCardTrigger,
+    Portal: PreviewCardPortal,
+    Backdrop: PreviewCardBackdrop,
+    Positioner: PreviewCardPositioner,
+    Popup: PreviewCardPopup,
+    Arrow: PreviewCardArrow,
+};

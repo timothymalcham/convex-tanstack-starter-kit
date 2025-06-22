@@ -1,17 +1,17 @@
-import * as React from 'react'
-import { Progress as BaseProgress } from '@base-ui-components/react/progress'
-import { twMerge } from 'tailwind-merge'
+import * as React from "react";
+import { Progress as BaseProgress } from "@base-ui-components/react/progress";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Progress Component
- * 
+ *
  * Displays the status of a task that takes a long time, perfect for file uploads,
  * data processing, form completion, loading states, and any long-running operations.
- * 
+ *
  * @example
  * ```jsx
  * import { Progress } from '@/components/ui/Progress'
- * 
+ *
  * // Basic progress bar
  * <Progress.Root value={65} max={100}>
  *   <div className="flex justify-between items-center mb-2">
@@ -22,11 +22,11 @@ import { twMerge } from 'tailwind-merge'
  *     <Progress.Indicator />
  *   </Progress.Track>
  * </Progress.Root>
- * 
+ *
  * // Form completion progress
  * const [currentStep, setCurrentStep] = React.useState(2)
  * const totalSteps = 5
- * 
+ *
  * <div className="space-y-4">
  *   <Progress.Root value={currentStep} max={totalSteps}>
  *     <div className="flex justify-between text-sm mb-2">
@@ -39,16 +39,16 @@ import { twMerge } from 'tailwind-merge'
  *       <Progress.Indicator />
  *     </Progress.Track>
  *   </Progress.Root>
- *   
+ *
  *   <div className="flex gap-2">
- *     <button 
+ *     <button
  *       onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
  *       disabled={currentStep <= 1}
  *       className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
  *     >
  *       Previous
  *     </button>
- *     <button 
+ *     <button
  *       onClick={() => setCurrentStep(Math.min(totalSteps, currentStep + 1))}
  *       disabled={currentStep >= totalSteps}
  *       className="px-3 py-1 bg-blue-500 text-white rounded disabled:opacity-50"
@@ -57,7 +57,7 @@ import { twMerge } from 'tailwind-merge'
  *     </button>
  *   </div>
  * </div>
- * 
+ *
  * // Download progress with speed
  * <Progress.Root value={78} max={100}>
  *   <div className="flex justify-between items-center mb-2">
@@ -75,7 +75,7 @@ import { twMerge } from 'tailwind-merge'
  *     <span>12 seconds remaining</span>
  *   </div>
  * </Progress.Root>
- * 
+ *
  * // Skill/proficiency levels
  * const skills = [
  *   { name: 'React', level: 90 },
@@ -84,7 +84,7 @@ import { twMerge } from 'tailwind-merge'
  *   { name: 'Python', level: 60 },
  *   { name: 'Go', level: 40 },
  * ]
- * 
+ *
  * <div className="space-y-4">
  *   <h3 className="font-semibold">Technical Skills</h3>
  *   {skills.map((skill) => (
@@ -94,15 +94,15 @@ import { twMerge } from 'tailwind-merge'
  *         <Progress.Value />
  *       </div>
  *       <Progress.Track size="sm">
- *         <Progress.Indicator 
- *           className={skill.level >= 80 ? 'bg-green-500' : 
- *                     skill.level >= 60 ? 'bg-yellow-500' : 'bg-gray-400'} 
+ *         <Progress.Indicator
+ *           className={skill.level >= 80 ? 'bg-green-500' :
+ *                     skill.level >= 60 ? 'bg-yellow-500' : 'bg-gray-400'}
  *         />
  *       </Progress.Track>
  *     </Progress.Root>
  *   ))}
  * </div>
- * 
+ *
  * // Indeterminate progress
  * <Progress.Root value={null}>
  *   <div className="flex items-center gap-2 mb-2">
@@ -113,7 +113,7 @@ import { twMerge } from 'tailwind-merge'
  *     <Progress.Indicator className="animate-pulse bg-blue-500" />
  *   </Progress.Track>
  * </Progress.Root>
- * 
+ *
  * // Goal/target progress
  * <Progress.Root value={7500} min={0} max={10000}>
  *   <div className="flex justify-between items-center mb-2">
@@ -129,7 +129,7 @@ import { twMerge } from 'tailwind-merge'
  *     75% complete • $2,500 remaining
  *   </div>
  * </Progress.Root>
- * 
+ *
  * // Multi-step process with segments
  * const processSteps = [
  *   { name: 'Upload', status: 'complete' },
@@ -137,14 +137,14 @@ import { twMerge } from 'tailwind-merge'
  *   { name: 'Review', status: 'pending' },
  *   { name: 'Deploy', status: 'pending' },
  * ]
- * 
+ *
  * <div className="space-y-3">
  *   <Progress.Root value={50} max={100}>
  *     <Progress.Label className="font-medium">Deployment Progress</Progress.Label>
  *     <Progress.Track className="relative mt-2">
  *       <Progress.Indicator />
  *       {processSteps.map((step, index) => (
- *         <div 
+ *         <div
  *           key={step.name}
  *           className="absolute top-0 bottom-0 flex items-center"
  *           style={{ left: `${(index / (processSteps.length - 1)) * 100}%` }}
@@ -158,10 +158,10 @@ import { twMerge } from 'tailwind-merge'
  *       ))}
  *     </Progress.Track>
  *   </Progress.Root>
- *   
+ *
  *   <div className="flex justify-between text-sm">
  *     {processSteps.map((step) => (
- *       <span 
+ *       <span
  *         key={step.name}
  *         className={step.status === 'complete' ? 'text-green-600' :
  *                   step.status === 'current' ? 'text-blue-600' :
@@ -172,7 +172,7 @@ import { twMerge } from 'tailwind-merge'
  *     ))}
  *   </div>
  * </div>
- * 
+ *
  * // Storage/quota usage
  * <div className="space-y-4">
  *   <Progress.Root value={8.7} max={15}>
@@ -186,7 +186,7 @@ import { twMerge } from 'tailwind-merge'
  *       <Progress.Indicator className="bg-orange-500" />
  *     </Progress.Track>
  *   </Progress.Root>
- *   
+ *
  *   <div className="grid grid-cols-3 gap-3 text-sm">
  *     <div className="flex items-center gap-2">
  *       <div className="w-3 h-3 bg-blue-500 rounded"></div>
@@ -202,7 +202,7 @@ import { twMerge } from 'tailwind-merge'
  *     </div>
  *   </div>
  * </div>
- * 
+ *
  * // Circular progress (custom styling)
  * <div className="flex items-center gap-4">
  *   <div className="relative w-16 h-16">
@@ -229,7 +229,7 @@ import { twMerge } from 'tailwind-merge'
  *       <span className="text-sm font-medium">73%</span>
  *     </div>
  *   </div>
- *   
+ *
  *   <div>
  *     <div className="font-medium">Project Completion</div>
  *     <div className="text-sm text-gray-600">26 of 35 tasks done</div>
@@ -239,124 +239,107 @@ import { twMerge } from 'tailwind-merge'
  */
 
 interface ProgressRootProps extends React.ComponentPropsWithoutRef<typeof BaseProgress.Root> {
-  className?: string
+    className?: string;
 }
 
-const ProgressRoot = React.forwardRef<HTMLDivElement, ProgressRootProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseProgress.Root
-        ref={ref}
-        className={twMerge('relative', className)}
-        {...props}
-      />
-    )
-  }
-)
-ProgressRoot.displayName = 'Progress.Root'
+const ProgressRoot = React.forwardRef<HTMLDivElement, ProgressRootProps>(({ className, ...props }, ref) => {
+    return <BaseProgress.Root ref={ref} className={twMerge("relative", className)} {...props} />;
+});
+ProgressRoot.displayName = "Progress.Root";
 
 interface ProgressTrackProps extends React.ComponentPropsWithoutRef<typeof BaseProgress.Track> {
-  className?: string
-  size?: 'xs' | 'sm' | 'md' | 'lg'
+    className?: string;
+    size?: "xs" | "sm" | "md" | "lg";
 }
 
 const ProgressTrack = React.forwardRef<HTMLDivElement, ProgressTrackProps>(
-  ({ className, size = 'md', ...props }, ref) => {
-    const sizeStyles = {
-      xs: 'h-1',
-      sm: 'h-2',
-      md: 'h-3',
-      lg: 'h-4'
-    }
+    ({ className, size = "md", ...props }, ref) => {
+        const sizeStyles = {
+            xs: "h-1",
+            sm: "h-2",
+            md: "h-3",
+            lg: "h-4",
+        };
 
-    return (
-      <BaseProgress.Track
-        ref={ref}
-        className={twMerge(
-          'relative w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800',
-          sizeStyles[size],
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-ProgressTrack.displayName = 'Progress.Track'
+        return (
+            <BaseProgress.Track
+                ref={ref}
+                className={twMerge(
+                    "relative w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800",
+                    sizeStyles[size],
+                    className,
+                )}
+                {...props}
+            />
+        );
+    },
+);
+ProgressTrack.displayName = "Progress.Track";
 
 interface ProgressIndicatorProps extends React.ComponentPropsWithoutRef<typeof BaseProgress.Indicator> {
-  className?: string
+    className?: string;
 }
 
-const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProps>(
-  ({ className, ...props }, ref) => {
+const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProps>(({ className, ...props }, ref) => {
     return (
-      <BaseProgress.Indicator
-        ref={ref}
-        className={twMerge(
-          'h-full bg-blue-600 transition-all duration-500 ease-out rounded-full',
-          'dark:bg-blue-500',
-          'data-[indeterminate]:animate-pulse',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-ProgressIndicator.displayName = 'Progress.Indicator'
+        <BaseProgress.Indicator
+            ref={ref}
+            className={twMerge(
+                "h-full bg-blue-600 transition-all duration-500 ease-out rounded-full",
+                "dark:bg-blue-500",
+                "data-[indeterminate]:animate-pulse",
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+ProgressIndicator.displayName = "Progress.Indicator";
 
 interface ProgressValueProps extends React.ComponentPropsWithoutRef<typeof BaseProgress.Value> {
-  className?: string
-  showPercentage?: boolean
+    className?: string;
+    showPercentage?: boolean;
 }
 
 const ProgressValue = React.forwardRef<HTMLSpanElement, ProgressValueProps>(
-  ({ className, showPercentage = true, children, ...props }, ref) => {
-    return (
-      <BaseProgress.Value
-        ref={ref}
-        className={twMerge(
-          'text-sm font-medium text-gray-700 dark:text-gray-300',
-          className
-        )}
-        {...props}
-      >
-        {children || ((value, max) => {
-          if (value == null) return '—'
-          const percentage = Math.round((parseInt(value, 10) / (max ?? 1)) * 100)
-          return showPercentage ? `${percentage}%` : `${value}/${max}`
-        })}
-      </BaseProgress.Value>
-    )
-  }
-)
-ProgressValue.displayName = 'Progress.Value'
+    ({ className, showPercentage = true, children, ...props }, ref) => {
+        return (
+            <BaseProgress.Value
+                ref={ref}
+                className={twMerge("text-sm font-medium text-gray-700 dark:text-gray-300", className)}
+                {...props}
+            >
+                {children ||
+                    ((value, max) => {
+                        if (value == null) return "—";
+                        const percentage = Math.round((parseInt(value, 10) / (max ?? 1)) * 100);
+                        return showPercentage ? `${percentage}%` : `${value}/${max}`;
+                    })}
+            </BaseProgress.Value>
+        );
+    },
+);
+ProgressValue.displayName = "Progress.Value";
 
 interface ProgressLabelProps extends React.ComponentPropsWithoutRef<typeof BaseProgress.Label> {
-  className?: string
+    className?: string;
 }
 
-const ProgressLabel = React.forwardRef<HTMLSpanElement, ProgressLabelProps>(
-  ({ className, ...props }, ref) => {
+const ProgressLabel = React.forwardRef<HTMLSpanElement, ProgressLabelProps>(({ className, ...props }, ref) => {
     return (
-      <BaseProgress.Label
-        ref={ref}
-        className={twMerge(
-          'text-sm font-medium text-gray-900 dark:text-gray-100',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-ProgressLabel.displayName = 'Progress.Label'
+        <BaseProgress.Label
+            ref={ref}
+            className={twMerge("text-sm font-medium text-gray-900 dark:text-gray-100", className)}
+            {...props}
+        />
+    );
+});
+ProgressLabel.displayName = "Progress.Label";
 
 export const Progress = {
-  Root: ProgressRoot,
-  Track: ProgressTrack,
-  Indicator: ProgressIndicator,
-  Value: ProgressValue,
-  Label: ProgressLabel,
-}
+    Root: ProgressRoot,
+    Track: ProgressTrack,
+    Indicator: ProgressIndicator,
+    Value: ProgressValue,
+    Label: ProgressLabel,
+};

@@ -1,24 +1,24 @@
-import * as React from 'react'
-import { NavigationMenu as BaseNavigationMenu } from '@base-ui-components/react/navigation-menu'
-import { twMerge } from 'tailwind-merge'
+import * as React from "react";
+import { NavigationMenu as BaseNavigationMenu } from "@base-ui-components/react/navigation-menu";
+import { twMerge } from "tailwind-merge";
 
 /**
  * NavigationMenu Component
- * 
+ *
  * A collection of links and menus for website navigation, perfect for headers,
  * sidebars, and complex navigation structures with dropdowns and mega menus.
- * 
+ *
  * @example
  * ```jsx
  * import { NavigationMenu, NavigationMenuContent } from '@/components/ui/NavigationMenu'
- * 
+ *
  * // Basic navigation menu
  * <NavigationMenu.Root>
  *   <NavigationMenu.List>
  *     <NavigationMenu.Item>
  *       <NavigationMenu.Link href="/">Home</NavigationMenu.Link>
  *     </NavigationMenu.Item>
- *     
+ *
  *     <NavigationMenu.Item>
  *       <NavigationMenu.Trigger>
  *         Products
@@ -37,13 +37,13 @@ import { twMerge } from 'tailwind-merge'
  *         </div>
  *       </NavigationMenuContent>
  *     </NavigationMenu.Item>
- * 
+ *
  *     <NavigationMenu.Item>
  *       <NavigationMenu.Link href="/about">About</NavigationMenu.Link>
  *     </NavigationMenu.Item>
  *   </NavigationMenu.List>
  * </NavigationMenu.Root>
- * 
+ *
  * // Mega menu with complex content
  * <NavigationMenu.Root>
  *   <NavigationMenu.List>
@@ -68,7 +68,7 @@ import { twMerge } from 'tailwind-merge'
  *                 </NavigationMenu.Link>
  *               </div>
  *             </div>
- *             
+ *
  *             <div>
  *               <h3 className="font-semibold mb-4">For Teams</h3>
  *               <div className="space-y-3">
@@ -82,7 +82,7 @@ import { twMerge } from 'tailwind-merge'
  *                 </NavigationMenu.Link>
  *               </div>
  *             </div>
- *             
+ *
  *             <div>
  *               <h3 className="font-semibold mb-4">Enterprise</h3>
  *               <div className="space-y-3">
@@ -102,7 +102,7 @@ import { twMerge } from 'tailwind-merge'
  *     </NavigationMenu.Item>
  *   </NavigationMenu.List>
  * </NavigationMenu.Root>
- * 
+ *
  * // Mobile-friendly navigation
  * <NavigationMenu.Root orientation="vertical" className="md:hidden">
  *   <NavigationMenu.List className="flex-col space-y-2">
@@ -111,7 +111,7 @@ import { twMerge } from 'tailwind-merge'
  *         Home
  *       </NavigationMenu.Link>
  *     </NavigationMenu.Item>
- *     
+ *
  *     <NavigationMenu.Item>
  *       <NavigationMenu.Trigger className="w-full justify-between">
  *         Products
@@ -127,7 +127,7 @@ import { twMerge } from 'tailwind-merge'
  *     </NavigationMenu.Item>
  *   </NavigationMenu.List>
  * </NavigationMenu.Root>
- * 
+ *
  * // Navigation with icons and badges
  * <NavigationMenu.Root>
  *   <NavigationMenu.List>
@@ -150,7 +150,7 @@ import { twMerge } from 'tailwind-merge'
  *               <div className="text-sm text-gray-500">Latest fashion trends</div>
  *             </div>
  *           </NavigationMenu.Link>
- *           
+ *
  *           <NavigationMenu.Link href="/shop/electronics" className="flex items-center gap-3">
  *             <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
  *               📱
@@ -165,7 +165,7 @@ import { twMerge } from 'tailwind-merge'
  *     </NavigationMenu.Item>
  *   </NavigationMenu.List>
  * </NavigationMenu.Root>
- * 
+ *
  * // Sidebar navigation
  * <NavigationMenu.Root orientation="vertical" className="w-64">
  *   <NavigationMenu.List className="flex-col space-y-1">
@@ -174,7 +174,7 @@ import { twMerge } from 'tailwind-merge'
  *         📊 Dashboard
  *       </NavigationMenu.Link>
  *     </NavigationMenu.Item>
- *     
+ *
  *     <NavigationMenu.Item>
  *       <NavigationMenu.Trigger className="w-full justify-between">
  *         👥 Users
@@ -200,252 +200,233 @@ import { twMerge } from 'tailwind-merge'
  */
 
 interface NavigationMenuRootProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Root> {
-  className?: string
+    className?: string;
 }
 
-const NavigationMenuRoot = React.forwardRef<HTMLElement, NavigationMenuRootProps>(
-  ({ className, ...props }, ref) => {
+const NavigationMenuRoot = React.forwardRef<HTMLElement, NavigationMenuRootProps>(({ className, ...props }, ref) => {
     return (
-      <BaseNavigationMenu.Root
-        ref={ref}
-        className={twMerge('relative z-10 flex max-w-max flex-1 items-center justify-center', className)}
-        {...props}
-      />
-    )
-  }
-)
-NavigationMenuRoot.displayName = 'NavigationMenu.Root'
+        <BaseNavigationMenu.Root
+            ref={ref}
+            className={twMerge("relative z-10 flex max-w-max flex-1 items-center justify-center", className)}
+            {...props}
+        />
+    );
+});
+NavigationMenuRoot.displayName = "NavigationMenu.Root";
 
 interface NavigationMenuListProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.List> {
-  className?: string
+    className?: string;
 }
 
 const NavigationMenuList = React.forwardRef<HTMLUListElement, NavigationMenuListProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseNavigationMenu.List
-        ref={ref}
-        className={twMerge(
-          'group flex flex-1 list-none items-center justify-center space-x-1',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-NavigationMenuList.displayName = 'NavigationMenu.List'
+    ({ className, ...props }, ref) => {
+        return (
+            <BaseNavigationMenu.List
+                ref={ref}
+                className={twMerge("group flex flex-1 list-none items-center justify-center space-x-1", className)}
+                {...props}
+            />
+        );
+    },
+);
+NavigationMenuList.displayName = "NavigationMenu.List";
 
 interface NavigationMenuItemProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Item> {
-  className?: string
+    className?: string;
 }
 
-const NavigationMenuItem = React.forwardRef<HTMLLIElement, NavigationMenuItemProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseNavigationMenu.Item
-        ref={ref}
-        className={className}
-        {...props}
-      />
-    )
-  }
-)
-NavigationMenuItem.displayName = 'NavigationMenu.Item'
+const NavigationMenuItem = React.forwardRef<HTMLLIElement, NavigationMenuItemProps>(({ className, ...props }, ref) => {
+    return <BaseNavigationMenu.Item ref={ref} className={className} {...props} />;
+});
+NavigationMenuItem.displayName = "NavigationMenu.Item";
 
 interface NavigationMenuTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Trigger> {
-  className?: string
+    className?: string;
 }
 
 const NavigationMenuTrigger = React.forwardRef<HTMLButtonElement, NavigationMenuTriggerProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <BaseNavigationMenu.Trigger
-        ref={ref}
-        className={twMerge(
-          'group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium',
-          'transition-colors hover:bg-gray-100 hover:text-gray-900',
-          'focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden',
-          'disabled:pointer-events-none disabled:opacity-50',
-          'data-[open]:bg-gray-100/50 dark:bg-gray-950',
-          'dark:hover:bg-gray-800 dark:hover:text-gray-50',
-          'dark:focus:bg-gray-800 dark:focus:text-gray-50',
-          'dark:data-[open]:bg-gray-800/50',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </BaseNavigationMenu.Trigger>
-    )
-  }
-)
-NavigationMenuTrigger.displayName = 'NavigationMenu.Trigger'
+    ({ className, children, ...props }, ref) => {
+        return (
+            <BaseNavigationMenu.Trigger
+                ref={ref}
+                className={twMerge(
+                    "group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium",
+                    "transition-colors hover:bg-gray-100 hover:text-gray-900",
+                    "focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden",
+                    "disabled:pointer-events-none disabled:opacity-50",
+                    "data-[open]:bg-gray-100/50 dark:bg-gray-950",
+                    "dark:hover:bg-gray-800 dark:hover:text-gray-50",
+                    "dark:focus:bg-gray-800 dark:focus:text-gray-50",
+                    "dark:data-[open]:bg-gray-800/50",
+                    className,
+                )}
+                {...props}
+            >
+                {children}
+            </BaseNavigationMenu.Trigger>
+        );
+    },
+);
+NavigationMenuTrigger.displayName = "NavigationMenu.Trigger";
 
 interface NavigationMenuLinkProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Link> {
-  className?: string
-  href?: string
+    className?: string;
+    href?: string;
 }
 
 const NavigationMenuLink = React.forwardRef<HTMLAnchorElement, NavigationMenuLinkProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseNavigationMenu.Link
-        ref={ref}
-        className={twMerge(
-          'block select-none space-y-1 rounded-md p-3 leading-none no-underline',
-          'outline-hidden transition-colors hover:bg-gray-100 hover:text-gray-900',
-          'focus:bg-gray-100 focus:text-gray-900',
-          'dark:hover:bg-gray-800 dark:hover:text-gray-50',
-          'dark:focus:bg-gray-800 dark:focus:text-gray-50',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-NavigationMenuLink.displayName = 'NavigationMenu.Link'
+    ({ className, ...props }, ref) => {
+        return (
+            <BaseNavigationMenu.Link
+                ref={ref}
+                className={twMerge(
+                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline",
+                    "outline-hidden transition-colors hover:bg-gray-100 hover:text-gray-900",
+                    "focus:bg-gray-100 focus:text-gray-900",
+                    "dark:hover:bg-gray-800 dark:hover:text-gray-50",
+                    "dark:focus:bg-gray-800 dark:focus:text-gray-50",
+                    className,
+                )}
+                {...props}
+            />
+        );
+    },
+);
+NavigationMenuLink.displayName = "NavigationMenu.Link";
 
 interface NavigationMenuIconProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Icon> {
-  className?: string
+    className?: string;
 }
 
 const NavigationMenuIcon = React.forwardRef<HTMLSpanElement, NavigationMenuIconProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseNavigationMenu.Icon
-        ref={ref}
-        className={twMerge(
-          'relative top-[1px] ml-1 h-3 w-3 transition duration-200',
-          'group-data-[open]:rotate-180',
-          className
-        )}
-        {...props}
-      >
-        <svg
-          width="15"
-          height="15"
-          viewBox="0 0 15 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-            fill="currentColor"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          />
-        </svg>
-      </BaseNavigationMenu.Icon>
-    )
-  }
-)
-NavigationMenuIcon.displayName = 'NavigationMenu.Icon'
+    ({ className, ...props }, ref) => {
+        return (
+            <BaseNavigationMenu.Icon
+                ref={ref}
+                className={twMerge(
+                    "relative top-[1px] ml-1 h-3 w-3 transition duration-200",
+                    "group-data-[open]:rotate-180",
+                    className,
+                )}
+                {...props}
+            >
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            </BaseNavigationMenu.Icon>
+        );
+    },
+);
+NavigationMenuIcon.displayName = "NavigationMenu.Icon";
 
 interface NavigationMenuPortalProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Portal> {}
 
-const NavigationMenuPortal = BaseNavigationMenu.Portal
+const NavigationMenuPortal = BaseNavigationMenu.Portal;
 
 interface NavigationMenuPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Positioner> {
-  className?: string
+    className?: string;
 }
 
 const NavigationMenuPositioner = React.forwardRef<HTMLDivElement, NavigationMenuPositionerProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseNavigationMenu.Positioner
-        ref={ref}
-        className={twMerge('absolute left-0 top-0 flex w-full justify-center', className)}
-        {...props}
-      />
-    )
-  }
-)
-NavigationMenuPositioner.displayName = 'NavigationMenu.Positioner'
+    ({ className, ...props }, ref) => {
+        return (
+            <BaseNavigationMenu.Positioner
+                ref={ref}
+                className={twMerge("absolute left-0 top-0 flex w-full justify-center", className)}
+                {...props}
+            />
+        );
+    },
+);
+NavigationMenuPositioner.displayName = "NavigationMenu.Positioner";
 
 interface NavigationMenuPopupProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Popup> {
-  className?: string
+    className?: string;
 }
 
 const NavigationMenuPopup = React.forwardRef<HTMLDivElement, NavigationMenuPopupProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseNavigationMenu.Popup
-        ref={ref}
-        className={twMerge(
-          'origin-top-center relative mt-1.5 h-var(--navigation-menu-viewport-height) w-full overflow-hidden',
-          'rounded-md border bg-white text-gray-950 shadow-lg',
-          'data-[starting-style]:animate-in data-[starting-style]:fade-in-0 data-[starting-style]:zoom-in-90',
-          'data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95',
-          'data-[starting-style]:duration-200 data-[ending-style]:duration-150',
-          'dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-NavigationMenuPopup.displayName = 'NavigationMenu.Popup'
+    ({ className, ...props }, ref) => {
+        return (
+            <BaseNavigationMenu.Popup
+                ref={ref}
+                className={twMerge(
+                    "origin-top-center relative mt-1.5 h-var(--navigation-menu-viewport-height) w-full overflow-hidden",
+                    "rounded-md border bg-white text-gray-950 shadow-lg",
+                    "data-[starting-style]:animate-in data-[starting-style]:fade-in-0 data-[starting-style]:zoom-in-90",
+                    "data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95",
+                    "data-[starting-style]:duration-200 data-[ending-style]:duration-150",
+                    "dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50",
+                    className,
+                )}
+                {...props}
+            />
+        );
+    },
+);
+NavigationMenuPopup.displayName = "NavigationMenu.Popup";
 
 interface NavigationMenuViewportProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Viewport> {
-  className?: string
+    className?: string;
 }
 
 const NavigationMenuViewport = React.forwardRef<HTMLDivElement, NavigationMenuViewportProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div className="absolute left-0 top-full flex justify-center">
-        <BaseNavigationMenu.Viewport
-          ref={ref}
-          className={twMerge(
-            'origin-top-center relative mt-1.5 h-var(--navigation-menu-viewport-height) w-full overflow-hidden',
-            'rounded-md border bg-white text-gray-950 shadow-lg',
-            'data-[starting-style]:animate-in data-[starting-style]:fade-in-0 data-[starting-style]:zoom-in-90',
-            'data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95',
-            'data-[starting-style]:duration-200 data-[ending-style]:duration-150',
-            'dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50',
-            className
-          )}
-          {...props}
-        />
-      </div>
-    )
-  }
-)
-NavigationMenuViewport.displayName = 'NavigationMenu.Viewport'
+    ({ className, ...props }, ref) => {
+        return (
+            <div className="absolute left-0 top-full flex justify-center">
+                <BaseNavigationMenu.Viewport
+                    ref={ref}
+                    className={twMerge(
+                        "origin-top-center relative mt-1.5 h-var(--navigation-menu-viewport-height) w-full overflow-hidden",
+                        "rounded-md border bg-white text-gray-950 shadow-lg",
+                        "data-[starting-style]:animate-in data-[starting-style]:fade-in-0 data-[starting-style]:zoom-in-90",
+                        "data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95",
+                        "data-[starting-style]:duration-200 data-[ending-style]:duration-150",
+                        "dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50",
+                        className,
+                    )}
+                    {...props}
+                />
+            </div>
+        );
+    },
+);
+NavigationMenuViewport.displayName = "NavigationMenu.Viewport";
 
 // Compound component for better DX
 interface NavigationMenuContentProps {
-  children: React.ReactNode
-  className?: string
+    children: React.ReactNode;
+    className?: string;
 }
 
 export const NavigationMenuContent = React.forwardRef<HTMLDivElement, NavigationMenuContentProps>(
-  ({ children, className }, ref) => {
-    return (
-      <NavigationMenuPortal>
-        <NavigationMenuPositioner>
-          <NavigationMenuPopup ref={ref} className={className}>
-            {children}
-          </NavigationMenuPopup>
-        </NavigationMenuPositioner>
-      </NavigationMenuPortal>
-    )
-  }
-)
-NavigationMenuContent.displayName = 'NavigationMenuContent'
+    ({ children, className }, ref) => {
+        return (
+            <NavigationMenuPortal>
+                <NavigationMenuPositioner>
+                    <NavigationMenuPopup ref={ref} className={className}>
+                        {children}
+                    </NavigationMenuPopup>
+                </NavigationMenuPositioner>
+            </NavigationMenuPortal>
+        );
+    },
+);
+NavigationMenuContent.displayName = "NavigationMenuContent";
 
 export const NavigationMenu = {
-  Root: NavigationMenuRoot,
-  List: NavigationMenuList,
-  Item: NavigationMenuItem,
-  Trigger: NavigationMenuTrigger,
-  Link: NavigationMenuLink,
-  Icon: NavigationMenuIcon,
-  Portal: NavigationMenuPortal,
-  Positioner: NavigationMenuPositioner,
-  Popup: NavigationMenuPopup,
-  Viewport: NavigationMenuViewport,
-}
+    Root: NavigationMenuRoot,
+    List: NavigationMenuList,
+    Item: NavigationMenuItem,
+    Trigger: NavigationMenuTrigger,
+    Link: NavigationMenuLink,
+    Icon: NavigationMenuIcon,
+    Portal: NavigationMenuPortal,
+    Positioner: NavigationMenuPositioner,
+    Popup: NavigationMenuPopup,
+    Viewport: NavigationMenuViewport,
+};

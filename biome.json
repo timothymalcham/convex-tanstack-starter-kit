@@ -6,7 +6,8 @@
 		"useIgnoreFile": false
 	},
 	"files": {
-		"ignoreUnknown": false
+		"ignoreUnknown": false,
+		"includes": ["src/**/*.ts", "src/**/*.tsx", "!convex/**/*"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -20,7 +21,10 @@
 	},
 	"javascript": {
 		"formatter": {
-			"quoteStyle": "double"
+			"quoteStyle": "double",
+			"lineWidth": 120,
+			"indentWidth": 4,
+			"indentStyle": "space"
 		}
 	},
 	"assist": {

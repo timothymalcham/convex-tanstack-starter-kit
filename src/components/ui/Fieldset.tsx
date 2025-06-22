@@ -1,19 +1,19 @@
-import * as React from 'react'
-import { Fieldset as BaseFieldset } from '@base-ui-components/react/fieldset'
-import { twMerge } from 'tailwind-merge'
+import * as React from "react";
+import { Fieldset as BaseFieldset } from "@base-ui-components/react/fieldset";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Fieldset Component
- * 
+ *
  * Groups related form controls together with an optional legend. Provides semantic
  * structure and accessibility benefits for complex forms.
- * 
+ *
  * @example
  * ```jsx
  * import { Fieldset } from '@/components/ui/Fieldset'
  * import { Field } from '@/components/ui/Field'
  * import { Checkbox } from '@/components/ui/Checkbox'
- * 
+ *
  * // Basic fieldset with legend
  * <Fieldset.Root>
  *   <Fieldset.Legend>Personal Information</Fieldset.Legend>
@@ -28,7 +28,7 @@ import { twMerge } from 'tailwind-merge'
  *     </Field.Root>
  *   </div>
  * </Fieldset.Root>
- * 
+ *
  * // Fieldset with disabled state
  * <Fieldset.Root disabled>
  *   <Fieldset.Legend>Billing Address</Fieldset.Legend>
@@ -43,7 +43,7 @@ import { twMerge } from 'tailwind-merge'
  *     </Field.Root>
  *   </div>
  * </Fieldset.Root>
- * 
+ *
  * // Fieldset with checkbox group
  * <Fieldset.Root>
  *   <Fieldset.Legend>Preferences</Fieldset.Legend>
@@ -68,7 +68,7 @@ import { twMerge } from 'tailwind-merge'
  *     </label>
  *   </div>
  * </Fieldset.Root>
- * 
+ *
  * // Fieldset with custom styling
  * <Fieldset.Root className="border-2 border-dashed border-gray-300 dark:border-gray-600">
  *   <Fieldset.Legend className="bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 px-3 py-1 rounded">
@@ -84,7 +84,7 @@ import { twMerge } from 'tailwind-merge'
  *     </Field.Root>
  *   </div>
  * </Fieldset.Root>
- * 
+ *
  * // Nested fieldsets for complex forms
  * <form className="space-y-8">
  *   <Fieldset.Root>
@@ -100,7 +100,7 @@ import { twMerge } from 'tailwind-merge'
  *       </Field.Root>
  *     </div>
  *   </Fieldset.Root>
- * 
+ *
  *   <Fieldset.Root>
  *     <Fieldset.Legend>Profile Settings</Fieldset.Legend>
  *     <div className="space-y-4">
@@ -115,7 +115,7 @@ import { twMerge } from 'tailwind-merge'
  *     </div>
  *   </Fieldset.Root>
  * </form>
- * 
+ *
  * // Fieldset with radio group functionality
  * <Fieldset.Root>
  *   <Fieldset.Legend>Subscription Plan</Fieldset.Legend>
@@ -137,18 +137,18 @@ import { twMerge } from 'tailwind-merge'
  *   </div>
  * </Fieldset.Root>
  * ```
- * 
+ *
  * ## Best Practices
- * 
+ *
  * - Use fieldsets to group related form controls together
  * - Always provide a descriptive legend that explains the purpose of the grouped fields
  * - Consider accessibility - screen readers announce the legend when navigating to fields within the fieldset
  * - Nest fieldsets sparingly - too much nesting can confuse users and assistive technologies
  * - Use the disabled prop to disable all controls within a fieldset at once
  * - Combine with other form components like Field, Checkbox, and Radio for complete form solutions
- * 
+ *
  * ## Accessibility
- * 
+ *
  * - The fieldset element provides semantic grouping for form controls
  * - The legend element serves as an accessible name for the fieldset
  * - Screen readers announce the legend when users navigate to any control within the fieldset
@@ -156,51 +156,47 @@ import { twMerge } from 'tailwind-merge'
  */
 
 interface FieldsetRootProps extends React.ComponentPropsWithoutRef<typeof BaseFieldset.Root> {
-  className?: string
+    className?: string;
 }
 
-const FieldsetRoot = React.forwardRef<HTMLFieldSetElement, FieldsetRootProps>(
-  ({ className, ...props }, ref) => {
+const FieldsetRoot = React.forwardRef<HTMLFieldSetElement, FieldsetRootProps>(({ className, ...props }, ref) => {
     return (
-      <BaseFieldset.Root
-        ref={ref}
-        className={twMerge(
-          'border border-gray-200 dark:border-gray-700 rounded-lg p-6',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2',
-          'dark:focus-within:ring-offset-gray-900',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-FieldsetRoot.displayName = 'Fieldset.Root'
+        <BaseFieldset.Root
+            ref={ref}
+            className={twMerge(
+                "border border-gray-200 dark:border-gray-700 rounded-lg p-6",
+                "disabled:opacity-50 disabled:cursor-not-allowed",
+                "focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2",
+                "dark:focus-within:ring-offset-gray-900",
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+FieldsetRoot.displayName = "Fieldset.Root";
 
 interface FieldsetLegendProps extends React.ComponentPropsWithoutRef<typeof BaseFieldset.Legend> {
-  className?: string
+    className?: string;
 }
 
-const FieldsetLegend = React.forwardRef<HTMLDivElement, FieldsetLegendProps>(
-  ({ className, ...props }, ref) => {
+const FieldsetLegend = React.forwardRef<HTMLDivElement, FieldsetLegendProps>(({ className, ...props }, ref) => {
     return (
-      <BaseFieldset.Legend
-        ref={ref}
-        className={twMerge(
-          'text-base font-semibold text-gray-900 dark:text-gray-100',
-          'mb-4 px-2 -mx-2 -mt-3 bg-white dark:bg-gray-900',
-          'border-b border-gray-200 dark:border-gray-700 pb-2',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-FieldsetLegend.displayName = 'Fieldset.Legend'
+        <BaseFieldset.Legend
+            ref={ref}
+            className={twMerge(
+                "text-base font-semibold text-gray-900 dark:text-gray-100",
+                "mb-4 px-2 -mx-2 -mt-3 bg-white dark:bg-gray-900",
+                "border-b border-gray-200 dark:border-gray-700 pb-2",
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+FieldsetLegend.displayName = "Fieldset.Legend";
 
 export const Fieldset = {
-  Root: FieldsetRoot,
-  Legend: FieldsetLegend,
-}
+    Root: FieldsetRoot,
+    Legend: FieldsetLegend,
+};

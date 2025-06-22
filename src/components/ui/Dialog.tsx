@@ -1,19 +1,19 @@
-import * as React from 'react'
-import { Dialog as BaseDialog } from '@base-ui-components/react/dialog'
-import { twMerge } from 'tailwind-merge'
+import * as React from "react";
+import { Dialog as BaseDialog } from "@base-ui-components/react/dialog";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Dialog Component
- * 
+ *
  * A flexible modal dialog that opens on top of the page content. Unlike AlertDialog,
  * Dialog is more general-purpose and doesn't interrupt the user's workflow.
- * 
+ *
  * @example
  * ```jsx
  * import { Dialog, DialogContent, DialogHeader, DialogFooter } from '@/components/ui/Dialog'
  * import { Button } from '@/components/ui/Button'
  * import { Field } from '@/components/ui/Field'
- * 
+ *
  * // Basic dialog
  * <Dialog.Root>
  *   <Dialog.Trigger asChild>
@@ -44,10 +44,10 @@ import { twMerge } from 'tailwind-merge'
  *     </DialogFooter>
  *   </DialogContent>
  * </Dialog.Root>
- * 
+ *
  * // Controlled dialog
  * const [open, setOpen] = React.useState(false)
- * 
+ *
  * <Dialog.Root open={open} onOpenChange={setOpen}>
  *   <Dialog.Trigger asChild>
  *     <Button>Settings</Button>
@@ -82,7 +82,7 @@ import { twMerge } from 'tailwind-merge'
  *     </DialogFooter>
  *   </DialogContent>
  * </Dialog.Root>
- * 
+ *
  * // Full-screen dialog on mobile
  * <Dialog.Root>
  *   <Dialog.Trigger asChild>
@@ -113,7 +113,7 @@ import { twMerge } from 'tailwind-merge'
  *     </DialogFooter>
  *   </DialogContent>
  * </Dialog.Root>
- * 
+ *
  * // Custom sized dialog
  * <Dialog.Root>
  *   <Dialog.Trigger asChild>
@@ -135,191 +135,172 @@ import { twMerge } from 'tailwind-merge'
 
 interface DialogRootProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Root> {}
 
-const DialogRoot = BaseDialog.Root
+const DialogRoot = BaseDialog.Root;
 
 interface DialogTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Trigger> {
-  asChild?: boolean
+    asChild?: boolean;
 }
 
-const DialogTrigger = BaseDialog.Trigger
+const DialogTrigger = BaseDialog.Trigger;
 
 interface DialogPortalProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Portal> {}
 
-const DialogPortal = BaseDialog.Portal
+const DialogPortal = BaseDialog.Portal;
 
 interface DialogBackdropProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Backdrop> {
-  className?: string
+    className?: string;
 }
 
-const DialogBackdrop = React.forwardRef<HTMLDivElement, DialogBackdropProps>(
-  ({ className, ...props }, ref) => {
+const DialogBackdrop = React.forwardRef<HTMLDivElement, DialogBackdropProps>(({ className, ...props }, ref) => {
     return (
-      <BaseDialog.Backdrop
-        ref={ref}
-        className={twMerge(
-          'fixed inset-0 z-50 bg-black/50 backdrop-blur-sm',
-          'data-[starting-style]:opacity-0 data-[ending-style]:opacity-0',
-          'animate-in fade-in-0 duration-200',
-          'data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:duration-200',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-DialogBackdrop.displayName = 'Dialog.Backdrop'
+        <BaseDialog.Backdrop
+            ref={ref}
+            className={twMerge(
+                "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
+                "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+                "animate-in fade-in-0 duration-200",
+                "data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:duration-200",
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+DialogBackdrop.displayName = "Dialog.Backdrop";
 
 interface DialogPopupProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Popup> {
-  className?: string
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+    className?: string;
+    size?: "sm" | "md" | "lg" | "xl" | "full";
 }
 
-const DialogPopup = React.forwardRef<HTMLDivElement, DialogPopupProps>(
-  ({ className, size = 'md', ...props }, ref) => {
+const DialogPopup = React.forwardRef<HTMLDivElement, DialogPopupProps>(({ className, size = "md", ...props }, ref) => {
     const sizeStyles = {
-      sm: 'max-w-sm',
-      md: 'max-w-md',
-      lg: 'max-w-lg',
-      xl: 'max-w-xl',
-      full: 'max-w-none w-[calc(100vw-2rem)] h-[calc(100vh-2rem)]'
-    }
+        sm: "max-w-sm",
+        md: "max-w-md",
+        lg: "max-w-lg",
+        xl: "max-w-xl",
+        full: "max-w-none w-[calc(100vw-2rem)] h-[calc(100vh-2rem)]",
+    };
 
     return (
-      <BaseDialog.Popup
-        ref={ref}
-        className={twMerge(
-          'fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%]',
-          'gap-4 border border-gray-200 bg-white p-6 shadow-lg dark:border-gray-800 dark:bg-gray-950',
-          'rounded-lg',
-          'data-[starting-style]:opacity-0 data-[starting-style]:scale-95',
-          'data-[ending-style]:opacity-0 data-[ending-style]:scale-95',
-          'animate-in fade-in-0 zoom-in-95 duration-200',
-          'data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95 data-[ending-style]:duration-200',
-          sizeStyles[size],
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-DialogPopup.displayName = 'Dialog.Popup'
+        <BaseDialog.Popup
+            ref={ref}
+            className={twMerge(
+                "fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%]",
+                "gap-4 border border-gray-200 bg-white p-6 shadow-lg dark:border-gray-800 dark:bg-gray-950",
+                "rounded-lg",
+                "data-[starting-style]:opacity-0 data-[starting-style]:scale-95",
+                "data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
+                "animate-in fade-in-0 zoom-in-95 duration-200",
+                "data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[ending-style]:zoom-out-95 data-[ending-style]:duration-200",
+                sizeStyles[size],
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+DialogPopup.displayName = "Dialog.Popup";
 
 interface DialogTitleProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Title> {
-  className?: string
+    className?: string;
 }
 
-const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
-  ({ className, ...props }, ref) => {
+const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(({ className, ...props }, ref) => {
     return (
-      <BaseDialog.Title
-        ref={ref}
-        className={twMerge(
-          'text-lg font-semibold leading-none tracking-tight text-gray-900 dark:text-gray-100',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-DialogTitle.displayName = 'Dialog.Title'
+        <BaseDialog.Title
+            ref={ref}
+            className={twMerge(
+                "text-lg font-semibold leading-none tracking-tight text-gray-900 dark:text-gray-100",
+                className,
+            )}
+            {...props}
+        />
+    );
+});
+DialogTitle.displayName = "Dialog.Title";
 
 interface DialogDescriptionProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Description> {
-  className?: string
+    className?: string;
 }
 
 const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseDialog.Description
-        ref={ref}
-        className={twMerge(
-          'text-sm text-gray-500 dark:text-gray-400',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-DialogDescription.displayName = 'Dialog.Description'
+    ({ className, ...props }, ref) => {
+        return (
+            <BaseDialog.Description
+                ref={ref}
+                className={twMerge("text-sm text-gray-500 dark:text-gray-400", className)}
+                {...props}
+            />
+        );
+    },
+);
+DialogDescription.displayName = "Dialog.Description";
 
 interface DialogCloseProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Close> {
-  asChild?: boolean
+    asChild?: boolean;
 }
 
-const DialogClose = BaseDialog.Close
+const DialogClose = BaseDialog.Close;
 
 // Compound components for better DX
 interface DialogContentProps {
-  children: React.ReactNode
-  className?: string
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+    children: React.ReactNode;
+    className?: string;
+    size?: "sm" | "md" | "lg" | "xl" | "full";
 }
 
 export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
-  ({ children, className, size, ...props }, ref) => {
-    return (
-      <DialogPortal>
-        <DialogBackdrop />
-        <DialogPopup ref={ref} className={className} size={size} {...props}>
-          {children}
-        </DialogPopup>
-      </DialogPortal>
-    )
-  }
-)
-DialogContent.displayName = 'DialogContent'
+    ({ children, className, size, ...props }, ref) => {
+        return (
+            <DialogPortal>
+                <DialogBackdrop />
+                <DialogPopup ref={ref} className={className} size={size} {...props}>
+                    {children}
+                </DialogPopup>
+            </DialogPortal>
+        );
+    },
+);
+DialogContent.displayName = "DialogContent";
 
 interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string
+    className?: string;
 }
 
-export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
-  ({ className, ...props }, ref) => {
+export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(({ className, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={twMerge(
-          'flex flex-col space-y-1.5 text-center sm:text-left',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-DialogHeader.displayName = 'DialogHeader'
+        <div
+            ref={ref}
+            className={twMerge("flex flex-col space-y-1.5 text-center sm:text-left", className)}
+            {...props}
+        />
+    );
+});
+DialogHeader.displayName = "DialogHeader";
 
 interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string
+    className?: string;
 }
 
-export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
-  ({ className, ...props }, ref) => {
+export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(({ className, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={twMerge(
-          'flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-2',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
-DialogFooter.displayName = 'DialogFooter'
+        <div
+            ref={ref}
+            className={twMerge("flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-2", className)}
+            {...props}
+        />
+    );
+});
+DialogFooter.displayName = "DialogFooter";
 
 export const Dialog = {
-  Root: DialogRoot,
-  Trigger: DialogTrigger,
-  Portal: DialogPortal,
-  Backdrop: DialogBackdrop,
-  Popup: DialogPopup,
-  Title: DialogTitle,
-  Description: DialogDescription,
-  Close: DialogClose,
-}
+    Root: DialogRoot,
+    Trigger: DialogTrigger,
+    Portal: DialogPortal,
+    Backdrop: DialogBackdrop,
+    Popup: DialogPopup,
+    Title: DialogTitle,
+    Description: DialogDescription,
+    Close: DialogClose,
+};
