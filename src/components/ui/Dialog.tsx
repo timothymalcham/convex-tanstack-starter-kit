@@ -124,7 +124,6 @@ import { twMerge } from 'tailwind-merge'
  *       <Dialog.Title>Data Visualization</Dialog.Title>
  *     </DialogHeader>
  *     <div className="h-96">
- *       {/* Chart or large content */}
  *       <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center">
  *         Chart placeholder
  *       </div>
@@ -137,19 +136,16 @@ import { twMerge } from 'tailwind-merge'
 interface DialogRootProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Root> {}
 
 const DialogRoot = BaseDialog.Root
-DialogRoot.displayName = 'Dialog.Root'
 
 interface DialogTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Trigger> {
   asChild?: boolean
 }
 
 const DialogTrigger = BaseDialog.Trigger
-DialogTrigger.displayName = 'Dialog.Trigger'
 
 interface DialogPortalProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Portal> {}
 
 const DialogPortal = BaseDialog.Portal
-DialogPortal.displayName = 'Dialog.Portal'
 
 interface DialogBackdropProps extends React.ComponentPropsWithoutRef<typeof BaseDialog.Backdrop> {
   className?: string
@@ -255,7 +251,6 @@ interface DialogCloseProps extends React.ComponentPropsWithoutRef<typeof BaseDia
 }
 
 const DialogClose = BaseDialog.Close
-DialogClose.displayName = 'Dialog.Close'
 
 // Compound components for better DX
 interface DialogContentProps {

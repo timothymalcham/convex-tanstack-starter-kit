@@ -42,19 +42,16 @@ import { twMerge } from 'tailwind-merge'
 interface AlertDialogRootProps extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Root> {}
 
 const AlertDialogRoot = BaseAlertDialog.Root
-AlertDialogRoot.displayName = 'AlertDialog.Root'
 
 interface AlertDialogTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Trigger> {
   asChild?: boolean
 }
 
 const AlertDialogTrigger = BaseAlertDialog.Trigger
-AlertDialogTrigger.displayName = 'AlertDialog.Trigger'
 
 interface AlertDialogPortalProps extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Portal> {}
 
 const AlertDialogPortal = BaseAlertDialog.Portal
-AlertDialogPortal.displayName = 'AlertDialog.Portal'
 
 interface AlertDialogBackdropProps extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Backdrop> {
   className?: string
@@ -150,7 +147,6 @@ interface AlertDialogCloseProps extends React.ComponentPropsWithoutRef<typeof Ba
 }
 
 const AlertDialogClose = BaseAlertDialog.Close
-AlertDialogClose.displayName = 'AlertDialog.Close'
 
 // Compound exports for better DX
 export const AlertDialog = {

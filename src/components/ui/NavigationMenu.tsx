@@ -346,7 +346,6 @@ NavigationMenuIcon.displayName = 'NavigationMenu.Icon'
 interface NavigationMenuPortalProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Portal> {}
 
 const NavigationMenuPortal = BaseNavigationMenu.Portal
-NavigationMenuPortal.displayName = 'NavigationMenu.Portal'
 
 interface NavigationMenuPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Positioner> {
   className?: string

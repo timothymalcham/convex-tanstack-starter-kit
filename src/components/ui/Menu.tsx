@@ -224,19 +224,16 @@ import { twMerge } from 'tailwind-merge'
 interface MenuRootProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Root> {}
 
 const MenuRoot = BaseMenu.Root
-MenuRoot.displayName = 'Menu.Root'
 
 interface MenuTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Trigger> {
   asChild?: boolean
 }
 
 const MenuTrigger = BaseMenu.Trigger
-MenuTrigger.displayName = 'Menu.Trigger'
 
 interface MenuPortalProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Portal> {}
 
 const MenuPortal = BaseMenu.Portal
-MenuPortal.displayName = 'Menu.Portal'
 
 interface MenuPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Positioner> {
   className?: string
@@ -453,22 +450,6 @@ const MenuRadioItem = React.forwardRef<HTMLDivElement, MenuRadioItemProps>(
 )
 MenuRadioItem.displayName = 'Menu.RadioItem'
 
-interface MenuItemIndicatorProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.ItemIndicator> {
-  className?: string
-}
-
-const MenuItemIndicator = React.forwardRef<HTMLSpanElement, MenuItemIndicatorProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <BaseMenu.ItemIndicator
-        ref={ref}
-        className={twMerge('text-current', className)}
-        {...props}
-      />
-    )
-  }
-)
-MenuItemIndicator.displayName = 'Menu.ItemIndicator'
 
 // Compound components for better DX
 interface MenuContentProps {
@@ -506,5 +487,4 @@ export const Menu = {
   CheckboxItem: MenuCheckboxItem,
   RadioGroup: MenuRadioGroup,
   RadioItem: MenuRadioItem,
-  ItemIndicator: MenuItemIndicator,
 }

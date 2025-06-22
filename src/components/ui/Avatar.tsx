@@ -111,7 +111,7 @@ const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
           'bg-gray-100 dark:bg-gray-800',
           className
         )}
-        delayMs={600}
+        delay={600}
         {...props}
       />
     )

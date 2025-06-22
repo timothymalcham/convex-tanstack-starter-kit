@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Don't ever write code that is confusing, overly complex, or more verbose than needed.
 - Work off of the TODO.md file when starting a task and mark todo items as complete as you finish them.
 - Always add an entry to the CHANGELOG.md file when finishing something so we can keep track of our work.
+- After finishing a task, run `npm run typecheck`, `npm run lint`/`npm run lint:fix`, and `npm run format`.
 
 ## Development Commands
 

@@ -143,12 +143,11 @@ import { twMerge } from 'tailwind-merge'
  *   </div>
  *   <Meter.Track className="bg-gray-200 h-4 relative">
  *     <Meter.Indicator className="bg-purple-500" />
- *     {/* Segment dividers */}
  *     {Array.from({ length: 9 }, (_, i) => (
  *       <div 
  *         key={i}
  *         className="absolute top-0 bottom-0 w-px bg-white"
- *         style={{ left: `${((i + 1) * 10)}%` }}
+ *         style={{ left: \`${((i + 1) * 10)}%\` }}
  *       />
  *     ))}
  *   </Meter.Track>
@@ -240,7 +239,9 @@ const MeterValue = React.forwardRef<HTMLSpanElement, MeterValueProps>(
         {...props}
       >
         {(value, max) => {
-          const percentage = Math.round((value / max) * 100)
+          const numValue = Number(value) || 0
+          const numMax = Number(max) || 1
+          const percentage = Math.round((numValue / numMax) * 100)
           return showUnit ? `${percentage}${unit}` : percentage.toString()
         }}
       </BaseMeter.Value>

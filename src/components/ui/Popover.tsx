@@ -195,19 +195,16 @@ import { twMerge } from 'tailwind-merge'
 interface PopoverRootProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Root> {}
 
 const PopoverRoot = BasePopover.Root
-PopoverRoot.displayName = 'Popover.Root'
 
 interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Trigger> {
   asChild?: boolean
 }
 
 const PopoverTrigger = BasePopover.Trigger
-PopoverTrigger.displayName = 'Popover.Trigger'
 
 interface PopoverPortalProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Portal> {}
 
 const PopoverPortal = BasePopover.Portal
-PopoverPortal.displayName = 'Popover.Portal'
 
 interface PopoverBackdropProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Backdrop> {
   className?: string

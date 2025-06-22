@@ -355,7 +355,6 @@ import { twMerge } from 'tailwind-merge'
 interface SelectRootProps extends React.ComponentPropsWithoutRef<typeof BaseSelect.Root> {}
 
 const SelectRoot = BaseSelect.Root
-SelectRoot.displayName = 'Select.Root'
 
 interface SelectTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> {
   className?: string
@@ -443,7 +442,6 @@ SelectIcon.displayName = 'Select.Icon'
 interface SelectPortalProps extends React.ComponentPropsWithoutRef<typeof BaseSelect.Portal> {}
 
 const SelectPortal = BaseSelect.Portal
-SelectPortal.displayName = 'Select.Portal'
 
 interface SelectPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseSelect.Positioner> {
   className?: string

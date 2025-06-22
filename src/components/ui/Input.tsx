@@ -72,7 +72,7 @@ import { twMerge } from 'tailwind-merge'
  * ```
  */
 
-interface InputProps extends React.ComponentPropsWithoutRef<typeof BaseInput> {
+interface InputProps extends Omit<React.ComponentPropsWithoutRef<typeof BaseInput>, 'size'> {
   /**
    * Additional CSS classes to apply to the input
    */

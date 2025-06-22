@@ -263,7 +263,6 @@ PreviewCardTrigger.displayName = 'PreviewCard.Trigger'
 interface PreviewCardPortalProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Portal> {}
 
 const PreviewCardPortal = BasePreviewCard.Portal
-PreviewCardPortal.displayName = 'PreviewCard.Portal'
 
 interface PreviewCardBackdropProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Backdrop> {
   className?: string

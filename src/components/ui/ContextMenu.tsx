@@ -92,19 +92,16 @@ import { twMerge } from 'tailwind-merge'
 interface ContextMenuRootProps extends React.ComponentPropsWithoutRef<typeof BaseContextMenu.Root> {}
 
 const ContextMenuRoot = BaseContextMenu.Root
-ContextMenuRoot.displayName = 'ContextMenu.Root'
 
 interface ContextMenuTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseContextMenu.Trigger> {
   asChild?: boolean
 }
 
 const ContextMenuTrigger = BaseContextMenu.Trigger
-ContextMenuTrigger.displayName = 'ContextMenu.Trigger'
 
 interface ContextMenuPortalProps extends React.ComponentPropsWithoutRef<typeof BaseContextMenu.Portal> {}
 
 const ContextMenuPortal = BaseContextMenu.Portal
-ContextMenuPortal.displayName = 'ContextMenu.Portal'
 
 interface ContextMenuPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseContextMenu.Positioner> {
   className?: string

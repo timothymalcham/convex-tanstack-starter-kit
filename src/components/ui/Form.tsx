@@ -523,10 +523,10 @@ const FormLabel = React.forwardRef<HTMLLabelElement, FormLabelProps>(
 )
 FormLabel.displayName = 'Form.Label'
 
-interface FormControlProps extends React.ComponentPropsWithoutRef<'input'> {
-  className?: string
-  as?: 'input' | 'textarea' | 'select'
-}
+type FormControlProps = 
+  | ({ as?: 'input' } & React.ComponentPropsWithoutRef<'input'>)
+  | ({ as: 'textarea' } & React.ComponentPropsWithoutRef<'textarea'>)
+  | ({ as: 'select' } & React.ComponentPropsWithoutRef<'select'>)
 
 const FormControl = React.forwardRef<
   HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement,
@@ -535,9 +535,7 @@ const FormControl = React.forwardRef<
   const { name, error, onInputChange } = useFormFieldContext()
   const { disabled } = useFormContext()
 
-  const handleChange = React.useCallback((
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+  const handleChange = React.useCallback((event: any) => {
     onInputChange?.()
     onChange?.(event)
   }, [onChange, onInputChange])
@@ -568,7 +566,7 @@ const FormControl = React.forwardRef<
       <textarea
         ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
         className={baseStyles}
-        {...commonProps}
+        {...(commonProps as React.ComponentPropsWithoutRef<'textarea'>)}
       />
     )
   }
@@ -578,7 +576,7 @@ const FormControl = React.forwardRef<
       <select
         ref={ref as React.ForwardedRef<HTMLSelectElement>}
         className={baseStyles}
-        {...commonProps}
+        {...(commonProps as React.ComponentPropsWithoutRef<'select'>)}
       />
     )
   }
@@ -587,7 +585,7 @@ const FormControl = React.forwardRef<
     <input
       ref={ref as React.ForwardedRef<HTMLInputElement>}
       className={baseStyles}
-      {...commonProps}
+      {...(commonProps as React.ComponentPropsWithoutRef<'input'>)}
     />
   )
 })
