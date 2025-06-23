@@ -1,5 +1,5 @@
-import * as React from "react";
 import { AlertDialog as BaseAlertDialog } from "@base-ui-components/react/alert-dialog";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**

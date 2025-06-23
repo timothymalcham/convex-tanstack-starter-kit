@@ -1,6 +1,6 @@
-import * as React from "react";
 import { Radio as BaseRadio } from "@base-ui-components/react/radio";
 import { RadioGroup as BaseRadioGroup } from "@base-ui-components/react/radio-group";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -255,12 +255,12 @@ import { twMerge } from "tailwind-merge";
  * ```
  */
 
-interface RadioGroupRootProps extends React.ComponentPropsWithoutRef<typeof BaseRadioGroup.Root> {
+interface RadioGroupRootProps extends React.ComponentPropsWithoutRef<typeof BaseRadioGroup> {
     className?: string;
 }
 
 const RadioGroupRoot = React.forwardRef<HTMLDivElement, RadioGroupRootProps>(({ className, ...props }, ref) => {
-    return <BaseRadioGroup.Root ref={ref} className={twMerge("group", className)} {...props} />;
+    return <BaseRadioGroup ref={ref} className={twMerge("group", className)} {...props} />;
 });
 RadioGroupRoot.displayName = "RadioGroup.Root";
 

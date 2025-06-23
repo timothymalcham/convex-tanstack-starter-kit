@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Select as BaseSelect } from "@base-ui-components/react/select";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -397,7 +397,7 @@ interface SelectIconProps extends React.ComponentPropsWithoutRef<typeof BaseSele
     className?: string;
 }
 
-const SelectIcon = React.forwardRef<HTMLSpanElement, SelectIconProps>(({ className, ...props }, ref) => {
+const SelectIcon = React.forwardRef<HTMLDivElement, SelectIconProps>(({ className, ...props }, ref) => {
     return (
         <BaseSelect.Icon
             ref={ref}
@@ -486,7 +486,7 @@ interface SelectItemTextProps extends React.ComponentPropsWithoutRef<typeof Base
     className?: string;
 }
 
-const SelectItemText = React.forwardRef<HTMLSpanElement, SelectItemTextProps>(({ className, ...props }, ref) => {
+const SelectItemText = React.forwardRef<HTMLDivElement, SelectItemTextProps>(({ className, ...props }, ref) => {
     return <BaseSelect.ItemText ref={ref} className={twMerge("flex-1 truncate", className)} {...props} />;
 });
 SelectItemText.displayName = "Select.ItemText";

@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Field as BaseField } from "@base-ui-components/react/field";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 interface FieldRootProps extends React.ComponentPropsWithoutRef<typeof BaseField.Root> {

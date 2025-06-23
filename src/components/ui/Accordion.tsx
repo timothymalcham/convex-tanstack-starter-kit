@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 interface AccordionRootProps extends React.ComponentPropsWithoutRef<typeof BaseAccordion.Root> {

@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Checkbox as BaseCheckbox } from "@base-ui-components/react/checkbox";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**

@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Input as BaseInput } from "@base-ui-components/react/input";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**

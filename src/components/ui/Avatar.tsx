@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Avatar as BaseAvatar } from "@base-ui-components/react/avatar";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**

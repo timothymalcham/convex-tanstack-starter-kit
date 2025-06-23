@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
 import invariant from "tiny-invariant";
-
-import { Icon } from "../icons/icons";
-import { useCreateColumnMutation } from "../queries";
 import { CancelButton } from "~/components/CancelButton";
 import { SaveButton } from "~/components/SaveButton";
+import { Icon } from "../icons/icons";
+import { useCreateColumnMutation } from "../queries";
 
 export function NewColumn({
     boardId,

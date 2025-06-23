@@ -1,5 +1,5 @@
-import * as React from "react";
 import { NavigationMenu as BaseNavigationMenu } from "@base-ui-components/react/navigation-menu";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -218,24 +218,22 @@ interface NavigationMenuListProps extends React.ComponentPropsWithoutRef<typeof 
     className?: string;
 }
 
-const NavigationMenuList = React.forwardRef<HTMLUListElement, NavigationMenuListProps>(
-    ({ className, ...props }, ref) => {
-        return (
-            <BaseNavigationMenu.List
-                ref={ref}
-                className={twMerge("group flex flex-1 list-none items-center justify-center space-x-1", className)}
-                {...props}
-            />
-        );
-    },
-);
+const NavigationMenuList = React.forwardRef<HTMLDivElement, NavigationMenuListProps>(({ className, ...props }, ref) => {
+    return (
+        <BaseNavigationMenu.List
+            ref={ref}
+            className={twMerge("group flex flex-1 list-none items-center justify-center space-x-1", className)}
+            {...props}
+        />
+    );
+});
 NavigationMenuList.displayName = "NavigationMenu.List";
 
 interface NavigationMenuItemProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Item> {
     className?: string;
 }
 
-const NavigationMenuItem = React.forwardRef<HTMLLIElement, NavigationMenuItemProps>(({ className, ...props }, ref) => {
+const NavigationMenuItem = React.forwardRef<HTMLDivElement, NavigationMenuItemProps>(({ className, ...props }, ref) => {
     return <BaseNavigationMenu.Item ref={ref} className={className} {...props} />;
 });
 NavigationMenuItem.displayName = "NavigationMenu.Item";
@@ -298,30 +296,28 @@ interface NavigationMenuIconProps extends React.ComponentPropsWithoutRef<typeof 
     className?: string;
 }
 
-const NavigationMenuIcon = React.forwardRef<HTMLSpanElement, NavigationMenuIconProps>(
-    ({ className, ...props }, ref) => {
-        return (
-            <BaseNavigationMenu.Icon
-                ref={ref}
-                className={twMerge(
-                    "relative top-[1px] ml-1 h-3 w-3 transition duration-200",
-                    "group-data-[open]:rotate-180",
-                    className,
-                )}
-                {...props}
-            >
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-                        fill="currentColor"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                    />
-                </svg>
-            </BaseNavigationMenu.Icon>
-        );
-    },
-);
+const NavigationMenuIcon = React.forwardRef<HTMLDivElement, NavigationMenuIconProps>(({ className, ...props }, ref) => {
+    return (
+        <BaseNavigationMenu.Icon
+            ref={ref}
+            className={twMerge(
+                "relative top-[1px] ml-1 h-3 w-3 transition duration-200",
+                "group-data-[open]:rotate-180",
+                className,
+            )}
+            {...props}
+        >
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                />
+            </svg>
+        </BaseNavigationMenu.Icon>
+    );
+});
 NavigationMenuIcon.displayName = "NavigationMenu.Icon";
 
 interface NavigationMenuPortalProps extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Portal> {}

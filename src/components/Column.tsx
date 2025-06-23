@@ -1,15 +1,14 @@
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
-import invariant from "tiny-invariant";
-import { twMerge } from "tailwind-merge";
-
 import { flushSync } from "react-dom";
-import { CONTENT_TYPES } from "../types";
+import { twMerge } from "tailwind-merge";
+import invariant from "tiny-invariant";
 import { Icon } from "../icons/icons";
 import { useDeleteColumnMutation, useUpdateCardMutation, useUpdateColumnMutation } from "../queries";
+import type { RenderedItem } from "../types";
+import { CONTENT_TYPES } from "../types";
+import { Card } from "./Card";
 import { EditableText } from "./EditableText";
 import { NewCard } from "./NewCard";
-import { Card } from "./Card";
-import type { RenderedItem } from "../types";
 
 interface ColumnProps {
     name: string;

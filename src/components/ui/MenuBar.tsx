@@ -1,5 +1,6 @@
-import * as React from "react";
+import { Menu as BaseMenu } from "@base-ui-components/react/menu";
 import { Menubar as BaseMenubar } from "@base-ui-components/react/menubar";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -153,13 +154,13 @@ import { twMerge } from "tailwind-merge";
  * ```
  */
 
-interface MenuBarRootProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Root> {
+interface MenuBarRootProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar> {
     className?: string;
 }
 
 const MenuBarRoot = React.forwardRef<HTMLDivElement, MenuBarRootProps>(({ className, ...props }, ref) => {
     return (
-        <BaseMenubar.Root
+        <BaseMenubar
             ref={ref}
             className={twMerge(
                 "flex h-10 items-center space-x-1 rounded-md border bg-white p-1",
@@ -173,23 +174,21 @@ const MenuBarRoot = React.forwardRef<HTMLDivElement, MenuBarRootProps>(({ classN
 });
 MenuBarRoot.displayName = "MenuBar.Root";
 
-interface MenuBarMenuProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu> {
-    className?: string;
-}
+interface MenuBarMenuProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Root> {}
 
-const MenuBarMenu = React.forwardRef<HTMLDivElement, MenuBarMenuProps>(({ className, ...props }, ref) => {
-    return <BaseMenubar.Menu ref={ref} className={className} {...props} />;
-});
+const MenuBarMenu = (props: MenuBarMenuProps) => {
+    return <BaseMenu.Root {...props} />;
+};
 MenuBarMenu.displayName = "MenuBar.Menu";
 
-interface MenuBarMenuTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.Trigger> {
+interface MenuBarMenuTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Trigger> {
     className?: string;
 }
 
 const MenuBarMenuTrigger = React.forwardRef<HTMLButtonElement, MenuBarMenuTriggerProps>(
     ({ className, ...props }, ref) => {
         return (
-            <BaseMenubar.Menu.Trigger
+            <BaseMenu.Trigger
                 ref={ref}
                 className={twMerge(
                     "flex cursor-pointer select-none items-center rounded-sm px-3 py-1.5 text-sm font-medium",
@@ -207,27 +206,35 @@ const MenuBarMenuTrigger = React.forwardRef<HTMLButtonElement, MenuBarMenuTrigge
 );
 MenuBarMenuTrigger.displayName = "MenuBar.MenuTrigger";
 
-interface MenuBarPortalProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.Portal> {}
+interface MenuBarPortalProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Portal> {}
 
-const MenuBarPortal = BaseMenubar.Menu.Portal;
-MenuBarPortal.displayName = "MenuBar.Portal";
+const MenuBarPortal = BaseMenu.Portal;
+// MenuBarPortal.displayName = "MenuBar.Portal"; // Can't set displayName on function components from BaseUI
 
-interface MenuBarPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.Positioner> {
+interface MenuBarPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Positioner> {
     className?: string;
+    children?: React.ReactNode;
 }
 
-const MenuBarPositioner = React.forwardRef<HTMLDivElement, MenuBarPositionerProps>(({ className, ...props }, ref) => {
-    return <BaseMenubar.Menu.Positioner ref={ref} className={twMerge("z-50", className)} {...props} />;
-});
+const MenuBarPositioner = React.forwardRef<HTMLDivElement, MenuBarPositionerProps>(
+    ({ className, children, ...props }, ref) => {
+        return (
+            <BaseMenu.Positioner ref={ref} className={twMerge("z-50", className)} {...props}>
+                {children}
+            </BaseMenu.Positioner>
+        );
+    },
+);
 MenuBarPositioner.displayName = "MenuBar.Positioner";
 
-interface MenuBarPopupProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.Popup> {
+interface MenuBarPopupProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Popup> {
     className?: string;
+    children?: React.ReactNode;
 }
 
-const MenuBarPopup = React.forwardRef<HTMLDivElement, MenuBarPopupProps>(({ className, ...props }, ref) => {
+const MenuBarPopup = React.forwardRef<HTMLDivElement, MenuBarPopupProps>(({ className, children, ...props }, ref) => {
     return (
-        <BaseMenubar.Menu.Popup
+        <BaseMenu.Popup
             ref={ref}
             className={twMerge(
                 "min-w-48 overflow-hidden rounded-md border bg-white p-1 shadow-lg",
@@ -238,18 +245,20 @@ const MenuBarPopup = React.forwardRef<HTMLDivElement, MenuBarPopupProps>(({ clas
                 className,
             )}
             {...props}
-        />
+        >
+            {children}
+        </BaseMenu.Popup>
     );
 });
 MenuBarPopup.displayName = "MenuBar.Popup";
 
-interface MenuBarItemProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.Item> {
+interface MenuBarItemProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Item> {
     className?: string;
 }
 
 const MenuBarItem = React.forwardRef<HTMLDivElement, MenuBarItemProps>(({ className, ...props }, ref) => {
     return (
-        <BaseMenubar.Menu.Item
+        <BaseMenu.Item
             ref={ref}
             className={twMerge(
                 "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm",
@@ -265,13 +274,13 @@ const MenuBarItem = React.forwardRef<HTMLDivElement, MenuBarItemProps>(({ classN
 });
 MenuBarItem.displayName = "MenuBar.Item";
 
-interface MenuBarSeparatorProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.Separator> {
+interface MenuBarSeparatorProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Separator> {
     className?: string;
 }
 
 const MenuBarSeparator = React.forwardRef<HTMLDivElement, MenuBarSeparatorProps>(({ className, ...props }, ref) => {
     return (
-        <BaseMenubar.Menu.Separator
+        <BaseMenu.Separator
             ref={ref}
             className={twMerge("-mx-1 my-1 h-px bg-gray-200 dark:bg-gray-800", className)}
             {...props}
@@ -280,22 +289,22 @@ const MenuBarSeparator = React.forwardRef<HTMLDivElement, MenuBarSeparatorProps>
 });
 MenuBarSeparator.displayName = "MenuBar.Separator";
 
-interface MenuBarGroupProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.Group> {
+interface MenuBarGroupProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Group> {
     className?: string;
 }
 
 const MenuBarGroup = React.forwardRef<HTMLDivElement, MenuBarGroupProps>(({ className, ...props }, ref) => {
-    return <BaseMenubar.Menu.Group ref={ref} className={className} {...props} />;
+    return <BaseMenu.Group ref={ref} className={className} {...props} />;
 });
 MenuBarGroup.displayName = "MenuBar.Group";
 
-interface MenuBarGroupLabelProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.GroupLabel> {
+interface MenuBarGroupLabelProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.GroupLabel> {
     className?: string;
 }
 
 const MenuBarGroupLabel = React.forwardRef<HTMLDivElement, MenuBarGroupLabelProps>(({ className, ...props }, ref) => {
     return (
-        <BaseMenubar.Menu.GroupLabel
+        <BaseMenu.GroupLabel
             ref={ref}
             className={twMerge("px-2 py-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400", className)}
             {...props}
@@ -304,14 +313,15 @@ const MenuBarGroupLabel = React.forwardRef<HTMLDivElement, MenuBarGroupLabelProp
 });
 MenuBarGroupLabel.displayName = "MenuBar.GroupLabel";
 
-interface MenuBarCheckboxItemProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.CheckboxItem> {
+interface MenuBarCheckboxItemProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItem> {
     className?: string;
+    children?: React.ReactNode;
 }
 
 const MenuBarCheckboxItem = React.forwardRef<HTMLDivElement, MenuBarCheckboxItemProps>(
     ({ className, children, ...props }, ref) => {
         return (
-            <BaseMenubar.Menu.CheckboxItem
+            <BaseMenu.CheckboxItem
                 ref={ref}
                 className={twMerge(
                     "relative flex cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm",
@@ -324,29 +334,30 @@ const MenuBarCheckboxItem = React.forwardRef<HTMLDivElement, MenuBarCheckboxItem
                 {...props}
             >
                 <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">{children}</span>
-            </BaseMenubar.Menu.CheckboxItem>
+            </BaseMenu.CheckboxItem>
         );
     },
 );
 MenuBarCheckboxItem.displayName = "MenuBar.CheckboxItem";
 
-interface MenuBarRadioGroupProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.RadioGroup> {
+interface MenuBarRadioGroupProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.RadioGroup> {
     className?: string;
 }
 
 const MenuBarRadioGroup = React.forwardRef<HTMLDivElement, MenuBarRadioGroupProps>(({ className, ...props }, ref) => {
-    return <BaseMenubar.Menu.RadioGroup ref={ref} className={className} {...props} />;
+    return <BaseMenu.RadioGroup ref={ref} className={className} {...props} />;
 });
 MenuBarRadioGroup.displayName = "MenuBar.RadioGroup";
 
-interface MenuBarRadioItemProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.RadioItem> {
+interface MenuBarRadioItemProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.RadioItem> {
     className?: string;
+    children?: React.ReactNode;
 }
 
 const MenuBarRadioItem = React.forwardRef<HTMLDivElement, MenuBarRadioItemProps>(
     ({ className, children, ...props }, ref) => {
         return (
-            <BaseMenubar.Menu.RadioItem
+            <BaseMenu.RadioItem
                 ref={ref}
                 className={twMerge(
                     "relative flex cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm",
@@ -359,22 +370,24 @@ const MenuBarRadioItem = React.forwardRef<HTMLDivElement, MenuBarRadioItemProps>
                 {...props}
             >
                 <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">{children}</span>
-            </BaseMenubar.Menu.RadioItem>
+            </BaseMenu.RadioItem>
         );
     },
 );
 MenuBarRadioItem.displayName = "MenuBar.RadioItem";
 
-interface MenuBarItemIndicatorProps extends React.ComponentPropsWithoutRef<typeof BaseMenubar.Menu.ItemIndicator> {
-    className?: string;
-}
+// Note: BaseMenu doesn't have an ItemIndicator component
+// This component is commented out until BaseUI adds support for it
+// interface MenuBarItemIndicatorProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.ItemIndicator> {
+//     className?: string;
+// }
 
-const MenuBarItemIndicator = React.forwardRef<HTMLSpanElement, MenuBarItemIndicatorProps>(
-    ({ className, ...props }, ref) => {
-        return <BaseMenubar.Menu.ItemIndicator ref={ref} className={twMerge("text-current", className)} {...props} />;
-    },
-);
-MenuBarItemIndicator.displayName = "MenuBar.ItemIndicator";
+// const MenuBarItemIndicator = React.forwardRef<HTMLSpanElement, MenuBarItemIndicatorProps>(
+//     ({ className, ...props }, ref) => {
+//         return <BaseMenu.ItemIndicator ref={ref} className={twMerge("text-current", className)} {...props} />;
+//     },
+// );
+// MenuBarItemIndicator.displayName = "MenuBar.ItemIndicator";
 
 // Compound component for better DX
 interface MenuBarMenuContentProps {
@@ -411,5 +424,5 @@ export const MenuBar = {
     CheckboxItem: MenuBarCheckboxItem,
     RadioGroup: MenuBarRadioGroup,
     RadioItem: MenuBarRadioItem,
-    ItemIndicator: MenuBarItemIndicator,
+    // ItemIndicator: MenuBarItemIndicator, // Commented out - not available in BaseMenu
 };

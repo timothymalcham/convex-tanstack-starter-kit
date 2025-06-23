@@ -1,6 +1,6 @@
-import * as React from "react";
-import { CheckboxGroup as BaseCheckboxGroup } from "@base-ui-components/react/checkbox-group";
 import { Checkbox } from "@base-ui-components/react/checkbox";
+import { CheckboxGroup as BaseCheckboxGroup } from "@base-ui-components/react/checkbox-group";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -116,7 +116,7 @@ export const CheckboxItem = React.forwardRef<HTMLLabelElement, CheckboxItemProps
                     disabled={disabled}
                     className={twMerge(
                         "flex items-center justify-center rounded border border-gray-300 dark:border-gray-700",
-                        "outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+                        "outline-none focus-visible:outline-2 focus-visible:outline-offset-2",
                         "focus-visible:outline-blue-600 dark:focus-visible:outline-blue-400",
                         "data-[checked]:bg-blue-600 data-[checked]:border-blue-600",
                         "data-[checked]:dark:bg-blue-500 data-[checked]:dark:border-blue-500",

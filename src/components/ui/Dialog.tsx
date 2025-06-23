@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui-components/react/dialog";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 /**

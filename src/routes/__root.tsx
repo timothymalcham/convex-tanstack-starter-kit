@@ -1,16 +1,17 @@
 /// <reference types="vite/client" />
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
-import { Link, Outlet, createRootRouteWithContext, useRouterState, HeadContent, Scripts } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import * as React from "react";
-import { Toaster } from "react-hot-toast";
+
 import type { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
+import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import type * as React from "react";
+import { Toaster } from "react-hot-toast";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { IconLink } from "~/components/IconLink";
+import { Loader } from "~/components/Loader";
 import { NotFound } from "~/components/NotFound";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/utils/seo";
-import { Loader } from "~/components/Loader";
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient;
