@@ -32,3 +32,19 @@
   - Includes utility functions for dismiss, loading, and promises
   - Integrated Toaster component into app root (replaced react-hot-toast)
   - Added useToast hook for React-friendly toast access (located in src/hooks/)
+- Added Toggle component to UI components library
+  - Built with @base-ui-components/react/toggle
+  - Multiple variants: default and outline
+  - Multiple sizes: sm, md, lg
+  - Accessible with proper focus states and keyboard navigation
+- Added ToggleGroup component to UI components library
+  - Built with @base-ui-components/react/toggle-group
+  - Manages multiple toggle selection states
+  - Supports single and multiple selection modes
+  - Styled container for grouped toggles
+- Added Toolbar component to UI components library
+  - Built with @base-ui-components/react/toolbar
+  - Includes Root, Button, Group, Separator, and Link sub-components
+  - Multiple button variants (default, ghost) and sizes (sm, md, lg)
+  - Compound component pattern for easy usage
+  - Accessible keyboard navigation and focus management

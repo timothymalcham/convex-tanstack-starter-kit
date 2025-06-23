@@ -33,6 +33,9 @@
 - [x] Toast (w Sonner)
 - [x] useToast hook
 - [ ] createToastHeaders server function (trigger toasts when return-ing from a server function, e.g. "Item successfully created/updated")
+- [x] Toggle 
+- [x] Toggle Group
+- [x] Toolbar
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
