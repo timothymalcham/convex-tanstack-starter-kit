@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type * as React from "react";
-import { Toaster } from "react-hot-toast";
+import { Toast } from "~/components/ui/Toast";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { IconLink } from "~/components/IconLink";
 import { Loader } from "~/components/Loader";
@@ -120,7 +120,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
                     <div className="grow min-h-0 h-full flex flex-col">
                         {children}
-                        <Toaster />
+                        <Toast />
                     </div>
                 </div>
                 <ReactQueryDevtools />

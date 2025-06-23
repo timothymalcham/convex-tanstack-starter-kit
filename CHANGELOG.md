@@ -24,3 +24,10 @@
   - Compound component pattern for easy usage
   - Accessible with proper focus management
   - Customizable class names for all sub-components
+- Added Toast component using Sonner
+  - Positioned at bottom-right by default
+  - Multiple variants: default, success, info, warning, error, action
+  - Supports descriptions and action buttons
+  - Simple API with toast.success(), toast.error(), etc.
+  - Includes utility functions for dismiss, loading, and promises
+  - Integrated Toaster component into app root (replaced react-hot-toast)

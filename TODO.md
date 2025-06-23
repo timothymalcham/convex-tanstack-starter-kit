@@ -30,6 +30,7 @@
 - [x] Separator
 - [x] Switch
 - [x] Tabs
+- [x] Toast (w Sonner)
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
