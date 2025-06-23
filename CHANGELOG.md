@@ -48,3 +48,10 @@
   - Multiple button variants (default, ghost) and sizes (sm, md, lg)
   - Compound component pattern for easy usage
   - Accessible keyboard navigation and focus management
+- Added Tooltip component to UI components library
+  - Built with @base-ui-components/react/tooltip
+  - Includes Provider, Root, Trigger, Portal, Positioner, Popup, and Arrow sub-components
+  - Smooth animations with scale and opacity transitions
+  - Default arrow with light/dark mode support
+  - Configurable positioning with sideOffset
+  - Compound component pattern for easy usage

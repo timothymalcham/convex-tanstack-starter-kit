@@ -36,6 +36,7 @@
 - [x] Toggle 
 - [x] Toggle Group
 - [x] Toolbar
+- [x] Tooltip
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
