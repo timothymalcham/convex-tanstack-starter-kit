@@ -29,6 +29,7 @@
 - [x] Select
 - [x] Separator
 - [x] Switch
+- [x] Tabs
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure

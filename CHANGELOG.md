@@ -18,3 +18,9 @@
   - Supports dark mode styling
   - Customizable root and thumb class names
   - Exports sub-components for advanced usage
+- Added Tabs component to UI components library
+  - Built with @base-ui-components/react/tabs
+  - Includes animated indicator with smooth transitions
+  - Compound component pattern for easy usage
+  - Accessible with proper focus management
+  - Customizable class names for all sub-components
