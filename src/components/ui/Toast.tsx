@@ -93,7 +93,7 @@ export const toast = {
 
     // Utility functions
     dismiss: (toastId?: string | number) => sonnerToast.dismiss(toastId),
-    loading: (message: string, options?: Omit<ToastOptions, "action" | "cancel">) => 
+    loading: (message: string, options?: Omit<ToastOptions, "action" | "cancel">) =>
         sonnerToast.loading(message, { description: options?.description }),
     promise: sonnerToast.promise,
 };

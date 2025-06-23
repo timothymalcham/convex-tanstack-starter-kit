@@ -31,3 +31,4 @@
   - Simple API with toast.success(), toast.error(), etc.
   - Includes utility functions for dismiss, loading, and promises
   - Integrated Toaster component into app root (replaced react-hot-toast)
+  - Added useToast hook for React-friendly toast access (located in src/hooks/)

@@ -31,6 +31,8 @@
 - [x] Switch
 - [x] Tabs
 - [x] Toast (w Sonner)
+- [x] useToast hook
+- [ ] createToastHeaders server function (trigger toasts when return-ing from a server function, e.g. "Item successfully created/updated")
 - [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
