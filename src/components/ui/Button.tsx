@@ -1,3 +1,57 @@
+/**
+ * Button Component
+ *
+ * A clickable button element with multiple variants and sizes. Built with standard HTML button.
+ *
+ * @example
+ * // Basic button
+ * <Button>Click me</Button>
+ *
+ * // Different variants
+ * <Button variant="primary">Primary Action</Button>
+ * <Button variant="secondary">Secondary Action</Button>
+ * <Button variant="danger">Delete</Button>
+ * <Button variant="ghost">Subtle Action</Button>
+ *
+ * // Different sizes
+ * <Button size="sm">Small</Button>
+ * <Button size="md">Medium</Button>
+ * <Button size="lg">Large</Button>
+ *
+ * // Full width
+ * <Button fullWidth>Full Width Button</Button>
+ *
+ * // With icons
+ * <Button>
+ *   <PlusIcon className="w-4 h-4 mr-2" />
+ *   Add Item
+ * </Button>
+ *
+ * // Disabled state
+ * <Button disabled>Disabled</Button>
+ *
+ * // As form submit
+ * <Button type="submit">Submit Form</Button>
+ *
+ * @usage
+ * - Primary actions (save, submit, confirm)
+ * - Secondary actions (cancel, reset)
+ * - Destructive actions (delete, remove)
+ * - Navigation triggers
+ * - Form submissions
+ * - Modal triggers
+ *
+ * @best-practices
+ * - Use primary for main actions (max 1 per section)
+ * - Use secondary for alternative actions
+ * - Use danger for destructive actions with confirmation
+ * - Use ghost for subtle actions in compact spaces
+ * - Keep button text concise and action-oriented
+ * - Provide loading states for async actions
+ * - Use consistent sizing within button groups
+ * - Ensure sufficient touch targets (44px minimum)
+ */
+
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 

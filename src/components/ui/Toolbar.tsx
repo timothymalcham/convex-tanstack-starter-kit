@@ -1,3 +1,68 @@
+/**
+ * Toolbar Component
+ *
+ * A container for grouping related controls and actions. Built with Base UI Toolbar.
+ *
+ * @example
+ * // Basic toolbar
+ * <Toolbar.Root>
+ *   <Toolbar.Button>Save</Toolbar.Button>
+ *   <Toolbar.Button variant="ghost">Cancel</Toolbar.Button>
+ *   <Toolbar.Separator />
+ *   <Toolbar.Button>Delete</Toolbar.Button>
+ * </Toolbar.Root>
+ *
+ * // With toggle groups
+ * <Toolbar.Root>
+ *   <ToggleGroup defaultValue="left">
+ *     <Toolbar.Button render={<Toggle />} value="left">
+ *       Align Left
+ *     </Toolbar.Button>
+ *     <Toolbar.Button render={<Toggle />} value="center">
+ *       Align Center
+ *     </Toolbar.Button>
+ *   </ToggleGroup>
+ *   <Toolbar.Separator />
+ *   <Toolbar.Group>
+ *     <Toolbar.Button size="sm">$</Toolbar.Button>
+ *     <Toolbar.Button size="sm">%</Toolbar.Button>
+ *   </Toolbar.Group>
+ * </Toolbar.Root>
+ *
+ * // With additional elements
+ * <Toolbar.Root>
+ *   <Toolbar.Button>Bold</Toolbar.Button>
+ *   <Toolbar.Button>Italic</Toolbar.Button>
+ *   <Toolbar.Separator />
+ *   <Select.Root>
+ *     <Toolbar.Button render={<Select.Trigger />}>
+ *       <Select.Value placeholder="Font" />
+ *     </Toolbar.Button>
+ *   </Select.Root>
+ *   <Toolbar.Link href="#" className="ml-auto">
+ *     Last saved 2m ago
+ *   </Toolbar.Link>
+ * </Toolbar.Root>
+ *
+ * @usage
+ * - Text editors (formatting controls)
+ * - Image editors (tool palettes)
+ * - Data tables (actions bar)
+ * - Form headers (save/cancel)
+ * - Media players (playback controls)
+ * - Drawing applications
+ *
+ * @best-practices
+ * - Group related actions together
+ * - Use separators to create logical sections
+ * - Place primary actions on the left
+ * - Place secondary/meta info on the right
+ * - Keep toolbars focused and not overwhelming
+ * - Use consistent button sizes within groups
+ * - Provide keyboard navigation
+ * - Consider responsive behavior for mobile
+ */
+
 import { Toolbar as BaseToolbar } from "@base-ui-components/react/toolbar";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";

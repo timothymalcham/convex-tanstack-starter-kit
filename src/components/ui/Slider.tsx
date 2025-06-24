@@ -1,3 +1,52 @@
+/**
+ * Slider Component
+ *
+ * An interactive slider for selecting numeric values. Built with Base UI Slider.
+ *
+ * @example
+ * // Basic slider
+ * <Slider defaultValue={25} />
+ *
+ * // Controlled slider
+ * const [value, setValue] = useState(50);
+ * <Slider value={value} onValueChange={setValue} />
+ *
+ * // Range slider
+ * <Slider defaultValue={[20, 80]} />
+ *
+ * // Custom styling
+ * <Slider
+ *   defaultValue={25}
+ *   trackClassName="bg-blue-200"
+ *   indicatorClassName="bg-blue-600"
+ *   thumbClassName="bg-blue-600 border-blue-700"
+ * />
+ *
+ * // Advanced usage with custom children
+ * <SliderRoot value={value} onValueChange={setValue}>
+ *   <SliderControl>
+ *     <SliderTrack>
+ *       <SliderIndicator />
+ *       <SliderThumb />
+ *     </SliderTrack>
+ *   </SliderControl>
+ * </SliderRoot>
+ *
+ * @usage
+ * - Volume controls
+ * - Price range filters
+ * - Image brightness/contrast adjustments
+ * - Progress indicators that allow user input
+ * - Any numeric input with visual feedback
+ *
+ * @best-practices
+ * - Provide clear min/max labels when range is not obvious
+ * - Use step values that make sense for your use case
+ * - Consider keyboard accessibility (arrow keys)
+ * - Show current value when precision matters
+ * - Use range sliders for filtering ranges
+ */
+
 import { Slider as BaseSlider } from "@base-ui-components/react/slider";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";

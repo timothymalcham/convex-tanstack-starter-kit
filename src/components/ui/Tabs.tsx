@@ -1,3 +1,58 @@
+/**
+ * Tabs Component
+ *
+ * A set of layered sections of content, only one visible at a time. Built with Base UI Tabs.
+ *
+ * @example
+ * // Basic tabs
+ * <Tabs.Root defaultValue="overview">
+ *   <Tabs.List>
+ *     <Tabs.Tab value="overview">Overview</Tabs.Tab>
+ *     <Tabs.Tab value="projects">Projects</Tabs.Tab>
+ *     <Tabs.Tab value="account">Account</Tabs.Tab>
+ *     <Tabs.Indicator />
+ *   </Tabs.List>
+ *   <Tabs.Panel value="overview">
+ *     Overview content here
+ *   </Tabs.Panel>
+ *   <Tabs.Panel value="projects">
+ *     Projects content here
+ *   </Tabs.Panel>
+ *   <Tabs.Panel value="account">
+ *     Account content here
+ *   </Tabs.Panel>
+ * </Tabs.Root>
+ *
+ * // Controlled tabs
+ * const [activeTab, setActiveTab] = useState("overview");
+ * <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
+ *   {tabs content}
+ * </Tabs.Root>
+ *
+ * // Custom styling
+ * <Tabs.Root defaultValue="tab1" className="w-full">
+ *   <Tabs.List className="bg-gray-100 p-1">
+ *     <Tabs.Tab value="tab1" className="rounded px-4 py-2">Tab 1</Tabs.Tab>
+ *   </Tabs.List>
+ * </Tabs.Root>
+ *
+ * @usage
+ * - Navigation between related content sections
+ * - Settings panels
+ * - Dashboard sections
+ * - Product feature comparisons
+ * - Form wizards (with validation)
+ *
+ * @best-practices
+ * - Keep tab labels short and descriptive
+ * - Use 3-7 tabs maximum for usability
+ * - Consider vertical tabs for mobile/narrow layouts
+ * - Ensure content is related across tabs
+ * - Use indicators to show active state clearly
+ * - Maintain state when switching between tabs
+ * - Consider loading states for async content
+ */
+
 import { Tabs as BaseTabs } from "@base-ui-components/react/tabs";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";

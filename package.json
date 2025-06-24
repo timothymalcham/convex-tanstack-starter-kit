@@ -16,7 +16,9 @@
     "format:check": "biome format ."
   },
   "dependencies": {
+    "@auth/core": "^0.37.0",
     "@base-ui-components/react": "^1.0.0-beta.0",
+    "@convex-dev/auth": "^0.0.87",
     "@convex-dev/react-query": "0.0.0-alpha.8",
     "@tanstack/react-query": "^5.66.0",
     "@tanstack/react-query-devtools": "^5.66.0",

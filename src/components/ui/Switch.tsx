@@ -1,3 +1,49 @@
+/**
+ * Switch Component
+ *
+ * A toggle switch for binary choices. Built with Base UI Switch.
+ *
+ * @example
+ * // Basic switch
+ * <Switch defaultChecked />
+ *
+ * // Controlled switch
+ * const [enabled, setEnabled] = useState(false);
+ * <Switch checked={enabled} onCheckedChange={setEnabled} />
+ *
+ * // With label
+ * <label className="flex items-center gap-2">
+ *   <Switch />
+ *   Enable notifications
+ * </label>
+ *
+ * // Custom styling
+ * <Switch
+ *   className="bg-green-600 data-[checked]:bg-green-700"
+ *   thumbClassName="bg-white"
+ * />
+ *
+ * // Advanced usage with custom children
+ * <SwitchRoot checked={enabled} onCheckedChange={setEnabled}>
+ *   <SwitchThumb />
+ * </SwitchRoot>
+ *
+ * @usage
+ * - Settings toggles (dark mode, notifications)
+ * - Feature flags
+ * - Binary preferences
+ * - Replacing checkboxes for immediate actions
+ * - Visibility toggles
+ *
+ * @best-practices
+ * - Use for immediate actions, not form submissions
+ * - Always include clear labels
+ * - Provide visual feedback for state changes
+ * - Consider loading states for async operations
+ * - Use consistent positioning (left/right) across your app
+ * - Avoid for destructive actions without confirmation
+ */
+
 import { Switch as BaseSwitch } from "@base-ui-components/react/switch";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";

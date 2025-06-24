@@ -1,3 +1,57 @@
+/**
+ * Toggle Component
+ *
+ * A button that can be toggled between pressed and unpressed states. Built with Base UI Toggle.
+ *
+ * @example
+ * // Basic toggle
+ * <Toggle aria-label="Bold">
+ *   <BoldIcon />
+ * </Toggle>
+ *
+ * // Controlled toggle
+ * const [bold, setBold] = useState(false);
+ * <Toggle pressed={bold} onPressedChange={setBold} aria-label="Bold">
+ *   <BoldIcon />
+ * </Toggle>
+ *
+ * // Different variants and sizes
+ * <Toggle variant="outline" size="lg">
+ *   <ItalicIcon />
+ * </Toggle>
+ *
+ * // With text
+ * <Toggle>
+ *   <BoldIcon />
+ *   Bold
+ * </Toggle>
+ *
+ * // Custom render prop
+ * <Toggle
+ *   render={(props, state) => (
+ *     <button {...props}>
+ *       {state.pressed ? <HeartFilledIcon /> : <HeartOutlineIcon />}
+ *     </button>
+ *   )}
+ * />
+ *
+ * @usage
+ * - Text formatting controls (bold, italic, underline)
+ * - Favorite/bookmark buttons
+ * - Visibility toggles
+ * - Filter activation
+ * - Tool selection in editors
+ * - Single-choice options that can be deselected
+ *
+ * @best-practices
+ * - Always provide aria-label for icon-only toggles
+ * - Use consistent visual states across your app
+ * - Consider grouping related toggles with ToggleGroup
+ * - Provide clear visual feedback for pressed state
+ * - Use appropriate icons that clearly show state
+ * - Avoid for destructive actions
+ */
+
 import { Toggle as BaseToggle } from "@base-ui-components/react/toggle";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";

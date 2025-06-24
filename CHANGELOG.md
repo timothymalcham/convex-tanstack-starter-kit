@@ -55,3 +55,11 @@
   - Default arrow with light/dark mode support
   - Configurable positioning with sideOffset
   - Compound component pattern for easy usage
+
+### Documentation
+- Added comprehensive JSDoc documentation to all UI components
+  - Example usage patterns and code snippets
+  - When to use each component (usage guidelines)
+  - Best practices and accessibility considerations
+  - Component variants, sizes, and customization options
+  - Common patterns and integration examples

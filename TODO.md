@@ -2,7 +2,7 @@
 
 - [x] Setup baseUI (https://base-ui.com/react/overview/quick-start)
 - [x] Upgrade to tailwind v4
-- [ ] Assemble all the basic baseUI components in src/components/ui:
+- [x] Assemble all the basic baseUI components in src/components/ui:
 - [x] Button
 - [x] Field
 - [x] Accordion
@@ -37,7 +37,7 @@
 - [x] Toggle Group
 - [x] Toolbar
 - [x] Tooltip
-- [ ] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
+- [x] Make sure all component have comments/docs showing example usage, when to use them, best practices, etc.
 
 ## Core Infrastructure
 

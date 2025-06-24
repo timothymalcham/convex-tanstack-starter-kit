@@ -1,3 +1,76 @@
+/**
+ * Tooltip Component
+ *
+ * Displays informative text when users hover over or focus on an element. Built with Base UI Tooltip.
+ *
+ * @example
+ * // Basic tooltip
+ * <Tooltip.Provider>
+ *   <Tooltip.Root>
+ *     <Tooltip.Trigger>
+ *       <Button>Hover me</Button>
+ *     </Tooltip.Trigger>
+ *     <Tooltip.Portal>
+ *       <Tooltip.Positioner>
+ *         <Tooltip.Popup>
+ *           <Tooltip.Arrow />
+ *           This is a helpful tooltip!
+ *         </Tooltip.Popup>
+ *       </Tooltip.Positioner>
+ *     </Tooltip.Portal>
+ *   </Tooltip.Root>
+ * </Tooltip.Provider>
+ *
+ * // Multiple tooltips
+ * <Tooltip.Provider>
+ *   <div className="flex gap-2">
+ *     <Tooltip.Root>
+ *       <Tooltip.Trigger>
+ *         <Button><BoldIcon /></Button>
+ *       </Tooltip.Trigger>
+ *       <Tooltip.Portal>
+ *         <Tooltip.Positioner>
+ *           <Tooltip.Popup>
+ *             <Tooltip.Arrow />
+ *             Bold (Ctrl+B)
+ *           </Tooltip.Popup>
+ *         </Tooltip.Positioner>
+ *       </Tooltip.Portal>
+ *     </Tooltip.Root>
+ *   </div>
+ * </Tooltip.Provider>
+ *
+ * // Custom positioning
+ * <Tooltip.Positioner sideOffset={20} side="bottom">
+ *   <Tooltip.Popup className="bg-black text-white">
+ *     Custom styled tooltip
+ *   </Tooltip.Popup>
+ * </Tooltip.Positioner>
+ *
+ * // Without arrow
+ * <Tooltip.Popup>
+ *   Tooltip without arrow
+ * </Tooltip.Popup>
+ *
+ * @usage
+ * - Icon button explanations
+ * - Keyboard shortcut hints
+ * - Form field help text
+ * - Feature explanations
+ * - Status information
+ * - Abbreviated content expansion
+ *
+ * @best-practices
+ * - Keep text concise and helpful
+ * - Don't use for critical information
+ * - Ensure tooltips don't cover important content
+ * - Include keyboard shortcuts when relevant
+ * - Test on touch devices (consider alternatives)
+ * - Don't nest interactive elements in tooltips
+ * - Use consistent delay timing
+ * - Provide fallback for screen readers
+ */
+
 import { Tooltip as BaseTooltip } from "@base-ui-components/react/tooltip";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
