@@ -1,7 +1,7 @@
 import Resend from "@auth/core/providers/resend";
 import { Resend as ResendAPI } from "resend";
 import { alphabet, generateRandomString } from "oslo/crypto";
-import { render } from "@react-email/components";
+import { render } from "@react-email/render";
 import VerificationEmail from "../emails/VerificationEmail";
 
 export const ResendOTP = Resend({
@@ -13,7 +13,7 @@ export const ResendOTP = Resend({
   async sendVerificationRequest({ identifier: email, provider, token }) {
     const resend = new ResendAPI(provider.apiKey);
     
-    const emailHtml = render(VerificationEmail({
+    const emailHtml = await render(VerificationEmail({
       verificationCode: token,
       email: email,
     }));

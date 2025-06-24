@@ -19,6 +19,13 @@
   - Search params for error handling and redirects
   - Password strength requirements (min 8 characters)
   - Account creation with flow parameter
+- Added email verification system
+  - Installed Resend and Oslo for secure email verification
+  - Created ResendOTP provider with 8-digit verification codes
+  - Built professional email templates with React Email and Tailwind
+  - Created verification page (/verify) with code input and resend functionality
+  - Integrated email verification into signup flow
+  - Added welcome email template for post-verification
 - Added Separator component to UI components library
   - Supports horizontal and vertical orientations
   - Uses @base-ui-components/react as base

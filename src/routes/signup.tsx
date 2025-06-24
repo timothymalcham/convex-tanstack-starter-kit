@@ -47,12 +47,12 @@ function SignupPage() {
 
                 await signIn("password", formData);
                 // Redirect to verification page
-                await navigate({ 
-                    to: "/verify", 
-                    search: { 
+                await navigate({
+                    to: "/verify",
+                    search: {
                         email: value.email,
-                        redirect 
-                    } 
+                        redirect,
+                    },
                 });
             } catch (err) {
                 // Update search params with error
