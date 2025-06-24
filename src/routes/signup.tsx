@@ -46,8 +46,14 @@ function SignupPage() {
                 formData.append("flow", "signUp");
 
                 await signIn("password", formData);
-                // Redirect to the intended page or home
-                await navigate({ to: redirect || "/" });
+                // Redirect to verification page
+                await navigate({ 
+                    to: "/verify", 
+                    search: { 
+                        email: value.email,
+                        redirect 
+                    } 
+                });
             } catch (err) {
                 // Update search params with error
                 await navigate({

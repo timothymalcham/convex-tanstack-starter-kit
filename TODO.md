@@ -45,6 +45,7 @@
 - [x] Set up Convex Auth with email/password authentication
 - [x] Create user registration flow with email confirmation
 - [x] Implement login/logout functionality
+- [x] Add email verification with Resend and React Email
 - [ ] Add forgot password flow
 - [ ] Create user profile management
 - [ ] Add role-based access control (admin, user)
