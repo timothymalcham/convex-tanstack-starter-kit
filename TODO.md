@@ -46,7 +46,8 @@
 - [x] Create user registration flow with email confirmation
 - [x] Implement login/logout functionality
 - [x] Add email verification with Resend and React Email
-- [ ] Add forgot password flow
+- [x] Add forgot password flow with reset functionality
+- [x] Add email address validation with Zod
 - [ ] Create user profile management
 - [ ] Add role-based access control (admin, user)
 - [ ] Implement session management

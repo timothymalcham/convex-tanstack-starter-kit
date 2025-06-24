@@ -26,6 +26,19 @@
   - Created verification page (/verify) with code input and resend functionality
   - Integrated email verification into signup flow
   - Added welcome email template for post-verification
+- Added password reset/forgot password flow
+  - Created PasswordResetEmail template with React Email and Tailwind styling
+  - Built ResendOTPPasswordReset provider with secure 8-digit reset codes
+  - Added forgot password page (/forgot-password) for email submission
+  - Created reset password page (/reset-password) with code and new password input
+  - Integrated password reset functionality into auth configuration
+  - Added "Forgot password?" link to login page
+  - Added success message display for password reset completion
+- Added email address validation
+  - Implemented Zod email validation in auth profile function
+  - Email addresses are validated on signup and signin
+  - Emails are normalized to lowercase for consistency
+  - Invalid email formats throw ConvexError with clear message
 - Added Separator component to UI components library
   - Supports horizontal and vertical orientations
   - Uses @base-ui-components/react as base
