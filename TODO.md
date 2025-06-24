@@ -42,10 +42,9 @@
 ## Core Infrastructure
 
 ### Authentication & Authorization
-- [ ] Set up Convex Auth with email/password authentication
-│ > let's start with the first todo item: Set up Convex Auth with email/password authentication, you can find instructions here: https://labs.convex.dev/auth/config/passwords, adding necessary components in        │
-- [ ] Create user registration flow with email confirmation
-- [ ] Implement login/logout functionality
+- [x] Set up Convex Auth with email/password authentication
+- [x] Create user registration flow with email confirmation
+- [x] Implement login/logout functionality
 - [ ] Add forgot password flow
 - [ ] Create user profile management
 - [ ] Add role-based access control (admin, user)

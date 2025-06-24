@@ -5,11 +5,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type * as React from "react";
-import { Toast } from "~/components/ui/Toast";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { IconLink } from "~/components/IconLink";
 import { Loader } from "~/components/Loader";
 import { NotFound } from "~/components/NotFound";
+import { Toast } from "~/components/ui/Toast";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/utils/seo";
 

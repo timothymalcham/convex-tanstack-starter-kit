@@ -3,6 +3,22 @@
 ## [Unreleased]
 
 ### Added
+- Set up Convex Auth with email/password authentication
+  - Installed @convex-dev/auth and @auth/core packages
+  - Configured auth tables in schema with authTables
+  - Created auth.ts with Password provider
+  - Set up HTTP routes for authentication
+  - Integrated ConvexAuthProvider in router
+- Created login page (/login)
+  - TanStack Form with Zod validation
+  - Search params for error handling and redirects
+  - Responsive design with Tailwind CSS
+  - Email and password authentication flow
+- Created signup page (/signup)
+  - TanStack Form with Zod validation and password confirmation
+  - Search params for error handling and redirects
+  - Password strength requirements (min 8 characters)
+  - Account creation with flow parameter
 - Added Separator component to UI components library
   - Supports horizontal and vertical orientations
   - Uses @base-ui-components/react as base

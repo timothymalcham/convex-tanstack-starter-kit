@@ -1,9 +1,8 @@
+import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexQueryClient } from "@convex-dev/react-query";
 import { MutationCache, notifyManager, QueryClient } from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { routerWithQueryClient } from "@tanstack/react-router-with-query";
-import { ConvexProvider } from "convex/react";
-import toast from "react-hot-toast";
 import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary";
 import { NotFound } from "./components/NotFound";
 import { routeTree } from "./routeTree.gen";
@@ -28,7 +27,7 @@ export function createRouter() {
         },
         mutationCache: new MutationCache({
             onError: (error) => {
-                toast(error.message, { className: "bg-red-500 text-white" });
+                // toast(error.message, { className: "bg-red-500 text-white" });
             },
         }),
     });
@@ -41,7 +40,9 @@ export function createRouter() {
             defaultErrorComponent: DefaultCatchBoundary,
             defaultNotFoundComponent: () => <NotFound />,
             context: { queryClient },
-            Wrap: ({ children }) => <ConvexProvider client={convexQueryClient.convexClient}>{children}</ConvexProvider>,
+            Wrap: ({ children }) => (
+                <ConvexAuthProvider client={convexQueryClient.convexClient}>{children}</ConvexAuthProvider>
+            ),
             scrollRestoration: true,
         }),
         queryClient,
