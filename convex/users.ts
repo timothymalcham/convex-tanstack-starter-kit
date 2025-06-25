@@ -13,7 +13,7 @@ export const getCurrentUser = query({
       email: v.string(),
       name: v.optional(v.string()),
       image: v.optional(v.string()),
-      emailVerified: v.optional(v.boolean()),
+      emailVerificationTime: v.optional(v.number()),
     })
   ),
   handler: async (ctx) => {
@@ -33,7 +33,7 @@ export const getCurrentUser = query({
       email: user.email || "",
       name: user.name,
       image: user.image,
-      emailVerified: user.emailVerified,
+      emailVerificationTime: user.emailVerificationTime,
     };
   },
 });

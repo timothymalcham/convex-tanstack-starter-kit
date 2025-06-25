@@ -4,7 +4,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
 import { Loader } from "~/components/Loader";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/_authenticated/dashboard")({
     component: Home,
     pendingComponent: () => <Loader />,
 });
@@ -19,7 +19,7 @@ function Home() {
                 {boardsQuery.data.map((board) => (
                     <li key={board.id} className="ml-4">
                         <Link
-                            to="/_authenticated/boards/$boardId"
+                            to="/boards/$boardId"
                             params={{
                                 boardId: board.id,
                             }}
