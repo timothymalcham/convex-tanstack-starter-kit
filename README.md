@@ -10,7 +10,7 @@ This starter kit takes a maximalist approach, it contains a lot of features. Del
 - Convex: Backend as a Service
 - Convex Auth: email/password authentication (https://labs.convex.dev/auth)
 - Tanstack Start, Query, Router, Forms: SSR, routing, query, forms, etc.
-- Stripe: billing with Polar.sh
+- Billing: https://useautumn.com/
 - Sonner: for toasts
 - BaseUI: for components (https://base-ui.com/react/overview/quick-start)
 - TailwindCSS: for styling, no writing CSS as much as possible! 

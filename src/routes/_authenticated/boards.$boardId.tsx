@@ -3,7 +3,7 @@ import { Board } from "~/components/Board";
 import { Loader } from "~/components/Loader";
 import { boardQueries } from "~/queries";
 
-export const Route = createFileRoute("/boards/$boardId")({
+export const Route = createFileRoute("/_authenticated/boards/$boardId")({
     component: Home,
     pendingComponent: () => <Loader />,
     loader: async ({ params, context: { queryClient } }) => {
