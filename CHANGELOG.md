@@ -39,6 +39,15 @@
   - Email addresses are validated on signup and signin
   - Emails are normalized to lowercase for consistency
   - Invalid email formats throw ConvexError with clear message
+- Created comprehensive user profile management system
+  - Enhanced Convex user queries and mutations with profile preferences
+  - Added userProfiles table for storing user-specific settings like email notifications
+  - Updated getCurrentUser query to include email notification preferences
+  - Enhanced updateProfile mutation to handle both user fields and profile settings
+  - Built full-featured profile settings page at /profile route with form validation
+  - Added Switch component integration for email notification toggles
+  - Created useCurrentUser custom React hook following project conventions
+  - Implemented proper error handling and success notifications
 - Added Separator component to UI components library
   - Supports horizontal and vertical orientations
   - Uses @base-ui-components/react as base

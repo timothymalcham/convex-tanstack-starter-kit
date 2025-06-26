@@ -4,6 +4,10 @@ import { authTables } from "@convex-dev/auth/server";
 
 const schema = defineSchema({
   ...authTables,
+  userProfiles: defineTable({
+    userId: v.id("users"),
+    emailNotifications: v.optional(v.boolean()),
+  }).index('by_userId', ['userId']),
   boards: defineTable({
     id: v.string(),
     name: v.string(),

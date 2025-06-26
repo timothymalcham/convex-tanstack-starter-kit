@@ -1,7 +1,6 @@
 import { useAuthActions } from "@convex-dev/auth/react";
-import { convexQuery } from "@convex-dev/react-query";
+import { useConvexMutation } from "@convex-dev/react-query";
 import { useForm } from "@tanstack/react-form";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { api } from "convex/_generated/api";
 import { useState } from "react";
@@ -10,12 +9,13 @@ import { z } from "zod";
 import { Button } from "~/components/ui/Button";
 import { Field } from "~/components/ui/Field";
 import { Input } from "~/components/ui/Input";
-
-// import { AlertDialog } from "~/components/ui/AlertDialog";
+import { Switch } from "~/components/ui/Switch";
+import { useCurrentUser } from "~/hooks/useUser";
 
 const profileFormSchema = z.object({
     name: z.string().min(1, "Name is required").max(100, "Name is too long"),
     email: z.string().email(),
+    emailNotifications: z.boolean(),
 });
 
 export const Route = createFileRoute("/_authenticated/profile")({
@@ -28,47 +28,30 @@ function ProfilePage() {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
     // Fetch current user data
-    const { data: currentUser } = useSuspenseQuery(convexQuery(api.users.getCurrentUser, {}));
+    const currentUser = useCurrentUser();
 
     // Update profile mutation
-    const updateProfileMutation = useMutation({
-        mutationFn: async (values: { name: string }) => {
-            // This is a placeholder - we'll need to implement this properly with Convex mutations
-            console.log("Update profile:", values);
-            return Promise.resolve();
-        },
-        onSuccess: () => {
-            toast.success("Profile updated successfully");
-        },
-        onError: (error) => {
-            toast.error(error.message || "Failed to update profile");
-        },
-    });
+    const updateProfile = useConvexMutation(api.users.updateProfile);
 
     // Delete account mutation
-    const deleteAccountMutation = useMutation({
-        mutationFn: async () => {
-            // This is a placeholder - we'll need to implement this properly with Convex mutations
-            console.log("Delete account");
-            return Promise.resolve();
-        },
-        onSuccess: async () => {
-            await signOut();
-            await navigate({ to: "/" });
-            toast.success("Account deleted successfully");
-        },
-        onError: (error) => {
-            toast.error(error.message || "Failed to delete account");
-        },
-    });
+    const deleteAccount = useConvexMutation(api.users.deleteAccount);
 
     const form = useForm({
         defaultValues: {
             name: currentUser?.name || "",
             email: currentUser?.email || "",
+            emailNotifications: currentUser?.emailNotifications ?? true,
         },
         onSubmit: async ({ value }) => {
-            await updateProfileMutation.mutateAsync({ name: value.name });
+            try {
+                await updateProfile({
+                    name: value.name,
+                    emailNotifications: value.emailNotifications,
+                });
+                toast.success("Profile updated successfully");
+            } catch (error) {
+                toast.error(error instanceof Error ? error.message : "Failed to update profile");
+            }
         },
         validators: {
             onChange: profileFormSchema,
@@ -81,7 +64,14 @@ function ProfilePage() {
     };
 
     const handleDeleteAccount = async () => {
-        await deleteAccountMutation.mutateAsync();
+        try {
+            await deleteAccount({});
+            await signOut();
+            await navigate({ to: "/" });
+            toast.success("Account deleted successfully");
+        } catch (error) {
+            toast.error(error instanceof Error ? error.message : "Failed to delete account");
+        }
     };
 
     if (!currentUser) return null;
@@ -139,6 +129,36 @@ function ProfilePage() {
                                             />
                                             <Field.Description>Email cannot be changed</Field.Description>
                                         </Field.Root>
+                                    )}
+                                </form.Field>
+                            </div>
+
+                            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                                    Email Preferences
+                                </h3>
+
+                                <form.Field name="emailNotifications">
+                                    {(field) => (
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex-1">
+                                                <label
+                                                    htmlFor={field.name}
+                                                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                                                >
+                                                    Email Notifications
+                                                </label>
+                                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                                    Receive email notifications about important updates
+                                                </p>
+                                            </div>
+                                            <Switch
+                                                id={field.name}
+                                                checked={field.state.value}
+                                                onCheckedChange={(checked) => field.handleChange(checked)}
+                                                className="ml-4"
+                                            />
+                                        </div>
                                     )}
                                 </form.Field>
                             </div>
@@ -249,7 +269,7 @@ function ProfilePage() {
                                 onClick={handleDeleteAccount}
                                 className="flex-1 px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-red-600 hover:bg-red-700"
                             >
-                                {deleteAccountMutation.isPending ? "Deleting..." : "Delete Account"}
+                                Delete Account
                             </Button>
                         </div>
                     </div>
