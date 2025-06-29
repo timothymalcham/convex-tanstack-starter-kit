@@ -6,7 +6,7 @@ import VerificationEmail from "../emails/VerificationEmail";
 
 export const ResendOTP = Resend({
   id: "resend-otp",
-  apiKey: process.env.AUTH_RESEND_KEY,
+  apiKey: process.env.STARTER_KIT_RESEND_KEY,
   async generateVerificationToken() {
     return generateRandomString(8, alphabet("0-9"));
   },

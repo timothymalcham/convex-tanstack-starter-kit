@@ -17,6 +17,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedKitchenSinkRouteImport } from './routes/_authenticated/kitchen-sink'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedBoardsBoardIdRouteImport } from './routes/_authenticated/boards.$boardId'
 
@@ -59,6 +60,12 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedKitchenSinkRoute =
+  AuthenticatedKitchenSinkRouteImport.update({
+    id: '/kitchen-sink',
+    path: '/kitchen-sink',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/kitchen-sink': typeof AuthenticatedKitchenSinkRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/boards/$boardId': typeof AuthenticatedBoardsBoardIdRoute
 }
@@ -90,6 +98,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/kitchen-sink': typeof AuthenticatedKitchenSinkRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/boards/$boardId': typeof AuthenticatedBoardsBoardIdRoute
 }
@@ -103,6 +112,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/kitchen-sink': typeof AuthenticatedKitchenSinkRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/boards/$boardId': typeof AuthenticatedBoardsBoardIdRoute
 }
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/dashboard'
+    | '/kitchen-sink'
     | '/profile'
     | '/boards/$boardId'
   fileRoutesByTo: FileRoutesByTo
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/dashboard'
+    | '/kitchen-sink'
     | '/profile'
     | '/boards/$boardId'
   id:
@@ -139,6 +151,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/_authenticated/dashboard'
+    | '/_authenticated/kitchen-sink'
     | '/_authenticated/profile'
     | '/_authenticated/boards/$boardId'
   fileRoutesById: FileRoutesById
@@ -211,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/kitchen-sink': {
+      id: '/_authenticated/kitchen-sink'
+      path: '/kitchen-sink'
+      fullPath: '/kitchen-sink'
+      preLoaderRoute: typeof AuthenticatedKitchenSinkRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -230,12 +250,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedKitchenSinkRoute: typeof AuthenticatedKitchenSinkRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedBoardsBoardIdRoute: typeof AuthenticatedBoardsBoardIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedKitchenSinkRoute: AuthenticatedKitchenSinkRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedBoardsBoardIdRoute: AuthenticatedBoardsBoardIdRoute,
 }
