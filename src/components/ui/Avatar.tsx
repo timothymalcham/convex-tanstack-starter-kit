@@ -2,6 +2,8 @@ import { Avatar as BaseAvatar } from "@base-ui-components/react/avatar";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
+const AvatarContext = React.createContext<{ fallbackColor?: string }>({});
+
 /**
  * Avatar Component
  *
@@ -48,9 +50,10 @@ import { twMerge } from "tailwind-merge";
 interface AvatarRootProps extends React.ComponentPropsWithoutRef<typeof BaseAvatar.Root> {
     className?: string;
     size?: "xs" | "sm" | "md" | "lg" | "xl";
+    fallbackColor?: "blue" | "green" | "purple" | "pink" | "orange" | "teal" | "red" | "gray";
 }
 
-const AvatarRoot = React.forwardRef<HTMLSpanElement, AvatarRootProps>(({ className, size = "md", ...props }, ref) => {
+const AvatarRoot = React.forwardRef<HTMLSpanElement, AvatarRootProps>(({ className, size = "md", fallbackColor = "gray", ...props }, ref) => {
     const sizeStyles = {
         xs: "h-6 w-6 text-xs",
         sm: "h-8 w-8 text-sm",
@@ -59,17 +62,29 @@ const AvatarRoot = React.forwardRef<HTMLSpanElement, AvatarRootProps>(({ classNa
         xl: "h-16 w-16 text-xl",
     };
 
+    const colorMap = {
+        blue: "bg-blue-500 dark:bg-blue-600",
+        green: "bg-green-500 dark:bg-green-600",
+        purple: "bg-purple-500 dark:bg-purple-600",
+        pink: "bg-pink-500 dark:bg-pink-600",
+        orange: "bg-orange-500 dark:bg-orange-600",
+        teal: "bg-teal-500 dark:bg-teal-600",
+        red: "bg-red-500 dark:bg-red-600",
+        gray: "bg-gray-100 dark:bg-gray-800",
+    };
+
     return (
-        <BaseAvatar.Root
-            ref={ref}
-            className={twMerge(
-                "relative inline-flex shrink-0 overflow-hidden rounded-full",
-                "bg-gray-100 dark:bg-gray-800",
-                sizeStyles[size],
-                className,
-            )}
-            {...props}
-        />
+        <AvatarContext.Provider value={{ fallbackColor: colorMap[fallbackColor] }}>
+            <BaseAvatar.Root
+                ref={ref}
+                className={twMerge(
+                    "relative inline-flex shrink-0 overflow-hidden rounded-full",
+                    sizeStyles[size],
+                    className,
+                )}
+                {...props}
+            />
+        </AvatarContext.Provider>
     );
 });
 AvatarRoot.displayName = "Avatar.Root";
@@ -93,19 +108,36 @@ interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<typeof Base
     className?: string;
 }
 
-const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(({ className, ...props }, ref) => {
+const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(({ className, children, ...props }, ref) => {
+    const { fallbackColor } = React.useContext(AvatarContext);
+    
     return (
         <BaseAvatar.Fallback
             ref={ref}
             className={twMerge(
                 "flex h-full w-full items-center justify-center",
-                "font-medium text-gray-600 dark:text-gray-300",
-                "bg-gray-100 dark:bg-gray-800",
+                "font-medium text-white",
+                fallbackColor || "bg-gray-100 dark:bg-gray-800",
                 className,
             )}
             delay={600}
             {...props}
-        />
+        >
+            {children || (
+                <svg
+                    className="h-[60%] w-[60%] text-white/80"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fillRule="evenodd"
+                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            )}
+        </BaseAvatar.Fallback>
     );
 });
 AvatarFallback.displayName = "Avatar.Fallback";

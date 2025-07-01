@@ -80,32 +80,104 @@ interface TabsPanelProps extends React.ComponentPropsWithoutRef<typeof BaseTabs.
 export const TabsRoot = React.forwardRef<React.ElementRef<typeof BaseTabs.Root>, TabsRootProps>(
     ({ className, ...props }, ref) => {
         return (
-            <BaseTabs.Root ref={ref} className={twMerge("rounded-md border border-gray-200", className)} {...props} />
+            <BaseTabs.Root ref={ref} className={twMerge("w-full", className)} {...props} />
         );
     },
 );
 
+const TabsContext = React.createContext<{ isAnyTabHovered: boolean }>({ isAnyTabHovered: false });
+
 export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>, TabsListProps>(
     ({ className, ...props }, ref) => {
+        const [hoverState, setHoverState] = React.useState<{ width: number; left: number; opacity: number } | null>(null);
+        const [isAnyTabHovered, setIsAnyTabHovered] = React.useState(false);
+        const listRef = React.useRef<HTMLDivElement>(null);
+        const isMouseInside = React.useRef(false);
+
+        React.useImperativeHandle(ref, () => listRef.current!);
+
+        const updateHoverState = React.useCallback((event: MouseEvent | React.MouseEvent) => {
+            if (!listRef.current || !isMouseInside.current) return;
+            
+            const target = document.elementFromPoint(event.clientX, event.clientY);
+            const tab = target?.closest('[role="tab"]') as HTMLElement;
+            
+            if (tab && listRef.current.contains(tab)) {
+                const listRect = listRef.current.getBoundingClientRect();
+                const tabRect = tab.getBoundingClientRect();
+                setHoverState({
+                    width: tabRect.width,
+                    left: tabRect.left - listRect.left,
+                    opacity: 1,
+                });
+                setIsAnyTabHovered(true);
+            }
+        }, []);
+
+        const handleMouseEnter = React.useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+            isMouseInside.current = true;
+            updateHoverState(event);
+        }, [updateHoverState]);
+
+        const handleMouseMove = React.useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+            updateHoverState(event);
+        }, [updateHoverState]);
+
+        const handleMouseLeave = React.useCallback(() => {
+            isMouseInside.current = false;
+            setIsAnyTabHovered(false);
+            setHoverState(prev => prev ? { ...prev, opacity: 0 } : null);
+            // Clear the hover state after animation
+            setTimeout(() => {
+                if (!isMouseInside.current) {
+                    setHoverState(null);
+                }
+            }, 200);
+        }, []);
+
         return (
-            <BaseTabs.List
-                ref={ref}
-                className={twMerge("relative z-0 flex gap-1 px-1 shadow-[inset_0_-1px] shadow-gray-200", className)}
-                {...props}
-            />
+            <TabsContext.Provider value={{ isAnyTabHovered }}>
+                <BaseTabs.List
+                    ref={listRef}
+                    className={twMerge("relative flex gap-1 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm", className)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    {...props}
+                >
+                    {/* Hover indicator */}
+                    {hoverState && (
+                        <div
+                            className="absolute top-1/2 z-[1] h-9 -translate-y-1/2 rounded-md bg-gradient-to-b from-gray-200/80 to-gray-300/60 dark:from-gray-600/80 dark:to-gray-700/60 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] pointer-events-none shadow-sm border border-gray-300/50 dark:border-gray-500/50"
+                            style={{
+                                width: hoverState.width,
+                                left: hoverState.left,
+                                opacity: hoverState.opacity,
+                            }}
+                        />
+                    )}
+                    {props.children}
+                </BaseTabs.List>
+            </TabsContext.Provider>
         );
     },
 );
 
 export const TabsTab = React.forwardRef<React.ElementRef<typeof BaseTabs.Tab>, TabsTabProps>(
     ({ className, ...props }, ref) => {
+        const [isHovered, setIsHovered] = React.useState(false);
+        
         return (
             <BaseTabs.Tab
                 ref={ref}
                 className={twMerge(
-                    "flex h-8 items-center justify-center border-0 px-2 text-sm font-medium text-gray-600 outline-none select-none before:inset-x-0 before:inset-y-1 before:rounded-sm before:-outline-offset-1 before:outline-blue-800 hover:text-gray-900 focus-visible:relative focus-visible:before:absolute focus-visible:before:outline focus-visible:before:outline-2 data-[selected]:text-gray-900",
+                    "flex h-9 items-center justify-center px-4 text-sm font-medium text-gray-600 dark:text-gray-400 transition-all duration-300 rounded-md cursor-pointer outline-none select-none hover:text-gray-900 dark:hover:text-gray-200 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 relative z-[3] whitespace-nowrap",
+                    // Only apply selected styles when not hovering
+                    !isHovered && "data-[selected]:text-gray-900 dark:data-[selected]:text-white",
                     className,
                 )}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
                 {...props}
             />
         );
@@ -114,11 +186,14 @@ export const TabsTab = React.forwardRef<React.ElementRef<typeof BaseTabs.Tab>, T
 
 export const TabsIndicator = React.forwardRef<React.ElementRef<typeof BaseTabs.Indicator>, TabsIndicatorProps>(
     ({ className, ...props }, ref) => {
+        const { isAnyTabHovered } = React.useContext(TabsContext);
+        
         return (
             <BaseTabs.Indicator
                 ref={ref}
                 className={twMerge(
-                    "absolute top-1/2 left-0 z-[-1] h-6 w-[var(--active-tab-width)] -translate-y-1/2 translate-x-[var(--active-tab-left)] rounded-sm bg-gray-100 transition-all duration-200 ease-in-out",
+                    "absolute top-1/2 left-0 z-[2] h-9 w-[var(--active-tab-width)] -translate-y-1/2 translate-x-[var(--active-tab-left)] rounded-md bg-white dark:bg-gray-700 shadow-lg border border-gray-300 dark:border-gray-600 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] backdrop-blur-sm",
+                    isAnyTabHovered && "opacity-0",
                     className,
                 )}
                 {...props}
@@ -133,7 +208,7 @@ export const TabsPanel = React.forwardRef<React.ElementRef<typeof BaseTabs.Panel
             <BaseTabs.Panel
                 ref={ref}
                 className={twMerge(
-                    "relative -outline-offset-1 outline-blue-800 focus-visible:rounded-md focus-visible:outline focus-visible:outline-2",
+                    "mt-4 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 focus-visible:rounded-md",
                     className,
                 )}
                 {...props}

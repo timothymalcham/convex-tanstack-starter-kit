@@ -502,6 +502,7 @@ function KitchenSinkPage() {
                                         <Tabs.Tab value="tab1">Dashboard</Tabs.Tab>
                                         <Tabs.Tab value="tab2">Analytics</Tabs.Tab>
                                         <Tabs.Tab value="tab3">Settings</Tabs.Tab>
+                                        <Tabs.Indicator />
                                     </Tabs.List>
                                     <Tabs.Panel value="tab1">
                                         <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg mt-4">
@@ -639,8 +640,9 @@ function KitchenSinkPage() {
                                             </Tooltip.Trigger>
                                             <Tooltip.Portal>
                                                 <Tooltip.Positioner>
-                                                    <Tooltip.Popup className="bg-gray-900 text-white px-2 py-1 rounded text-sm">
-                                                        This is a helpful tooltip
+                                                    <Tooltip.Popup>
+                                                        <Tooltip.Arrow />
+                                                        Hover for info
                                                     </Tooltip.Popup>
                                                 </Tooltip.Positioner>
                                             </Tooltip.Portal>
@@ -664,29 +666,25 @@ function KitchenSinkPage() {
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Avatars</h3>
                                 <div className="space-y-6">
                                     <div className="flex items-center space-x-4">
-                                        <Avatar.Root className="w-8 h-8">
+                                        <Avatar.Root size="sm" fallbackColor="blue">
                                             <Avatar.Image
                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face"
                                                 alt="Small avatar"
                                             />
-                                            <Avatar.Fallback>SM</Avatar.Fallback>
+                                            <Avatar.Fallback />
                                         </Avatar.Root>
-                                        <Avatar.Root className="w-12 h-12">
+                                        <Avatar.Root size="md" fallbackColor="green">
                                             <Avatar.Image
                                                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=48&h=48&fit=crop&crop=face"
                                                 alt="Medium avatar"
                                             />
-                                            <Avatar.Fallback>MD</Avatar.Fallback>
+                                            <Avatar.Fallback />
                                         </Avatar.Root>
-                                        <Avatar.Root className="w-16 h-16">
-                                            <Avatar.Image
-                                                src="https://images.unsplash.com/photo-1494790108755-2616b612c4d8?w=64&h=64&fit=crop&crop=face"
-                                                alt="Large avatar"
-                                            />
-                                            <Avatar.Fallback>LG</Avatar.Fallback>
+                                        <Avatar.Root size="lg" fallbackColor="purple">
+                                            <Avatar.Fallback />
                                         </Avatar.Root>
-                                        <Avatar.Root className="w-20 h-20">
-                                            <Avatar.Fallback className="text-lg">XL</Avatar.Fallback>
+                                        <Avatar.Root size="xl" fallbackColor="pink">
+                                            <Avatar.Fallback />
                                         </Avatar.Root>
                                     </div>
 
@@ -698,7 +696,7 @@ function KitchenSinkPage() {
                                         </h4>
                                         <div className="space-y-3">
                                             <div className="flex items-center space-x-3">
-                                                <Avatar.Root>
+                                                <Avatar.Root fallbackColor="orange">
                                                     <Avatar.Image
                                                         src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face"
                                                         alt="John Doe"
@@ -713,7 +711,7 @@ function KitchenSinkPage() {
                                                 </div>
                                             </div>
                                             <div className="flex items-center space-x-3">
-                                                <Avatar.Root>
+                                                <Avatar.Root fallbackColor="teal">
                                                     <Avatar.Image
                                                         src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face"
                                                         alt="Jane Smith"
