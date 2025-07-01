@@ -734,50 +734,154 @@ function KitchenSinkPage() {
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
                                     Preview Cards
                                 </h3>
-                                <div className="space-y-4">
+                                <div className="space-y-6">
                                     <PreviewCard.Root>
-                                        <PreviewCard.Trigger href="https://example.com" className="block">
-                                            <img
-                                                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop"
-                                                alt="Beautiful Landscape"
-                                                className="w-full h-32 object-cover rounded mb-2"
-                                            />
-                                            <h4 className="font-medium text-gray-900 dark:text-white">
-                                                Beautiful Landscape
-                                            </h4>
-                                            <p className="text-sm text-gray-600 dark:text-gray-300">
-                                                A stunning mountain view with crystal clear lakes
-                                            </p>
+                                        <PreviewCard.Trigger href="https://example.com" className="group block relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-1">
+                                            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            <div className="relative">
+                                                <div className="aspect-[16/10] overflow-hidden">
+                                                    <img
+                                                        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop"
+                                                        alt="Beautiful Landscape"
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                </div>
+                                                <div className="p-6">
+                                                    <div className="flex items-center gap-2 mb-3">
+                                                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                                        <span className="text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wide">Featured</span>
+                                                    </div>
+                                                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                                        Beautiful Landscape
+                                                    </h4>
+                                                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                                        A stunning mountain view with crystal clear lakes
+                                                    </p>
+                                                    <div className="flex items-center justify-between mt-4">
+                                                        <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                                            </svg>
+                                                            Norway
+                                                        </div>
+                                                        <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clipRule="evenodd" />
+                                                            </svg>
+                                                            Photography
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </PreviewCard.Trigger>
-                                        <PreviewCardContent>
-                                            <div className="p-4">
-                                                <h4 className="font-medium">Beautiful Landscape</h4>
-                                                <p className="text-sm text-gray-600 mt-2">
-                                                    A stunning mountain view with crystal clear lakes
-                                                </p>
+                                        <PreviewCardContent showArrow className="max-w-md">
+                                            <div className="space-y-4">
+                                                <div className="flex items-start gap-3">
+                                                    <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <h4 className="font-semibold text-gray-900 dark:text-white">Beautiful Landscape</h4>
+                                                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                                                            Experience breathtaking mountain vistas and pristine alpine lakes in this stunning Norwegian landscape.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid grid-cols-3 gap-3 text-center">
+                                                    <div className="p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                                        <div className="text-lg font-bold text-gray-900 dark:text-white">4K</div>
+                                                        <div className="text-xs text-gray-500">Resolution</div>
+                                                    </div>
+                                                    <div className="p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                                        <div className="text-lg font-bold text-gray-900 dark:text-white">HD</div>
+                                                        <div className="text-xs text-gray-500">Quality</div>
+                                                    </div>
+                                                    <div className="p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                                        <div className="text-lg font-bold text-gray-900 dark:text-white">Free</div>
+                                                        <div className="text-xs text-gray-500">License</div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-3">
+                                                    📸 by Nature Photography • unsplash.com
+                                                </div>
                                             </div>
                                         </PreviewCardContent>
                                     </PreviewCard.Root>
+
                                     <PreviewCard.Root>
-                                        <PreviewCard.Trigger href="https://example.com" className="block">
-                                            <img
-                                                src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=200&fit=crop"
-                                                alt="Modern Architecture"
-                                                className="w-full h-32 object-cover rounded mb-2"
-                                            />
-                                            <h4 className="font-medium text-gray-900 dark:text-white">
-                                                Modern Architecture
-                                            </h4>
-                                            <p className="text-sm text-gray-600 dark:text-gray-300">
-                                                Innovative building design in the heart of the city
-                                            </p>
+                                        <PreviewCard.Trigger href="https://example.com" className="group block relative overflow-hidden rounded-xl bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-1">
+                                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            <div className="relative">
+                                                <div className="aspect-[16/10] overflow-hidden">
+                                                    <img
+                                                        src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=250&fit=crop"
+                                                        alt="Modern Architecture"
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                </div>
+                                                <div className="p-6">
+                                                    <div className="flex items-center gap-2 mb-3">
+                                                        <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                                                        <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">Architecture</span>
+                                                    </div>
+                                                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                                        Modern Architecture
+                                                    </h4>
+                                                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                                        Innovative building design in the heart of the city
+                                                    </p>
+                                                    <div className="flex items-center justify-between mt-4">
+                                                        <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                                            </svg>
+                                                            New York
+                                                        </div>
+                                                        <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
+                                                                <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                                                            </svg>
+                                                            Commercial
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </PreviewCard.Trigger>
-                                        <PreviewCardContent>
-                                            <div className="p-4">
-                                                <h4 className="font-medium">Modern Architecture</h4>
-                                                <p className="text-sm text-gray-600 mt-2">
-                                                    Innovative building design in the heart of the city
-                                                </p>
+                                        <PreviewCardContent showArrow className="max-w-md">
+                                            <div className="space-y-4">
+                                                <div className="flex items-start gap-3">
+                                                    <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center">
+                                                        <svg className="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm3 1h6v4H7V5zm8 8v2h1a1 1 0 100-2h-1zm-1-1H7v4h6v-4zm2-2h1a1 1 0 100-2h-1v2zm1-4h-1V6h1a1 1 0 110 2z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <h4 className="font-semibold text-gray-900 dark:text-white">Modern Architecture</h4>
+                                                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                                                            Cutting-edge urban development featuring sustainable design and innovative structural engineering.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid grid-cols-3 gap-3 text-center">
+                                                    <div className="p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                                        <div className="text-lg font-bold text-gray-900 dark:text-white">2024</div>
+                                                        <div className="text-xs text-gray-500">Year Built</div>
+                                                    </div>
+                                                    <div className="p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                                        <div className="text-lg font-bold text-gray-900 dark:text-white">50F</div>
+                                                        <div className="text-xs text-gray-500">Floors</div>
+                                                    </div>
+                                                    <div className="p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                                        <div className="text-lg font-bold text-gray-900 dark:text-white">LEED</div>
+                                                        <div className="text-xs text-gray-500">Certified</div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-3">
+                                                    🏢 by Urban Studios • architecture.com
+                                                </div>
                                             </div>
                                         </PreviewCardContent>
                                     </PreviewCard.Root>
