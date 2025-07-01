@@ -182,7 +182,12 @@ interface NumberFieldRootProps extends React.ComponentPropsWithoutRef<typeof Bas
 const NumberFieldRoot = React.forwardRef<HTMLDivElement, NumberFieldRootProps>(
     ({ className, size = "md", ...props }, ref) => {
         return (
-            <BaseNumberField.Root ref={ref} className={twMerge("relative", className)} data-size={size} {...props} />
+            <BaseNumberField.Root
+                ref={ref}
+                className={twMerge("relative group", className)}
+                data-size={size}
+                {...props}
+            />
         );
     },
 );
@@ -198,9 +203,14 @@ const NumberFieldScrubArea = React.forwardRef<HTMLSpanElement, NumberFieldScrubA
             <BaseNumberField.ScrubArea
                 ref={ref}
                 className={twMerge(
-                    "cursor-ew-resize select-none text-sm font-medium text-gray-700 dark:text-gray-300",
-                    "hover:text-blue-600 dark:hover:text-blue-400",
-                    "data-[scrubbing]:text-blue-600 dark:data-[scrubbing]:text-blue-400",
+                    "cursor-ew-resize select-none font-semibold tracking-wide",
+                    "text-gray-700 dark:text-gray-300",
+                    "hover:text-blue-600 hover:bg-blue-50/50 dark:hover:text-blue-400 dark:hover:bg-blue-950/30",
+                    "data-[scrubbing]:text-blue-600 data-[scrubbing]:bg-blue-100/70 dark:data-[scrubbing]:text-blue-400 dark:data-[scrubbing]:bg-blue-900/50",
+                    "px-2 py-1 rounded-md transition-all duration-150 ease-out",
+                    "border border-transparent hover:border-blue-200 dark:hover:border-blue-800",
+                    "data-[scrubbing]:border-blue-300 dark:data-[scrubbing]:border-blue-700",
+                    "shadow-sm hover:shadow-md data-[scrubbing]:shadow-lg",
                     className,
                 )}
                 {...props}
@@ -221,15 +231,18 @@ const NumberFieldScrubAreaCursor = React.forwardRef<HTMLDivElement, NumberFieldS
             <BaseNumberField.ScrubAreaCursor
                 ref={ref}
                 className={twMerge(
-                    "pointer-events-none fixed z-50 flex h-6 w-6 items-center justify-center",
-                    "rounded-full bg-blue-600 text-white shadow-lg",
+                    "pointer-events-none fixed z-50 flex items-center justify-center",
+                    "h-8 w-8 rounded-full bg-gradient-to-b from-blue-500 to-blue-600",
+                    "text-white shadow-xl shadow-blue-500/40 ring-2 ring-blue-400/50",
+                    "backdrop-blur-sm border border-blue-400/30",
                     "data-[starting-style]:scale-0 data-[ending-style]:scale-0",
+                    "transition-transform duration-200 ease-out",
                     className,
                 )}
                 {...props}
             >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                    <path d="M2 6h8M6 2v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" className="drop-shadow-sm">
+                    <path d="M2 7h10M7 2v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
             </BaseNumberField.ScrubAreaCursor>
         );
@@ -247,8 +260,11 @@ const NumberFieldGroup = React.forwardRef<HTMLDivElement, NumberFieldGroupProps>
             ref={ref}
             className={twMerge(
                 "relative flex items-center",
-                "rounded-md border border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-950",
-                "focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20",
+                "rounded-lg border border-gray-300 dark:border-gray-600",
+                "bg-white dark:bg-gray-900",
+                "shadow-sm",
+                "hover:border-gray-400 dark:hover:border-gray-500",
+                "focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500",
                 "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed",
                 className,
             )}
@@ -267,14 +283,15 @@ const NumberFieldInput = React.forwardRef<HTMLInputElement, NumberFieldInputProp
         <BaseNumberField.Input
             ref={ref}
             className={twMerge(
-                "flex-1 border-0 bg-transparent px-3 py-2 text-center text-sm",
+                "flex-1 border-0 px-3 py-2 text-center",
+                "bg-transparent",
                 "text-gray-900 placeholder:text-gray-400",
-                "dark:text-gray-100 dark:placeholder:text-gray-500",
-                "focus:outline-hidden",
+                "dark:text-white dark:placeholder:text-gray-500",
+                "focus:outline-none",
                 "data-[disabled]:cursor-not-allowed",
-                'data-[size="sm"]:h-8 data-[size="sm"]:px-2 data-[size="sm"]:text-xs',
-                'data-[size="md"]:h-10',
-                'data-[size="lg"]:h-12 data-[size="lg"]:px-4',
+                'group-data-[size="sm"]:h-8 group-data-[size="sm"]:px-2 group-data-[size="sm"]:text-sm',
+                'group-data-[size="md"]:h-10 group-data-[size="md"]:text-base',
+                'group-data-[size="lg"]:h-12 group-data-[size="lg"]:px-4 group-data-[size="lg"]:text-lg',
                 className,
             )}
             {...props}
@@ -293,21 +310,30 @@ const NumberFieldDecrement = React.forwardRef<HTMLButtonElement, NumberFieldButt
             <BaseNumberField.Decrement
                 ref={ref}
                 className={twMerge(
-                    "flex items-center justify-center border-r border-gray-300 dark:border-gray-700",
+                    "flex items-center justify-center",
                     "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700",
-                    "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100",
-                    "transition-colors duration-150",
+                    "text-gray-600 dark:text-gray-400",
+                    "border-r border-gray-300 dark:border-gray-600",
+                    "hover:text-gray-900 dark:hover:text-gray-200",
+                    "active:bg-gray-200 dark:active:bg-gray-600",
+                    "transition-colors",
                     "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-                    'data-[size="sm"]:w-7 data-[size="sm"]:h-8',
-                    'data-[size="md"]:w-9 data-[size="md"]:h-10',
-                    'data-[size="lg"]:w-11 data-[size="lg"]:h-12',
+                    'group-data-[size="sm"]:w-8 group-data-[size="sm"]:h-8',
+                    'group-data-[size="md"]:w-10 group-data-[size="md"]:h-10',
+                    'group-data-[size="lg"]:w-12 group-data-[size="lg"]:h-12',
                     "rounded-l-md",
                     className,
                 )}
                 {...props}
             >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M3 6h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    className="group-data-[size='sm']:w-3 group-data-[size='sm']:h-3 group-data-[size='lg']:w-5 group-data-[size='lg']:h-5"
+                >
+                    <path d="M4 8h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
             </BaseNumberField.Decrement>
         );
@@ -321,21 +347,30 @@ const NumberFieldIncrement = React.forwardRef<HTMLButtonElement, NumberFieldButt
             <BaseNumberField.Increment
                 ref={ref}
                 className={twMerge(
-                    "flex items-center justify-center border-l border-gray-300 dark:border-gray-700",
+                    "flex items-center justify-center",
                     "bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700",
-                    "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100",
-                    "transition-colors duration-150",
+                    "text-gray-600 dark:text-gray-400",
+                    "border-l border-gray-300 dark:border-gray-600",
+                    "hover:text-gray-900 dark:hover:text-gray-200",
+                    "active:bg-gray-200 dark:active:bg-gray-600",
+                    "transition-colors",
                     "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-                    'data-[size="sm"]:w-7 data-[size="sm"]:h-8',
-                    'data-[size="md"]:w-9 data-[size="md"]:h-10',
-                    'data-[size="lg"]:w-11 data-[size="lg"]:h-12',
+                    'group-data-[size="sm"]:w-8 group-data-[size="sm"]:h-8',
+                    'group-data-[size="md"]:w-10 group-data-[size="md"]:h-10',
+                    'group-data-[size="lg"]:w-12 group-data-[size="lg"]:h-12',
                     "rounded-r-md",
                     className,
                 )}
                 {...props}
             >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M6 3v6M3 6h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    className="group-data-[size='sm']:w-3 group-data-[size='sm']:h-3 group-data-[size='lg']:w-5 group-data-[size='lg']:h-5"
+                >
+                    <path d="M8 4v8M4 8h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
             </BaseNumberField.Increment>
         );

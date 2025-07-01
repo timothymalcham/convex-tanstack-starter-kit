@@ -46,8 +46,9 @@ function ResetPasswordPage() {
                 formData.append("email", value.email);
                 formData.append("code", value.code);
                 formData.append("newPassword", value.password);
+                formData.append("flow", "reset-verification");
 
-                await signIn("resend-otp-password-reset", formData);
+                await signIn("password", formData);
 
                 // Redirect to login with success message
                 await navigate({
@@ -81,7 +82,7 @@ function ResetPasswordPage() {
             formData.append("email", email);
             formData.append("flow", "reset");
 
-            await signIn("resend-otp-password-reset", formData);
+            await signIn("password", formData);
 
             // Show success message
             await navigate({

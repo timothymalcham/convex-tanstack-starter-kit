@@ -36,7 +36,7 @@ function ForgotPasswordPage() {
                 formData.append("email", value.email);
                 formData.append("flow", "reset");
 
-                await signIn("resend-otp-password-reset", formData);
+                await signIn("password", formData);
 
                 // Redirect to reset password page
                 await navigate({

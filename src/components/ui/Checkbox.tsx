@@ -23,7 +23,16 @@ import { twMerge } from "tailwind-merge";
  *   <Checkbox.Indicator />
  * </Checkbox.Root>
  *
- * // With label using Field component
+ * // With label (preferred - accessible)
+ * <CheckboxWithLabel label="I agree to the terms and conditions" />
+ *
+ * // With label and description
+ * <CheckboxWithLabel
+ *   label="Subscribe to newsletter"
+ *   description="Get weekly updates about new features and tips"
+ * />
+ *
+ * // With label using Field component (manual approach)
  * <Field.Root>
  *   <div className="flex items-center gap-2">
  *     <Checkbox.Root id="terms">
@@ -60,6 +69,12 @@ import { twMerge } from "tailwind-merge";
 interface CheckboxRootProps extends React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root> {
     className?: string;
     size?: "sm" | "md" | "lg";
+}
+
+interface CheckboxWithLabelProps extends CheckboxRootProps {
+    label?: React.ReactNode;
+    description?: React.ReactNode;
+    id?: string;
 }
 
 const CheckboxRoot = React.forwardRef<HTMLButtonElement, CheckboxRootProps>(
@@ -148,6 +163,42 @@ const CheckboxIndicator = React.forwardRef<HTMLSpanElement, CheckboxIndicatorPro
     );
 });
 CheckboxIndicator.displayName = "Checkbox.Indicator";
+
+// Component with built-in label support
+export const CheckboxWithLabel = React.forwardRef<HTMLButtonElement, CheckboxWithLabelProps>(
+    ({ label, description, id, className, size = "md", children, ...props }, ref) => {
+        const generatedId = React.useId();
+        const checkboxId = id || generatedId;
+
+        const checkboxElement = (
+            <CheckboxRoot ref={ref} id={checkboxId} className={className} size={size} {...props}>
+                {children || <CheckboxIndicator />}
+            </CheckboxRoot>
+        );
+
+        if (!label) {
+            return checkboxElement;
+        }
+
+        return (
+            <div className="flex items-start gap-2">
+                {checkboxElement}
+                <label htmlFor={checkboxId} className="cursor-pointer">
+                    <div className="flex flex-col">
+                        <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            {label}
+                        </span>
+                        {description && (
+                            <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">{description}</span>
+                        )}
+                    </div>
+                </label>
+            </div>
+        );
+    },
+);
+
+CheckboxWithLabel.displayName = "CheckboxWithLabel";
 
 export const Checkbox = {
     Root: CheckboxRoot,

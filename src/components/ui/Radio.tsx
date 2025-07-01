@@ -14,7 +14,37 @@ import { twMerge } from "tailwind-merge";
  * import { RadioGroup, Radio } from '@/components/ui/Radio'
  * import { Field } from '@/components/ui/Field'
  *
- * // Basic radio group
+ * // Basic radio group with labels (preferred - accessible)
+ * <RadioGroup.Root defaultValue="medium">
+ *   <div className="space-y-2">
+ *     <RadioWithLabel value="small" label="Small" />
+ *     <RadioWithLabel value="medium" label="Medium" />
+ *     <RadioWithLabel value="large" label="Large" />
+ *   </div>
+ * </RadioGroup.Root>
+ *
+ * // With descriptions
+ * <RadioGroup.Root defaultValue="medium">
+ *   <div className="space-y-3">
+ *     <RadioWithLabel
+ *       value="small"
+ *       label="Small"
+ *       description="Perfect for simple projects"
+ *     />
+ *     <RadioWithLabel
+ *       value="medium"
+ *       label="Medium"
+ *       description="Good for most use cases"
+ *     />
+ *     <RadioWithLabel
+ *       value="large"
+ *       label="Large"
+ *       description="Enterprise-grade features"
+ *     />
+ *   </div>
+ * </RadioGroup.Root>
+ *
+ * // Manual approach (legacy)
  * <RadioGroup.Root defaultValue="medium">
  *   <div className="space-y-2">
  *     <Radio.Root value="small">
@@ -269,12 +299,18 @@ interface RadioRootProps extends React.ComponentPropsWithoutRef<typeof BaseRadio
     size?: "sm" | "md" | "lg";
 }
 
+interface RadioWithLabelProps extends RadioRootProps {
+    label?: React.ReactNode;
+    description?: React.ReactNode;
+    id?: string;
+}
+
 const RadioRoot = React.forwardRef<HTMLButtonElement, RadioRootProps>(({ className, size = "md", ...props }, ref) => {
     return (
         <BaseRadio.Root
             ref={ref}
             className={twMerge(
-                "group inline-flex cursor-pointer items-center gap-2",
+                "group flex cursor-pointer items-center gap-2",
                 "focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded",
                 "disabled:cursor-not-allowed disabled:opacity-50",
                 "transition-colors duration-150",
@@ -307,7 +343,7 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
         };
 
         return (
-            <BaseRadio.Indicator
+            <span
                 ref={ref}
                 className={twMerge(
                     "relative flex shrink-0 items-center justify-center rounded-full border-2",
@@ -324,18 +360,55 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
                 )}
                 {...props}
             >
-                <span
-                    className={twMerge(
-                        "rounded-full bg-white opacity-0 transition-opacity duration-150",
-                        "group-data-[checked]:opacity-100",
-                        dotSizeStyles[size],
-                    )}
-                />
-            </BaseRadio.Indicator>
+                <BaseRadio.Indicator>
+                    <span
+                        className={twMerge(
+                            "rounded-full bg-white transition-opacity duration-150",
+                            dotSizeStyles[size],
+                        )}
+                    />
+                </BaseRadio.Indicator>
+            </span>
         );
     },
 );
 RadioIndicator.displayName = "Radio.Indicator";
+
+// Component with built-in label support
+export const RadioWithLabel = React.forwardRef<HTMLButtonElement, RadioWithLabelProps>(
+    ({ label, description, id, className, size = "md", children, ...props }, ref) => {
+        const generatedId = React.useId();
+        const radioId = id || generatedId;
+
+        const radioElement = (
+            <RadioRoot ref={ref} id={radioId} className={className} size={size} {...props}>
+                {children || <RadioIndicator size={size} />}
+            </RadioRoot>
+        );
+
+        if (!label) {
+            return radioElement;
+        }
+
+        return (
+            <label htmlFor={radioId} className="cursor-pointer">
+                <div className="flex items-start gap-3">
+                    {radioElement}
+                    <div className="flex flex-col">
+                        <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            {label}
+                        </span>
+                        {description && (
+                            <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">{description}</span>
+                        )}
+                    </div>
+                </div>
+            </label>
+        );
+    },
+);
+
+RadioWithLabel.displayName = "RadioWithLabel";
 
 export const RadioGroup = {
     Root: RadioGroupRoot,

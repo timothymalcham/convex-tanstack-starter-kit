@@ -3,6 +3,20 @@
 ## [Unreleased]
 
 ### Added
+- Improved UI component label accessibility
+  - Added SwitchWithLabel component with built-in label association using htmlFor
+  - Added CheckboxWithLabel component with proper label integration and descriptions
+  - Added RadioWithLabel component for better radio button accessibility
+  - All new components support automatic ID generation and proper label-input relationships
+  - Updated component examples to showcase accessible patterns as preferred approach
+  - Integrated new components into kitchen-sink route for demonstration and testing
+- Enhanced NumberField component with premium visual styling
+  - Redesigned with gradient backgrounds and sophisticated shadow effects
+  - Added hover and active state animations with color-coded increment/decrement buttons
+  - Improved button styling with red decrement and green increment color schemes
+  - Enhanced input field with better typography and visual hierarchy
+  - Added glossy overlay effects and rounded corners for modern appearance
+  - Upgraded ScrubArea and ScrubAreaCursor with interactive styling and better feedback
 - Created comprehensive kitchen sink component showcase page
   - Displays all UI components from src/components/ui in their various states
   - Organized into logical sections: Buttons, Form Controls, Feedback & Progress, Layout & Navigation, Overlays & Dialogs, Display & Media, and Utilities
@@ -114,3 +128,14 @@
   - Best practices and accessibility considerations
   - Component variants, sizes, and customization options
   - Common patterns and integration examples
+
+### Fixed
+- Fixed email verification error by replacing React Email rendering with simple HTML templates to avoid MessageChannel runtime issues in Convex
+- Updated ResendOTP and ResendOTPPasswordReset to use STARTER_KIT_RESEND_KEY environment variable
+- Added @convex-dev/resend package for future Convex-native email integration
+- Fixed provider name error in authentication flows - all signIn calls now correctly use "password" provider instead of "resend-otp" or "resend-otp-password-reset"
+- Fixed missing flow parameters in authentication forms - added proper flow values: "email-verification" for verify page and "reset-verification" for reset password page
+- Fixed React hooks error after email verification by redirecting to /dashboard instead of / to avoid auth state transition issues
+- Replaced anchor tags with Link components on index page for proper routing
+- Fixed kitchen-sink route error by wrapping Field components in Fieldset.Root - Base UI Field components require FieldsetRootContext which is provided by Fieldset
+- Fixed HTML validation errors in kitchen-sink by adding asChild prop to Trigger components (Popover, Tooltip, Collapsible) when wrapping Button components to prevent nested button elements

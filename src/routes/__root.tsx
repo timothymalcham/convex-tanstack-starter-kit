@@ -6,7 +6,6 @@ import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRout
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type * as React from "react";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
-import { IconLink } from "~/components/IconLink";
 import { Loader } from "~/components/Loader";
 import { NotFound } from "~/components/NotFound";
 import { Toast } from "~/components/ui/Toast";
@@ -89,32 +88,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                                 </Link>
                             </div>
                             <LoadingIndicator />
-                        </div>
-                        <div className="flex items-center gap-6">
-                            {/* <label
-                htmlFor="countries"
-                className="block text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Delay
-              </label>
-              <select
-                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                onChange={(event) => {
-                  // setExtraDelay(Number(event.currentTarget.value))
-                }}
-                defaultValue="0"
-              >
-                <option value="0">None</option>
-                <option value="100">100</option>
-                <option value="500">500</option>
-                <option value="2000">2000</option>
-              </select> */}
-                            <IconLink
-                                href="https://github.com/TanStack/router/tree/main/examples/react/start-trellaux"
-                                label="Source"
-                                icon="/github-mark-white.png"
-                            />
-                            <IconLink href="https://tanstack.com" icon="/tanstack.png" label="TanStack" />
                         </div>
                     </div>
 

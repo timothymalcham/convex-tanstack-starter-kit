@@ -11,7 +11,22 @@
  * const [enabled, setEnabled] = useState(false);
  * <Switch checked={enabled} onCheckedChange={setEnabled} />
  *
- * // With label
+ * // With label (preferred - accessible)
+ * <SwitchWithLabel label="Enable notifications" />
+ *
+ * // With label and description
+ * <SwitchWithLabel
+ *   label="Push notifications"
+ *   description="Receive alerts about new messages"
+ * />
+ *
+ * // Label on the left
+ * <SwitchWithLabel
+ *   label="Dark mode"
+ *   labelPosition="left"
+ * />
+ *
+ * // Manual label (legacy approach)
  * <label className="flex items-center gap-2">
  *   <Switch />
  *   Enable notifications
@@ -53,6 +68,13 @@ interface SwitchProps extends React.ComponentPropsWithoutRef<typeof BaseSwitch.R
     thumbClassName?: string;
 }
 
+interface SwitchWithLabelProps extends SwitchProps {
+    label?: React.ReactNode;
+    description?: React.ReactNode;
+    labelPosition?: "left" | "right";
+    id?: string;
+}
+
 export const Switch = React.forwardRef<React.ElementRef<typeof BaseSwitch.Root>, SwitchProps>(
     ({ className, thumbClassName, children, ...props }, ref) => {
         return (
@@ -78,6 +100,54 @@ export const Switch = React.forwardRef<React.ElementRef<typeof BaseSwitch.Root>,
 );
 
 Switch.displayName = "Switch";
+
+// Component with built-in label support
+export const SwitchWithLabel = React.forwardRef<React.ElementRef<typeof BaseSwitch.Root>, SwitchWithLabelProps>(
+    ({ label, description, labelPosition = "right", id, className, thumbClassName, children, ...props }, ref) => {
+        const generatedId = React.useId();
+        const switchId = id || generatedId;
+
+        const switchElement = (
+            <Switch ref={ref} id={switchId} className={className} thumbClassName={thumbClassName} {...props}>
+                {children}
+            </Switch>
+        );
+
+        if (!label) {
+            return switchElement;
+        }
+
+        return (
+            <div className="flex items-center gap-3">
+                {labelPosition === "left" && (
+                    <label htmlFor={switchId} className="cursor-pointer">
+                        <div className="flex flex-col">
+                            <span className="text-sm font-medium">{label}</span>
+                            {description && (
+                                <span className="text-xs text-gray-600 dark:text-gray-400">{description}</span>
+                            )}
+                        </div>
+                    </label>
+                )}
+
+                {switchElement}
+
+                {labelPosition === "right" && (
+                    <label htmlFor={switchId} className="cursor-pointer">
+                        <div className="flex flex-col">
+                            <span className="text-sm font-medium">{label}</span>
+                            {description && (
+                                <span className="text-xs text-gray-600 dark:text-gray-400">{description}</span>
+                            )}
+                        </div>
+                    </label>
+                )}
+            </div>
+        );
+    },
+);
+
+SwitchWithLabel.displayName = "SwitchWithLabel";
 
 // Export sub-components for advanced usage
 export const SwitchRoot = BaseSwitch.Root;

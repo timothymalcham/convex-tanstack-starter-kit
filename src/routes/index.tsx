@@ -1,4 +1,4 @@
-import { createFileRoute, Navigate } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import { Authenticated, Unauthenticated } from "convex/react";
 
 export const Route = createFileRoute("/")({
@@ -24,18 +24,18 @@ function PublicIndex() {
                             </p>
                         </div>
                         <div className="flex justify-center space-x-4">
-                            <a
-                                href="/login"
+                            <Link
+                                to="/login"
                                 className="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md font-medium"
                             >
                                 Sign In
-                            </a>
-                            <a
-                                href="/signup"
+                            </Link>
+                            <Link
+                                to="/signup"
                                 className="bg-gray-600 text-white hover:bg-gray-700 px-4 py-2 rounded-md font-medium"
                             >
                                 Sign Up
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -37,10 +37,11 @@ function VerifyPage() {
                 const formData = new FormData();
                 formData.append("email", value.email);
                 formData.append("code", value.code);
+                formData.append("flow", "email-verification");
 
-                await signIn("resend-otp", formData);
-                // Redirect to the intended page or home
-                await navigate({ to: redirect || "/" });
+                await signIn("password", formData);
+                // Redirect to the intended page or dashboard
+                await navigate({ to: redirect || "/dashboard" });
             } catch (err) {
                 // Update search params with error
                 await navigate({
@@ -65,9 +66,9 @@ function VerifyPage() {
         try {
             const formData = new FormData();
             formData.append("email", email);
-            formData.append("resend", "true");
+            formData.append("flow", "email-verification");
 
-            await signIn("resend-otp", formData);
+            await signIn("password", formData);
             // Show success message or navigate
             await navigate({
                 to: "/verify",
