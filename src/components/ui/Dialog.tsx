@@ -187,7 +187,7 @@ const DialogPopup = React.forwardRef<HTMLDivElement, DialogPopupProps>(({ classN
             ref={ref}
             className={twMerge(
                 "fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%]",
-                "gap-4 border border-gray-200 bg-white p-6 shadow-lg dark:border-gray-800 dark:bg-gray-950",
+                "gap-4 border border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/30 p-6 shadow-[0_20px_60px_rgb(0,0,0,0.08)] dark:border-neutral-800/60 dark:from-neutral-900 dark:to-neutral-800/30 backdrop-blur-sm",
                 "rounded-lg",
                 "data-[starting-style]:opacity-0 data-[starting-style]:scale-95",
                 "data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
@@ -211,7 +211,7 @@ const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(({ cl
         <BaseDialog.Title
             ref={ref}
             className={twMerge(
-                "text-lg font-semibold leading-none tracking-tight text-gray-900 dark:text-gray-100",
+                "text-lg font-semibold leading-none tracking-tight text-neutral-900 dark:text-neutral-100",
                 className,
             )}
             {...props}
@@ -229,7 +229,7 @@ const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescripti
         return (
             <BaseDialog.Description
                 ref={ref}
-                className={twMerge("text-sm text-gray-500 dark:text-gray-400", className)}
+                className={twMerge("text-sm text-neutral-500 dark:text-neutral-400", className)}
                 {...props}
             />
         );

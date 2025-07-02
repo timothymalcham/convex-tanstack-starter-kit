@@ -65,13 +65,13 @@ interface ToggleProps extends React.ComponentPropsWithoutRef<typeof BaseToggle> 
 export const Toggle = React.forwardRef<React.ElementRef<typeof BaseToggle>, ToggleProps>(
     ({ className, variant = "default", size = "md", ...props }, ref) => {
         const baseStyles =
-            "inline-flex items-center justify-center font-medium transition-all duration-200 rounded-md select-none focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-800 disabled:pointer-events-none disabled:opacity-50 shadow-sm";
+            "inline-flex items-center justify-center font-medium transition-all duration-200 rounded-md select-none focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-neutral-800 disabled:pointer-events-none disabled:opacity-50 shadow-sm";
 
         const variantStyles = {
             default:
-                "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 active:bg-gray-100 data-[pressed]:bg-blue-600 data-[pressed]:text-white data-[pressed]:border-blue-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:data-[pressed]:bg-blue-500",
+                "border border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/30 text-neutral-700 hover:from-neutral-50 hover:to-neutral-100/30 hover:border-neutral-300 hover:shadow-md active:from-neutral-100 active:to-neutral-200/30 data-[pressed]:bg-gradient-to-b data-[pressed]:from-neutral-800 data-[pressed]:to-neutral-900 data-[pressed]:text-white data-[pressed]:border-neutral-800 data-[pressed]:shadow-lg dark:border-neutral-700/60 dark:from-neutral-800 dark:to-neutral-700/30 dark:text-neutral-300 dark:hover:from-neutral-700 dark:hover:to-neutral-600/30 dark:data-[pressed]:from-neutral-600 dark:data-[pressed]:to-neutral-700",
             outline:
-                "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 active:bg-gray-100 data-[pressed]:bg-gray-900 data-[pressed]:text-white data-[pressed]:border-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:data-[pressed]:bg-gray-100 dark:data-[pressed]:text-gray-900",
+                "border border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/30 text-neutral-700 hover:from-neutral-50 hover:to-neutral-100/30 hover:border-neutral-300 hover:shadow-md active:from-neutral-100 active:to-neutral-200/30 data-[pressed]:bg-gradient-to-b data-[pressed]:from-neutral-900 data-[pressed]:to-neutral-800 data-[pressed]:text-white data-[pressed]:border-neutral-900 data-[pressed]:shadow-lg dark:border-neutral-700/60 dark:from-neutral-800 dark:to-neutral-700/30 dark:text-neutral-300 dark:hover:from-neutral-700 dark:hover:to-neutral-600/30 dark:data-[pressed]:from-neutral-100 dark:data-[pressed]:to-neutral-200 dark:data-[pressed]:text-neutral-900",
         };
 
         const sizeStyles = {

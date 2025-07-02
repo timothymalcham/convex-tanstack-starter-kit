@@ -10,7 +10,7 @@ const AccordionRoot = React.forwardRef<HTMLDivElement, AccordionRootProps>(({ cl
     return (
         <BaseAccordion.Root
             ref={ref}
-            className={twMerge("divide-y divide-gray-200 dark:divide-gray-800", className)}
+            className={twMerge("divide-y divide-neutral-200/60 dark:divide-neutral-800/60", className)}
             {...props}
         />
     );
@@ -46,8 +46,8 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
                 ref={ref}
                 className={twMerge(
                     "flex flex-1 items-center justify-between py-4 text-left font-medium transition-all",
-                    "hover:bg-gray-50 dark:hover:bg-gray-800/50",
-                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset",
+                    "hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:backdrop-blur-sm",
+                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-neutral-500/30 focus-visible:ring-inset",
                     "disabled:pointer-events-none disabled:opacity-50",
                     "[&[data-open]>svg]:rotate-180",
                     className,

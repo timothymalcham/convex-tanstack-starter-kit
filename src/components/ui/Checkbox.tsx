@@ -90,15 +90,15 @@ const CheckboxRoot = React.forwardRef<HTMLButtonElement, CheckboxRootProps>(
                 ref={ref}
                 className={twMerge(
                     "peer inline-flex shrink-0 cursor-pointer items-center justify-center",
-                    "rounded border-2 border-gray-300 dark:border-gray-700",
-                    "bg-white dark:bg-gray-950",
-                    "transition-colors duration-150",
-                    "hover:border-gray-400 dark:hover:border-gray-600",
-                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+                    "rounded-md border-2 border-neutral-200/80 dark:border-neutral-700/80 shadow-sm",
+                    "bg-gradient-to-b from-white to-neutral-50/30 dark:from-neutral-900 dark:to-neutral-800/30",
+                    "transition-all duration-200 ease-out",
+                    "hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-md",
+                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-neutral-400/30 focus-visible:ring-offset-2",
                     "disabled:cursor-not-allowed disabled:opacity-50",
-                    "data-[checked]:bg-blue-600 data-[checked]:border-blue-600",
-                    "data-[checked]:hover:bg-blue-700 data-[checked]:hover:border-blue-700",
-                    "data-[indeterminate]:bg-blue-600 data-[indeterminate]:border-blue-600",
+                    "data-[checked]:bg-gradient-to-b data-[checked]:from-neutral-800 data-[checked]:to-neutral-900 data-[checked]:border-neutral-800",
+                    "data-[checked]:hover:from-neutral-700 data-[checked]:hover:to-neutral-800 data-[checked]:hover:border-neutral-700 data-[checked]:shadow-lg",
+                    "data-[indeterminate]:bg-gradient-to-b data-[indeterminate]:from-neutral-800 data-[indeterminate]:to-neutral-900 data-[indeterminate]:border-neutral-800",
                     sizeStyles[size],
                     className,
                 )}
@@ -189,7 +189,7 @@ export const CheckboxWithLabel = React.forwardRef<HTMLButtonElement, CheckboxWit
                             {label}
                         </span>
                         {description && (
-                            <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">{description}</span>
+                            <span className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">{description}</span>
                         )}
                     </div>
                 </label>

@@ -245,8 +245,8 @@ const PopoverPopup = React.forwardRef<HTMLDivElement, PopoverPopupProps>(({ clas
         <BasePopover.Popup
             ref={ref}
             className={twMerge(
-                "min-w-32 max-w-xs overflow-hidden rounded-lg border bg-white p-4 shadow-lg",
-                "dark:border-gray-800 dark:bg-gray-950",
+                "min-w-32 max-w-xs overflow-hidden rounded-lg border border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/30 p-4 shadow-[0_16px_40px_rgb(0,0,0,0.08)] backdrop-blur-sm",
+                "dark:border-neutral-800/60 dark:from-neutral-900 dark:to-neutral-800/30",
                 "data-[starting-style]:opacity-0 data-[starting-style]:scale-95",
                 "data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
                 "animate-in fade-in-0 zoom-in-95 duration-200",
@@ -268,8 +268,8 @@ const PopoverArrow = React.forwardRef<HTMLDivElement, PopoverArrowProps>(({ clas
         <BasePopover.Arrow
             ref={ref}
             className={twMerge(
-                "h-2 w-2 rotate-45 border border-gray-200 bg-white",
-                "dark:border-gray-800 dark:bg-gray-950",
+                "h-2 w-2 rotate-45 border border-neutral-200/60 bg-gradient-to-b from-white to-neutral-50/30",
+                "dark:border-neutral-800/60 dark:from-neutral-900 dark:to-neutral-800/30",
                 className,
             )}
             {...props}
@@ -286,7 +286,7 @@ const PopoverTitle = React.forwardRef<HTMLHeadingElement, PopoverTitleProps>(({ 
     return (
         <BasePopover.Title
             ref={ref}
-            className={twMerge("font-semibold text-gray-900 dark:text-gray-100", className)}
+            className={twMerge("font-semibold text-neutral-900 dark:text-neutral-100", className)}
             {...props}
         />
     );
@@ -302,7 +302,7 @@ const PopoverDescription = React.forwardRef<HTMLParagraphElement, PopoverDescrip
         return (
             <BasePopover.Description
                 ref={ref}
-                className={twMerge("text-sm text-gray-500 dark:text-gray-400", className)}
+                className={twMerge("text-sm text-neutral-500 dark:text-neutral-400", className)}
                 {...props}
             />
         );

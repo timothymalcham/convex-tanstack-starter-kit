@@ -146,7 +146,7 @@ export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>,
                 <BaseTabs.List
                     ref={listRef}
                     className={twMerge(
-                        "relative flex gap-1 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm",
+                        "relative flex gap-1 p-1 bg-gradient-to-b from-neutral-100 to-neutral-200/30 dark:from-neutral-800 dark:to-neutral-700/30 rounded-lg border border-neutral-200/60 dark:border-neutral-700/60 shadow-sm backdrop-blur-sm",
                         className,
                     )}
                     onMouseEnter={handleMouseEnter}
@@ -157,7 +157,7 @@ export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>,
                     {/* Hover indicator */}
                     {hoverState && (
                         <div
-                            className="absolute top-1/2 z-[1] h-9 -translate-y-1/2 rounded-md bg-gradient-to-b from-gray-200/80 to-gray-300/60 dark:from-gray-600/80 dark:to-gray-700/60 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] pointer-events-none shadow-sm border border-gray-300/50 dark:border-gray-500/50"
+                            className="absolute top-1/2 z-[1] h-9 -translate-y-1/2 rounded-md bg-gradient-to-b from-neutral-200/80 to-neutral-300/60 dark:from-neutral-600/80 dark:to-neutral-700/60 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] pointer-events-none shadow-sm border border-neutral-300/50 dark:border-neutral-500/50"
                             style={{
                                 width: hoverState.width,
                                 left: hoverState.left,
@@ -180,9 +180,9 @@ export const TabsTab = React.forwardRef<React.ElementRef<typeof BaseTabs.Tab>, T
             <BaseTabs.Tab
                 ref={ref}
                 className={twMerge(
-                    "flex h-9 items-center justify-center px-4 text-sm font-medium text-gray-600 dark:text-gray-400 transition-all duration-300 rounded-md cursor-pointer outline-none select-none hover:text-gray-900 dark:hover:text-gray-200 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 relative z-[3] whitespace-nowrap",
+                    "flex h-9 items-center justify-center px-4 text-sm font-medium text-neutral-600 dark:text-neutral-400 transition-all duration-300 rounded-md cursor-pointer outline-none select-none hover:text-neutral-900 dark:hover:text-neutral-200 focus-visible:outline-2 focus-visible:outline-neutral-500 focus-visible:outline-offset-2 relative z-[3] whitespace-nowrap",
                     // Only apply selected styles when not hovering
-                    !isHovered && "data-[selected]:text-gray-900 dark:data-[selected]:text-white",
+                    !isHovered && "data-[selected]:text-neutral-900 dark:data-[selected]:text-white",
                     className,
                 )}
                 onMouseEnter={() => setIsHovered(true)}
@@ -201,7 +201,7 @@ export const TabsIndicator = React.forwardRef<React.ElementRef<typeof BaseTabs.I
             <BaseTabs.Indicator
                 ref={ref}
                 className={twMerge(
-                    "absolute top-1/2 left-0 z-[2] h-9 w-[var(--active-tab-width)] -translate-y-1/2 translate-x-[var(--active-tab-left)] rounded-md bg-white dark:bg-gray-700 shadow-lg border border-gray-300 dark:border-gray-600 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] backdrop-blur-sm",
+                    "absolute top-1/2 left-0 z-[2] h-9 w-[var(--active-tab-width)] -translate-y-1/2 translate-x-[var(--active-tab-left)] rounded-md bg-gradient-to-b from-white to-neutral-50/50 dark:from-neutral-700 dark:to-neutral-600/50 shadow-lg border border-neutral-300/60 dark:border-neutral-600/60 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] backdrop-blur-sm",
                     isAnyTabHovered && "opacity-0",
                     className,
                 )}
@@ -217,7 +217,7 @@ export const TabsPanel = React.forwardRef<React.ElementRef<typeof BaseTabs.Panel
             <BaseTabs.Panel
                 ref={ref}
                 className={twMerge(
-                    "mt-4 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 focus-visible:rounded-md",
+                    "mt-4 focus-visible:outline-2 focus-visible:outline-neutral-500 focus-visible:outline-offset-2 focus-visible:rounded-md",
                     className,
                 )}
                 {...props}

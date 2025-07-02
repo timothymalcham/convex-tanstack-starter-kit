@@ -123,10 +123,10 @@ const CollapsibleTrigger = React.forwardRef<HTMLButtonElement, CollapsibleTrigge
                 className={twMerge(
                     "flex items-center justify-between w-full rounded-lg text-sm font-medium text-left",
                     "transition-all duration-200 ease-out",
-                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 shadow-sm hover:shadow-md",
                     "disabled:pointer-events-none disabled:opacity-50",
-                    "bg-gray-50 text-gray-900 hover:bg-gray-100 border border-gray-200",
-                    "dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700 dark:border-gray-700",
+                    "bg-gradient-to-b from-neutral-50 to-neutral-100/80 text-neutral-900 hover:from-neutral-100 hover:to-neutral-200/80 border border-neutral-200/60",
+                    "dark:bg-gradient-to-b dark:from-neutral-800 dark:to-neutral-700/80 dark:text-neutral-100 dark:hover:from-neutral-700 dark:hover:to-neutral-600/80 dark:border-neutral-700/60",
                     "px-4 py-3",
                     "[&>svg]:data-[panel-open]:rotate-180 [&>svg]:transition-transform [&>svg]:duration-200",
                     className,
@@ -152,7 +152,7 @@ const CollapsiblePanel = React.forwardRef<HTMLDivElement, CollapsiblePanelProps>
                 "data-[ending-style]:h-0",
                 "data-[open]:animate-collapsible-down",
                 "data-[closed]:animate-collapsible-up",
-                "border-x border-b border-gray-200 dark:border-gray-700 rounded-b-lg -mt-px",
+                "border-x border-b border-neutral-200/60 dark:border-neutral-700/60 rounded-b-lg -mt-px bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm",
                 className,
             )}
             {...props}

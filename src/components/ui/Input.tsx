@@ -109,20 +109,20 @@ interface InputProps extends Omit<React.ComponentPropsWithoutRef<typeof BaseInpu
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, size = "md", fullWidth = false, type = "text", ...props }, ref) => {
         const baseStyles = [
-            "rounded-md border border-gray-300 dark:border-gray-700",
-            "bg-white dark:bg-gray-900",
-            "text-gray-900 dark:text-gray-100",
-            "placeholder:text-gray-400 dark:placeholder:text-gray-500",
-            "transition-colors duration-200",
-            "focus:border-blue-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500",
-            "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50 dark:disabled:bg-gray-800",
-            "data-[invalid]:border-red-500 data-[invalid]:focus:border-red-500 data-[invalid]:focus:ring-red-500",
-            "data-[valid]:border-green-500 data-[valid]:focus:border-green-500 data-[valid]:focus:ring-green-500",
-            "data-[dirty]:border-gray-400 dark:data-[dirty]:border-gray-600",
-            "data-[filled]:border-gray-400 dark:data-[filled]:border-gray-600",
-            "hover:border-gray-400 dark:hover:border-gray-600",
+            "rounded-lg border border-neutral-200/60 dark:border-neutral-700/60 shadow-sm",
+            "bg-gradient-to-b from-white to-neutral-50/30 dark:from-neutral-900 dark:to-neutral-800/30",
+            "text-neutral-900 dark:text-neutral-100",
+            "placeholder:text-neutral-400 dark:placeholder:text-neutral-500",
+            "transition-all duration-200 ease-out",
+            "focus:border-neutral-400 focus:outline-hidden focus:ring-2 focus:ring-neutral-400/30 focus:shadow-lg backdrop-blur-sm",
+            "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-neutral-50 dark:disabled:bg-neutral-800",
+            "data-[invalid]:border-red-400/60 data-[invalid]:focus:border-red-500 data-[invalid]:focus:ring-red-400/30",
+            "data-[valid]:border-emerald-400/60 data-[valid]:focus:border-emerald-500 data-[valid]:focus:ring-emerald-400/30",
+            "data-[dirty]:border-neutral-300 dark:data-[dirty]:border-neutral-600",
+            "data-[filled]:border-neutral-300 dark:data-[filled]:border-neutral-600",
+            "hover:border-neutral-300 dark:hover:border-neutral-600 hover:shadow-md",
             "data-[invalid]:hover:border-red-400",
-            "data-[valid]:hover:border-green-400",
+            "data-[valid]:hover:border-emerald-400",
         ];
 
         const sizeStyles = {

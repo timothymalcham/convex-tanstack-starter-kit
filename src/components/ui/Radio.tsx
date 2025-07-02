@@ -311,7 +311,7 @@ const RadioRoot = React.forwardRef<HTMLButtonElement, RadioRootProps>(({ classNa
             ref={ref}
             className={twMerge(
                 "group flex cursor-pointer items-center gap-2",
-                "focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded",
+                "focus:outline-hidden focus:ring-2 focus:ring-neutral-400/30 focus:ring-offset-2 rounded",
                 "disabled:cursor-not-allowed disabled:opacity-50",
                 "transition-colors duration-150",
                 className,
@@ -347,14 +347,14 @@ const RadioIndicator = React.forwardRef<HTMLSpanElement, RadioIndicatorProps>(
                 ref={ref}
                 className={twMerge(
                     "relative flex shrink-0 items-center justify-center rounded-full border-2",
-                    "border-gray-300 bg-white transition-all duration-150",
-                    "group-hover:border-gray-400",
-                    "group-focus:border-blue-500",
-                    "group-data-[checked]:border-blue-600 group-data-[checked]:bg-blue-600",
+                    "border-neutral-200/80 bg-gradient-to-b from-white to-neutral-50/30 transition-all duration-200 ease-out shadow-sm",
+                    "group-hover:border-neutral-300 group-hover:shadow-md",
+                    "group-focus:border-neutral-400",
+                    "group-data-[checked]:border-neutral-800 group-data-[checked]:bg-gradient-to-b group-data-[checked]:from-neutral-800 group-data-[checked]:to-neutral-900 group-data-[checked]:shadow-lg",
                     "group-disabled:cursor-not-allowed group-disabled:opacity-50",
-                    "dark:border-gray-600 dark:bg-gray-900",
-                    "dark:group-hover:border-gray-500",
-                    "dark:group-data-[checked]:border-blue-500 dark:group-data-[checked]:bg-blue-500",
+                    "dark:border-neutral-700/80 dark:from-neutral-900 dark:to-neutral-800/30",
+                    "dark:group-hover:border-neutral-600",
+                    "dark:group-data-[checked]:border-neutral-700 dark:group-data-[checked]:from-neutral-700 dark:group-data-[checked]:to-neutral-800",
                     sizeStyles[size],
                     className,
                 )}
@@ -399,7 +399,7 @@ export const RadioWithLabel = React.forwardRef<HTMLButtonElement, RadioWithLabel
                             {label}
                         </span>
                         {description && (
-                            <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">{description}</span>
+                            <span className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">{description}</span>
                         )}
                     </div>
                 </div>
