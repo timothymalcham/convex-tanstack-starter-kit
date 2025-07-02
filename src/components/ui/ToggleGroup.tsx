@@ -76,7 +76,10 @@ export const ToggleGroup = React.forwardRef<React.ElementRef<typeof BaseToggleGr
         return (
             <BaseToggleGroup
                 ref={ref}
-                className={twMerge("flex gap-1 rounded-lg border border-gray-300 bg-gray-100 p-1 dark:border-gray-600 dark:bg-gray-800", className)}
+                className={twMerge(
+                    "flex gap-1 rounded-lg border border-gray-300 bg-gray-100 p-1 dark:border-gray-600 dark:bg-gray-800",
+                    className,
+                )}
                 {...props}
             />
         );

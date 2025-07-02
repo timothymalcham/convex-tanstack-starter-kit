@@ -42,10 +42,10 @@ import { twMerge } from "tailwind-merge";
  *
  * // With custom trigger styling
  * <Collapsible.Root defaultOpen>
- *   <Collapsible.Trigger className="flex items-center justify-between w-full p-3 text-left bg-gray-100 hover:bg-gray-200 rounded">
+ *   <Collapsible.Trigger>
  *     <span className="font-medium">Advanced Settings</span>
  *     <svg
- *       className="h-4 w-4 transition-transform data-[panel-open]:rotate-180"
+ *       className="h-4 w-4"
  *       fill="none"
  *       stroke="currentColor"
  *       viewBox="0 0 24 24"
@@ -54,7 +54,7 @@ import { twMerge } from "tailwind-merge";
  *     </svg>
  *   </Collapsible.Trigger>
  *   <Collapsible.Panel>
- *     <div className="p-4 space-y-3 bg-gray-50 rounded-b">
+ *     <div className="p-4 space-y-3 bg-gray-50">
  *       <div>
  *         <label className="block text-sm font-medium mb-1">Setting 1</label>
  *         <input type="text" className="w-full border rounded px-2 py-1" />
@@ -73,9 +73,9 @@ import { twMerge } from "tailwind-merge";
  * // FAQ-style collapsible
  * <div className="space-y-2">
  *   <Collapsible.Root>
- *     <Collapsible.Trigger className="flex justify-between items-center w-full p-4 text-left border rounded-lg hover:bg-gray-50">
+ *     <Collapsible.Trigger>
  *       <span className="font-medium">What is your return policy?</span>
- *       <span className="text-gray-400 data-[panel-open]:rotate-180 transition-transform">▼</span>
+ *       <span className="text-gray-400">▼</span>
  *     </Collapsible.Trigger>
  *     <Collapsible.Panel>
  *       <div className="px-4 pb-4 text-gray-600">
@@ -121,13 +121,14 @@ const CollapsibleTrigger = React.forwardRef<HTMLButtonElement, CollapsibleTrigge
             <BaseCollapsible.Trigger
                 ref={ref}
                 className={twMerge(
-                    "inline-flex items-center justify-center rounded-md text-sm font-medium",
-                    "transition-colors duration-150",
+                    "flex items-center justify-between w-full rounded-lg text-sm font-medium text-left",
+                    "transition-all duration-200 ease-out",
                     "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
                     "disabled:pointer-events-none disabled:opacity-50",
-                    "bg-gray-100 text-gray-900 hover:bg-gray-200",
-                    "dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700",
-                    "h-10 px-4 py-2",
+                    "bg-gray-50 text-gray-900 hover:bg-gray-100 border border-gray-200",
+                    "dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700 dark:border-gray-700",
+                    "px-4 py-3",
+                    "[&>svg]:data-[panel-open]:rotate-180 [&>svg]:transition-transform [&>svg]:duration-200",
                     className,
                 )}
                 {...props}
@@ -151,6 +152,7 @@ const CollapsiblePanel = React.forwardRef<HTMLDivElement, CollapsiblePanelProps>
                 "data-[ending-style]:h-0",
                 "data-[open]:animate-collapsible-down",
                 "data-[closed]:animate-collapsible-up",
+                "border-x border-b border-gray-200 dark:border-gray-700 rounded-b-lg -mt-px",
                 className,
             )}
             {...props}

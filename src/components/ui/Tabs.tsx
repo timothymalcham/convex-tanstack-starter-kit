@@ -79,9 +79,7 @@ interface TabsPanelProps extends React.ComponentPropsWithoutRef<typeof BaseTabs.
 
 export const TabsRoot = React.forwardRef<React.ElementRef<typeof BaseTabs.Root>, TabsRootProps>(
     ({ className, ...props }, ref) => {
-        return (
-            <BaseTabs.Root ref={ref} className={twMerge("w-full", className)} {...props} />
-        );
+        return <BaseTabs.Root ref={ref} className={twMerge("w-full", className)} {...props} />;
     },
 );
 
@@ -89,7 +87,9 @@ const TabsContext = React.createContext<{ isAnyTabHovered: boolean }>({ isAnyTab
 
 export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>, TabsListProps>(
     ({ className, ...props }, ref) => {
-        const [hoverState, setHoverState] = React.useState<{ width: number; left: number; opacity: number } | null>(null);
+        const [hoverState, setHoverState] = React.useState<{ width: number; left: number; opacity: number } | null>(
+            null,
+        );
         const [isAnyTabHovered, setIsAnyTabHovered] = React.useState(false);
         const listRef = React.useRef<HTMLDivElement>(null);
         const isMouseInside = React.useRef(false);
@@ -98,10 +98,10 @@ export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>,
 
         const updateHoverState = React.useCallback((event: MouseEvent | React.MouseEvent) => {
             if (!listRef.current || !isMouseInside.current) return;
-            
+
             const target = document.elementFromPoint(event.clientX, event.clientY);
             const tab = target?.closest('[role="tab"]') as HTMLElement;
-            
+
             if (tab && listRef.current.contains(tab)) {
                 const listRect = listRef.current.getBoundingClientRect();
                 const tabRect = tab.getBoundingClientRect();
@@ -114,19 +114,25 @@ export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>,
             }
         }, []);
 
-        const handleMouseEnter = React.useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-            isMouseInside.current = true;
-            updateHoverState(event);
-        }, [updateHoverState]);
+        const handleMouseEnter = React.useCallback(
+            (event: React.MouseEvent<HTMLDivElement>) => {
+                isMouseInside.current = true;
+                updateHoverState(event);
+            },
+            [updateHoverState],
+        );
 
-        const handleMouseMove = React.useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-            updateHoverState(event);
-        }, [updateHoverState]);
+        const handleMouseMove = React.useCallback(
+            (event: React.MouseEvent<HTMLDivElement>) => {
+                updateHoverState(event);
+            },
+            [updateHoverState],
+        );
 
         const handleMouseLeave = React.useCallback(() => {
             isMouseInside.current = false;
             setIsAnyTabHovered(false);
-            setHoverState(prev => prev ? { ...prev, opacity: 0 } : null);
+            setHoverState((prev) => (prev ? { ...prev, opacity: 0 } : null));
             // Clear the hover state after animation
             setTimeout(() => {
                 if (!isMouseInside.current) {
@@ -139,7 +145,10 @@ export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>,
             <TabsContext.Provider value={{ isAnyTabHovered }}>
                 <BaseTabs.List
                     ref={listRef}
-                    className={twMerge("relative flex gap-1 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm", className)}
+                    className={twMerge(
+                        "relative flex gap-1 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm",
+                        className,
+                    )}
                     onMouseEnter={handleMouseEnter}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
@@ -166,7 +175,7 @@ export const TabsList = React.forwardRef<React.ElementRef<typeof BaseTabs.List>,
 export const TabsTab = React.forwardRef<React.ElementRef<typeof BaseTabs.Tab>, TabsTabProps>(
     ({ className, ...props }, ref) => {
         const [isHovered, setIsHovered] = React.useState(false);
-        
+
         return (
             <BaseTabs.Tab
                 ref={ref}
@@ -187,7 +196,7 @@ export const TabsTab = React.forwardRef<React.ElementRef<typeof BaseTabs.Tab>, T
 export const TabsIndicator = React.forwardRef<React.ElementRef<typeof BaseTabs.Indicator>, TabsIndicatorProps>(
     ({ className, ...props }, ref) => {
         const { isAnyTabHovered } = React.useContext(TabsContext);
-        
+
         return (
             <BaseTabs.Indicator
                 ref={ref}

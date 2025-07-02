@@ -100,10 +100,7 @@ export const TooltipTrigger = React.forwardRef<React.ElementRef<typeof BaseToolt
         return (
             <BaseTooltip.Trigger
                 ref={ref}
-                className={twMerge(
-                    "inline-flex items-center justify-center",
-                    className,
-                )}
+                className={twMerge("inline-flex items-center justify-center", className)}
                 {...props}
             />
         );
