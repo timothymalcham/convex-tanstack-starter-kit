@@ -117,7 +117,7 @@ function KitchenSinkPage() {
                                         </p>
                                     </div>
                                     <div className="space-y-4">
-                                        <Button variant="primary" className="w-full shadow-sm">
+                                        <Button variant="primary" className="w-full">
                                             Primary
                                         </Button>
                                         <Button variant="secondary" className="w-full">
@@ -128,6 +128,12 @@ function KitchenSinkPage() {
                                         </Button>
                                         <Button variant="ghost" className="w-full">
                                             Ghost
+                                        </Button>
+                                        <Button variant="shimmer" className="w-full">
+                                            Shimmer
+                                        </Button>
+                                        <Button variant="glow" className="w-full">
+                                            Glow
                                         </Button>
                                     </div>
                                 </div>

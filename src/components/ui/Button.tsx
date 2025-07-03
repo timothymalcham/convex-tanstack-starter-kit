@@ -56,7 +56,7 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "secondary" | "danger" | "ghost";
+    variant?: "primary" | "secondary" | "danger" | "ghost" | "shimmer" | "glow";
     size?: "sm" | "md" | "lg";
     fullWidth?: boolean;
 }
@@ -64,15 +64,21 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = "primary", size = "md", fullWidth = false, ...props }, ref) => {
         const baseStyles =
-            "inline-flex items-center justify-center font-medium transition-all duration-200 ease-out rounded-lg focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-sm tracking-tight";
+            "inline-flex items-center justify-center font-medium transition-all duration-200 ease-out rounded-xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 tracking-tight relative overflow-hidden";
 
         const variantStyles = {
             primary:
-                "bg-gradient-to-b from-neutral-900 to-neutral-800 text-white hover:from-neutral-800 hover:to-neutral-700 focus-visible:ring-neutral-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0",
+                "bg-white dark:bg-neutral-200 text-neutral-900 dark:text-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-100 focus-visible:ring-neutral-400/30 active:scale-[0.98]",
             secondary:
-                "bg-gradient-to-b from-neutral-100 to-neutral-200/80 dark:from-neutral-800 dark:to-neutral-700 text-neutral-900 dark:text-neutral-100 hover:from-neutral-200 hover:to-neutral-300/80 dark:hover:from-neutral-700 dark:hover:to-neutral-600 focus-visible:ring-neutral-500 border border-neutral-200/60 dark:border-neutral-600/60",
-            danger: "bg-gradient-to-b from-red-600 to-red-700 text-white hover:from-red-500 hover:to-red-600 focus-visible:ring-red-500 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0",
-            ghost: "text-neutral-700 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60 bg-transparent hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:border-neutral-300 dark:hover:border-neutral-600 focus-visible:ring-neutral-500 backdrop-blur-sm",
+                "bg-neutral-50 dark:bg-neutral-300 text-neutral-900 dark:text-neutral-900 hover:bg-white dark:hover:bg-neutral-200 focus-visible:ring-neutral-400/30 active:scale-[0.98]",
+            danger: 
+                "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-400/30 active:scale-[0.98]",
+            ghost: 
+                "text-neutral-700 dark:text-neutral-300 bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 focus-visible:ring-neutral-400/30 active:scale-[0.98]",
+            shimmer:
+                "bg-white dark:bg-neutral-200 text-neutral-900 dark:text-neutral-900 focus-visible:ring-neutral-400/30 active:scale-[0.98] before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-r before:from-transparent before:via-white/50 dark:before:via-neutral-100/50 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out",
+            glow:
+                "bg-white dark:bg-neutral-200 text-neutral-900 dark:text-neutral-900 focus-visible:ring-neutral-400/30 active:scale-[0.98] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] dark:shadow-[0_0_20px_rgba(147,51,234,0.5)] dark:hover:shadow-[0_0_30px_rgba(147,51,234,0.7)]",
         };
 
         const sizeStyles = {
