@@ -15,6 +15,7 @@ export const getCurrentUser = query({
       image: v.optional(v.string()),
       emailNotifications: v.optional(v.boolean()),
       emailVerificationTime: v.optional(v.number()),
+      authProviders: v.array(v.string()),
     })
   ),
   handler: async (ctx) => {
@@ -34,6 +35,14 @@ export const getCurrentUser = query({
       .withIndex("by_userId", q => q.eq("userId", userId))
       .unique();
     
+    // Get authentication providers
+    const authAccounts = await ctx.db
+      .query("authAccounts")
+      .withIndex("userIdAndProvider", q => q.eq("userId", userId))
+      .collect();
+    
+    const authProviders = authAccounts.map(account => account.provider);
+    
     return {
       _id: user._id,
       _creationTime: user._creationTime,
@@ -42,6 +51,7 @@ export const getCurrentUser = query({
       image: user.image,
       emailNotifications: profile?.emailNotifications ?? true,
       emailVerificationTime: user.emailVerificationTime,
+      authProviders,
     };
   },
 });

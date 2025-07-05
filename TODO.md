@@ -49,8 +49,8 @@
 - [x] Add forgot password flow with reset functionality
 - [x] Add email address validation with Zod
 - [x] Create user profile management
-- [ ] Implement session management
-- [ ] Add social login options (Google, GitHub)
+- [x] Implement session management
+- [x] Add social login options (Google, GitHub)
 
 ### Database & Schema
 - [ ] Create comprehensive database schema in `convex/schema.ts`

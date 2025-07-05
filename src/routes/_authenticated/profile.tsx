@@ -11,6 +11,7 @@ import { Field } from "~/components/ui/Field";
 import { Input } from "~/components/ui/Input";
 import { Switch } from "~/components/ui/Switch";
 import { useCurrentUser } from "~/hooks/useUser";
+import { SessionManagement } from "~/components/SessionManagement";
 
 const profileFormSchema = z.object({
     name: z.string().min(1, "Name is required").max(100, "Name is too long"),
@@ -217,6 +218,12 @@ function ProfilePage() {
 
                 <div className="mt-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                     <div className="px-4 py-5 sm:p-6">
+                        <SessionManagement />
+                    </div>
+                </div>
+
+                <div className="mt-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div className="px-4 py-5 sm:p-6">
                         <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Account Information</h2>
                         <dl className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                             <div>
@@ -241,6 +248,26 @@ function ProfilePage() {
                                 </dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-gray-200">
                                     {new Date(currentUser._creationTime).toLocaleDateString()}
+                                </dd>
+                            </div>
+                            <div>
+                                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                    Sign-in Methods
+                                </dt>
+                                <dd className="mt-1">
+                                    <div className="flex flex-wrap gap-2">
+                                        {currentUser.authProviders.map((provider) => (
+                                            <span
+                                                key={provider}
+                                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+                                            >
+                                                {provider === "password" ? "Email/Password" : 
+                                                 provider === "github" ? "GitHub" :
+                                                 provider === "google" ? "Google" : 
+                                                 provider.charAt(0).toUpperCase() + provider.slice(1)}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </dd>
                             </div>
                         </dl>

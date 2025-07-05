@@ -5,6 +5,7 @@ import { z } from "zod";
 import { Button } from "../components/ui/Button";
 import { Field } from "../components/ui/Field";
 import { Input } from "../components/ui/Input";
+import { SocialLoginButtons } from "../components/SocialLoginButtons";
 
 const loginSearchSchema = z.object({
     error: z.string().optional(),
@@ -165,6 +166,8 @@ function LoginPage() {
                         </div>
                     </div>
                 </form>
+
+                <SocialLoginButtons redirect={redirect} />
             </div>
         </div>
     );

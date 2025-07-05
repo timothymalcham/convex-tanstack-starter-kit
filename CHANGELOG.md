@@ -3,6 +3,25 @@
 ## [Unreleased]
 
 ### Added
+- Implemented comprehensive session management system
+  - Created sessions.ts with queries and mutations for session tracking
+  - Added ability to view all active sessions with creation time and expiration
+  - Implemented session revocation (individual and bulk)
+  - Added session statistics tracking (total, active, oldest session age)
+  - Created automatic cleanup of expired sessions via cron job
+  - Built SessionManagement component for user-friendly session control
+  - Added session management UI to user profile page
+  - Created useSessions hook for easy frontend integration
+  - Enhanced security by allowing users to revoke compromised sessions
+- Added social login support with GitHub and Google OAuth
+  - Configured GitHub and Google OAuth providers in Convex Auth
+  - Created SocialLoginButtons component with branded styling
+  - Added social login buttons to login and signup pages
+  - Implemented proper OAuth profile mapping for both providers
+  - Added authentication provider tracking in user profiles
+  - Created comprehensive OAuth setup documentation
+  - Added .env.example with required OAuth environment variables
+  - Enhanced user profile to show all connected authentication methods
 - Added dark/light mode theme switching with system preference detection
   - Installed @epic-web/client-hints package for theme detection
   - Created comprehensive theme management system with Theme context and provider

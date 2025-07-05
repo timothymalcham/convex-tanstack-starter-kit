@@ -19,6 +19,7 @@ import type * as auth from "../auth.js";
 import type * as board from "../board.js";
 import type * as crons from "../crons.js";
 import type * as http from "../http.js";
+import type * as sessions from "../sessions.js";
 import type * as users from "../users.js";
 
 /**
@@ -36,6 +37,7 @@ declare const fullApi: ApiFromModules<{
   board: typeof board;
   crons: typeof crons;
   http: typeof http;
+  sessions: typeof sessions;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
