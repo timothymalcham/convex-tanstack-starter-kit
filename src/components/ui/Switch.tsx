@@ -81,7 +81,7 @@ export const Switch = React.forwardRef<React.ElementRef<typeof BaseSwitch.Root>,
             <BaseSwitch.Root
                 ref={ref}
                 className={twMerge(
-                    "relative flex h-6 w-10 rounded-full bg-gradient-to-r from-neutral-700 from-35% to-neutral-200 to-65% bg-[length:6.5rem_100%] bg-[100%_0%] bg-no-repeat p-px shadow-[inset_0_1.5px_2px] shadow-neutral-200/60 outline outline-1 -outline-offset-1 outline-neutral-200/60 transition-[background-position,box-shadow] duration-[125ms] ease-[cubic-bezier(0.26,0.75,0.38,0.45)] before:absolute before:rounded-full before:outline-offset-2 before:outline-neutral-800 focus-visible:before:inset-0 focus-visible:before:outline focus-visible:before:outline-2 active:bg-neutral-100 data-[checked]:bg-[0%_0%] data-[checked]:active:bg-neutral-500 dark:from-neutral-500 dark:shadow-black/75 dark:outline-white/15 dark:data-[checked]:shadow-none",
+                    "relative flex h-6 w-10 rounded-full bg-gradient-to-r from-neutral-700 from-35% to-neutral-200 to-65% bg-[length:6.5rem_100%] bg-[100%_0%] bg-no-repeat p-px shadow-[inset_0_1.5px_2px] shadow-neutral-200/60 outline -outline-offset-1 outline-neutral-200/60 transition-[background-position,box-shadow] duration-[125ms] ease-[cubic-bezier(0.26,0.75,0.38,0.45)] before:absolute before:rounded-full before:outline-offset-2 before:outline-neutral-800 focus-visible:before:inset-0 focus-visible:before:outline active:bg-neutral-100 data-[checked]:bg-[0%_0%] data-[checked]:active:bg-neutral-500 dark:from-neutral-500 dark:shadow-black/75 dark:outline-white/15 dark:data-[checked]:shadow-none",
                     className,
                 )}
                 {...props}

@@ -1496,7 +1496,7 @@ function KitchenSinkPage() {
                                 </Collapsible.Root>
                             </div>
 
-                            <div className="bg-gradient-to-br from-white via-neutral-50/30 to-white dark:from-neutral-900 dark:via-neutral-800/30 dark:to-neutral-900 rounded-2xl p-8 shadow-lg border border-neutral-200 dark:border-neutral-700 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]">
+                            <div className="bg-gradient-to-br from-white via-neutral-50/30 to-white dark:from-neutral-900 dark:via-neutral-800/30 dark:to-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]">
                                 <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-6">
                                     Scroll Area
                                 </h3>
