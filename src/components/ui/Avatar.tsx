@@ -47,7 +47,7 @@ const AvatarContext = React.createContext<{ fallbackColor?: string }>({});
  * ```
  */
 
-interface AvatarRootProps extends React.ComponentPropsWithoutRef<typeof BaseAvatar.Root> {
+export interface AvatarRootProps extends React.ComponentPropsWithoutRef<typeof BaseAvatar.Root> {
     className?: string;
     size?: "xs" | "sm" | "md" | "lg" | "xl";
     fallbackColor?: "blue" | "green" | "purple" | "pink" | "orange" | "teal" | "red" | "gray";
@@ -91,7 +91,7 @@ const AvatarRoot = React.forwardRef<HTMLSpanElement, AvatarRootProps>(
 );
 AvatarRoot.displayName = "Avatar.Root";
 
-interface AvatarImageProps extends React.ComponentPropsWithoutRef<typeof BaseAvatar.Image> {
+export interface AvatarImageProps extends React.ComponentPropsWithoutRef<typeof BaseAvatar.Image> {
     className?: string;
 }
 
@@ -106,7 +106,7 @@ const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(({ clas
 });
 AvatarImage.displayName = "Avatar.Image";
 
-interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<typeof BaseAvatar.Fallback> {
+export interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<typeof BaseAvatar.Fallback> {
     className?: string;
 }
 
@@ -151,3 +151,6 @@ export const Avatar = {
     Image: AvatarImage,
     Fallback: AvatarFallback,
 };
+
+// Export types for better TypeScript support
+export type { AvatarRootProps, AvatarImageProps, AvatarFallbackProps };

@@ -75,19 +75,20 @@ import { Tooltip as BaseTooltip } from "@base-ui-components/react/tooltip";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
-interface TooltipTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Trigger> {
+export interface TooltipTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Trigger> {
     className?: string;
+    asChild?: boolean;
 }
 
-interface TooltipPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Positioner> {
+export interface TooltipPositionerProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Positioner> {
     sideOffset?: number;
 }
 
-interface TooltipPopupProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Popup> {
+export interface TooltipPopupProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Popup> {
     className?: string;
 }
 
-interface TooltipArrowProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Arrow> {
+export interface TooltipArrowProps extends React.ComponentPropsWithoutRef<typeof BaseTooltip.Arrow> {
     className?: string;
 }
 

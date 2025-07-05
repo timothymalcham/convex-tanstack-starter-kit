@@ -4,17 +4,26 @@ import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import type * as React from "react";
+import * as React from "react";
+import { ClientHintCheck } from "~/components/ClientHintCheck";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { Loader } from "~/components/Loader";
 import { NotFound } from "~/components/NotFound";
+import { ThemeToggle } from "~/components/ThemeToggle";
 import { Toast } from "~/components/ui/Toast";
+import { ThemeProvider } from "~/contexts/ThemeContext";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/utils/seo";
+import { getActualTheme, getSystemTheme, getTheme, getUserThemePreference, hintsUtils } from "~/utils/theme";
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient;
 }>()({
+    beforeLoad: async ({ context }) => {
+        // For now, we'll handle theme detection on the client side
+        // TanStack Router doesn't provide request object in the same way
+        return {};
+    },
     head: () => ({
         meta: [
             {
@@ -72,30 +81,57 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+    // Handle theme detection on client side with proper hydration
+    const [userPreference, setUserPreference] = React.useState<"light" | "dark" | "system">("system");
+    const [actualTheme, setActualTheme] = React.useState<"light" | "dark">("light");
+
+    React.useEffect(() => {
+        // Get user preference from cookie
+        const themeCookie = document.cookie
+            .split(";")
+            .find((c) => c.trim().startsWith("theme="))
+            ?.split("=")[1];
+        
+        const preference = (themeCookie as "light" | "dark" | "system") || "system";
+        setUserPreference(preference);
+
+        // Get actual theme to apply
+        const detectedTheme = getSystemTheme();
+        const resolvedTheme = getActualTheme(preference, detectedTheme);
+        setActualTheme(resolvedTheme);
+
+        // Apply theme to document
+        document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
+    }, []);
+
     return (
-        <html>
+        <html className={actualTheme === "dark" ? "dark" : ""}>
             <head>
                 <HeadContent />
+                <ClientHintCheck />
             </head>
             <body>
-                <div className="h-screen flex flex-col min-h-0">
-                    <div className="bg-slate-900 border-b border-slate-800 flex items-center justify-between py-4 px-8 box-border">
-                        <div className="flex items-center gap-4">
-                            <div>
-                                <Link to="/" className="block leading-tight">
-                                    <div className="font-black text-2xl text-white">Trellaux</div>
-                                    <div className="text-slate-500">a TanStack Demo</div>
-                                </Link>
+                <ThemeProvider theme={userPreference} actualTheme={actualTheme}>
+                    <div className="h-screen flex flex-col min-h-0">
+                        <div className="bg-slate-900 dark:bg-slate-900 border-b border-slate-800 dark:border-slate-700 flex items-center justify-between py-4 px-8 box-border">
+                            <div className="flex items-center gap-4">
+                                <div>
+                                    <Link to="/" className="block leading-tight">
+                                        <div className="font-black text-2xl text-white">Trellaux</div>
+                                        <div className="text-slate-500">a TanStack Demo</div>
+                                    </Link>
+                                </div>
+                                <LoadingIndicator />
                             </div>
-                            <LoadingIndicator />
+                            <ThemeToggle />
+                        </div>
+
+                        <div className="grow min-h-0 h-full flex flex-col">
+                            {children}
+                            <Toast />
                         </div>
                     </div>
-
-                    <div className="grow min-h-0 h-full flex flex-col">
-                        {children}
-                        <Toast />
-                    </div>
-                </div>
+                </ThemeProvider>
                 <ReactQueryDevtools />
                 <TanStackRouterDevtools position="bottom-right" />
                 <Scripts />

@@ -192,21 +192,26 @@ import { twMerge } from "tailwind-merge";
  * ```
  */
 
-interface PopoverRootProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Root> {}
+export interface PopoverRootProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Root> {}
 
 const PopoverRoot = BasePopover.Root;
 
-interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Trigger> {
+export interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Trigger> {
     asChild?: boolean;
 }
 
-const PopoverTrigger = BasePopover.Trigger;
+const PopoverTrigger = React.forwardRef<React.ElementRef<typeof BasePopover.Trigger>, PopoverTriggerProps>(
+    ({ ...props }, ref) => {
+        return <BasePopover.Trigger ref={ref} {...props} />;
+    },
+);
+PopoverTrigger.displayName = "Popover.Trigger";
 
-interface PopoverPortalProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Portal> {}
+export interface PopoverPortalProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Portal> {}
 
 const PopoverPortal = BasePopover.Portal;
 
-interface PopoverBackdropProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Backdrop> {
+export interface PopoverBackdropProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Backdrop> {
     className?: string;
 }
 
@@ -227,7 +232,7 @@ const PopoverBackdrop = React.forwardRef<HTMLDivElement, PopoverBackdropProps>((
 });
 PopoverBackdrop.displayName = "Popover.Backdrop";
 
-interface PopoverPositionerProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Positioner> {
+export interface PopoverPositionerProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Positioner> {
     className?: string;
 }
 
@@ -236,7 +241,7 @@ const PopoverPositioner = React.forwardRef<HTMLDivElement, PopoverPositionerProp
 });
 PopoverPositioner.displayName = "Popover.Positioner";
 
-interface PopoverPopupProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Popup> {
+export interface PopoverPopupProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Popup> {
     className?: string;
 }
 
@@ -259,7 +264,7 @@ const PopoverPopup = React.forwardRef<HTMLDivElement, PopoverPopupProps>(({ clas
 });
 PopoverPopup.displayName = "Popover.Popup";
 
-interface PopoverArrowProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Arrow> {
+export interface PopoverArrowProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Arrow> {
     className?: string;
 }
 
@@ -278,7 +283,7 @@ const PopoverArrow = React.forwardRef<HTMLDivElement, PopoverArrowProps>(({ clas
 });
 PopoverArrow.displayName = "Popover.Arrow";
 
-interface PopoverTitleProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Title> {
+export interface PopoverTitleProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Title> {
     className?: string;
 }
 

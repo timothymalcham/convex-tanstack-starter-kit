@@ -3,6 +3,22 @@
 ## [Unreleased]
 
 ### Added
+- Added dark/light mode theme switching with system preference detection
+  - Installed @epic-web/client-hints package for theme detection
+  - Created comprehensive theme management system with Theme context and provider
+  - Added theme toggle component with light/dark/system modes
+  - Implemented proper client-side theme detection without flash of incorrect styling
+  - Fixed theme switching functionality to actually apply light/dark themes correctly
+  - Added ClientHintCheck component for system theme change detection
+  - Integrated theme toggle into main navigation header
+  - Full support for system theme preference changes with real-time updates
+  - Enhanced existing dark mode CSS classes and Tailwind configuration
+  - Proper hydration-safe theme detection with cookie persistence
+- Fixed TypeScript errors in UI components
+  - Exported interface types for Avatar, Select, Tooltip, Popover, and other compound components
+  - Improved type inference for component props like fallbackColor on Avatar.Root and asChild on Tooltip.Trigger
+  - Enhanced TypeScript support for compound component patterns with proper prop recognition
+  - Fixed missing asChild prop types on interactive trigger components
 - Improved UI component label accessibility
   - Added SwitchWithLabel component with built-in label association using htmlFor
   - Added CheckboxWithLabel component with proper label integration and descriptions

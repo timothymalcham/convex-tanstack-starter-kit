@@ -71,14 +71,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 "bg-white dark:bg-neutral-200 text-neutral-900 dark:text-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-100 focus-visible:ring-neutral-400/30 active:scale-[0.98]",
             secondary:
                 "bg-neutral-50 dark:bg-neutral-300 text-neutral-900 dark:text-neutral-900 hover:bg-white dark:hover:bg-neutral-200 focus-visible:ring-neutral-400/30 active:scale-[0.98]",
-            danger: 
-                "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-400/30 active:scale-[0.98]",
-            ghost: 
-                "text-neutral-700 dark:text-neutral-300 bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 focus-visible:ring-neutral-400/30 active:scale-[0.98]",
+            danger: "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-400/30 active:scale-[0.98]",
+            ghost: "text-neutral-700 dark:text-neutral-300 bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 focus-visible:ring-neutral-400/30 active:scale-[0.98]",
             shimmer:
                 "bg-white dark:bg-neutral-200 text-neutral-900 dark:text-neutral-900 focus-visible:ring-neutral-400/30 active:scale-[0.98] before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-r before:from-transparent before:via-white/50 dark:before:via-neutral-100/50 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out",
-            glow:
-                "bg-white dark:bg-neutral-200 text-neutral-900 dark:text-neutral-900 focus-visible:ring-neutral-400/30 active:scale-[0.98] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] dark:shadow-[0_0_20px_rgba(147,51,234,0.5)] dark:hover:shadow-[0_0_30px_rgba(147,51,234,0.7)]",
+            glow: "bg-white dark:bg-neutral-200 text-neutral-900 dark:text-neutral-900 focus-visible:ring-neutral-400/30 active:scale-[0.98] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] dark:shadow-[0_0_20px_rgba(147,51,234,0.5)] dark:hover:shadow-[0_0_30px_rgba(147,51,234,0.7)]",
         };
 
         const sizeStyles = {
