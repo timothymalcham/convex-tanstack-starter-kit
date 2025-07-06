@@ -53,13 +53,13 @@
 - [x] Add social login options (Google, GitHub)
 
 ### Database & Schema
-- [ ] Create comprehensive database schema in `convex/schema.ts`
-- [ ] Set up users table with profile fields
-- [ ] Create organizations/teams table
-- [ ] Add billing/subscription tables
-- [ ] Implement audit logging tables
-- [ ] Create notification tables
-- [ ] Set up proper database indexes for performance
+- [x] Create comprehensive database schema in `convex/schema.ts`
+- [x] Set up users table with profile fields
+- [x] Create organizations/teams table
+- [x] Add billing/subscription tables
+- [x] Implement audit logging tables
+- [x] Create notification tables
+- [x] Set up proper database indexes for performance
 
 ### Backend API Layer
 - [ ] Create user management mutations (create, update, delete)

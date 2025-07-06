@@ -14,6 +14,18 @@ export const getCurrentUser = query({
       name: v.optional(v.string()),
       image: v.optional(v.string()),
       emailNotifications: v.optional(v.boolean()),
+      marketingEmails: v.optional(v.boolean()),
+      timezone: v.optional(v.string()),
+      language: v.optional(v.string()),
+      theme: v.optional(v.union(v.literal("light"), v.literal("dark"), v.literal("system"))),
+      bio: v.optional(v.string()),
+      website: v.optional(v.string()),
+      location: v.optional(v.string()),
+      jobTitle: v.optional(v.string()),
+      company: v.optional(v.string()),
+      phone: v.optional(v.string()),
+      onboardingCompleted: v.optional(v.boolean()),
+      lastActiveAt: v.optional(v.number()),
       emailVerificationTime: v.optional(v.number()),
       authProviders: v.array(v.string()),
     })
@@ -50,6 +62,18 @@ export const getCurrentUser = query({
       name: user.name,
       image: user.image,
       emailNotifications: profile?.emailNotifications ?? true,
+      marketingEmails: profile?.marketingEmails,
+      timezone: profile?.timezone,
+      language: profile?.language,
+      theme: profile?.theme,
+      bio: profile?.bio,
+      website: profile?.website,
+      location: profile?.location,
+      jobTitle: profile?.jobTitle,
+      company: profile?.company,
+      phone: profile?.phone,
+      onboardingCompleted: profile?.onboardingCompleted,
+      lastActiveAt: profile?.lastActiveAt,
       emailVerificationTime: user.emailVerificationTime,
       authProviders,
     };
@@ -62,6 +86,16 @@ export const updateProfile = mutation({
     name: v.optional(v.string()),
     image: v.optional(v.string()),
     emailNotifications: v.optional(v.boolean()),
+    marketingEmails: v.optional(v.boolean()),
+    timezone: v.optional(v.string()),
+    language: v.optional(v.string()),
+    theme: v.optional(v.union(v.literal("light"), v.literal("dark"), v.literal("system"))),
+    bio: v.optional(v.string()),
+    website: v.optional(v.string()),
+    location: v.optional(v.string()),
+    jobTitle: v.optional(v.string()),
+    company: v.optional(v.string()),
+    phone: v.optional(v.string()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -86,20 +120,33 @@ export const updateProfile = mutation({
     }
     
     // Update profile preferences
-    if (args.emailNotifications !== undefined) {
+    const profileUpdates: Record<string, any> = {};
+    const profileFields = [
+      'emailNotifications', 'marketingEmails', 'timezone', 'language', 
+      'theme', 'bio', 'website', 'location', 'jobTitle', 'company', 'phone'
+    ];
+    
+    for (const field of profileFields) {
+      if (args[field as keyof typeof args] !== undefined) {
+        profileUpdates[field] = args[field as keyof typeof args];
+      }
+    }
+    
+    if (Object.keys(profileUpdates).length > 0) {
+      // Update lastActiveAt when profile is updated
+      profileUpdates.lastActiveAt = Date.now();
+      
       const existingProfile = await ctx.db
         .query("userProfiles")
         .withIndex("by_userId", q => q.eq("userId", userId))
         .unique();
       
       if (existingProfile) {
-        await ctx.db.patch(existingProfile._id, {
-          emailNotifications: args.emailNotifications,
-        });
+        await ctx.db.patch(existingProfile._id, profileUpdates);
       } else {
         await ctx.db.insert("userProfiles", {
           userId,
-          emailNotifications: args.emailNotifications,
+          ...profileUpdates,
         });
       }
     }
