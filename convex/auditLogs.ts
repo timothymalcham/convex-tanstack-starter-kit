@@ -172,7 +172,7 @@ export const getUserAuditLogs = query({
         const membership = await ctx.db
           .query("organizationMembers")
           .withIndex("by_organizationAndUser", q => 
-            q.eq("organizationId", args.organizationId).eq("userId", userId)
+            q.eq("organizationId", args.organizationId!).eq("userId", userId)
           )
           .filter(q => q.eq(q.field("status"), "active"))
           .unique();
