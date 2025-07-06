@@ -47,7 +47,7 @@ export const exportUserData = action({
     // Note: In a real implementation, you'd upload the blob here
     // For now, we'll simulate the storage process
     
-    const storageId: string = await ctx.runMutation(internal.dataExport.saveExportFile, {
+    const storageId: string = await ctx.runAction(internal.dataExport.saveExportFile, {
       userId,
       filename,
       mimeType,
@@ -79,7 +79,7 @@ export const saveExportFile = internalAction({
     size: v.number(),
     content: v.string(),
   },
-  returns: v.id("_storage"),
+  returns: v.string(),
   handler: async (ctx, args) => {
     // In a real implementation, you would:
     // 1. Create a proper file upload
@@ -93,7 +93,7 @@ export const saveExportFile = internalAction({
 });
 
 // Generate user export data
-export const generateUserExportData = query({
+export const generateUserExportData = internalQuery({
   args: {
     userId: v.id("users"),
     includeFiles: v.boolean(),
@@ -276,7 +276,7 @@ export const generateUserExportData = query({
 });
 
 // Internal query to check organization permissions
-const checkOrganizationPermissions = internalQuery({
+export const checkOrganizationPermissions = internalQuery({
   args: {
     organizationId: v.id("organizations"),
     userId: v.id("users"),
@@ -284,7 +284,7 @@ const checkOrganizationPermissions = internalQuery({
   },
   returns: v.object({
     hasPermission: v.boolean(),
-    role: v.optional(v.union(v.literal("owner"), v.literal("admin"), v.literal("member"))),
+    role: v.optional(v.union(v.literal("owner"), v.literal("admin"), v.literal("member"), v.literal("viewer"))),
   }),
   handler: async (ctx, args) => {
     const membership = await ctx.db
@@ -327,7 +327,7 @@ export const exportOrganizationData = action({
     }
 
     // Check if user has admin permissions
-    const permissionCheck = await ctx.runQuery(checkOrganizationPermissions, {
+    const permissionCheck = await ctx.runQuery(internal.dataExport.checkOrganizationPermissions, {
       organizationId: args.organizationId,
       userId,
       requiredRole: "admin",
@@ -355,7 +355,7 @@ export const exportOrganizationData = action({
 });
 
 // Generate organization export data
-export const generateOrganizationExportData = query({
+export const generateOrganizationExportData = internalQuery({
   args: {
     organizationId: v.id("organizations"),
     includeMembers: v.boolean(),

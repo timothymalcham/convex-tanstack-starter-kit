@@ -264,8 +264,7 @@ const schema = defineSchema({
     .index('by_action', ['action'])
     .index('by_resource', ['resource'])
     .index('by_resourceId', ['resourceId'])
-    .index('by_severity', ['severity'])
-    .index('by_creationTime', ['_creationTime']),
+    .index('by_severity', ['severity']),
 
   // ====================
   // FILE STORAGE

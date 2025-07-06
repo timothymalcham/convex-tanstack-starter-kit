@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query, action, internalMutation, internalQuery } from "./_generated/server";
+import { mutation, query, action, internalMutation, internalQuery, internalAction } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { internal } from "./_generated/api";
 
@@ -297,7 +297,7 @@ export const batchSendNotifications = mutation({
 });
 
 // Internal query to check organization permissions
-const checkOrganizationPermissions = internalQuery({
+export const checkOrganizationPermissions = internalQuery({
   args: {
     organizationId: v.id("organizations"),
     userId: v.id("users"),
@@ -305,7 +305,7 @@ const checkOrganizationPermissions = internalQuery({
   },
   returns: v.object({
     hasPermission: v.boolean(),
-    role: v.optional(v.union(v.literal("owner"), v.literal("admin"), v.literal("member"))),
+    role: v.optional(v.union(v.literal("owner"), v.literal("admin"), v.literal("member"), v.literal("viewer"))),
   }),
   handler: async (ctx, args) => {
     const membership = await ctx.db
@@ -353,7 +353,7 @@ export const batchCleanupExpiredData = action({
 
     // Check permissions for organization-level cleanup
     if (args.organizationId) {
-      const permissionCheck = await ctx.runQuery(checkOrganizationPermissions, {
+      const permissionCheck = await ctx.runQuery(internal.adminOperations.checkOrganizationPermissions, {
         organizationId: args.organizationId,
         userId,
         requiredRole: "owner",
@@ -391,7 +391,8 @@ export const batchCleanupExpiredData = action({
 
     // Cleanup expired sessions
     if (args.dataTypes.includes("sessions")) {
-      results.sessionsDeleted = await ctx.runMutation(internal.sessions.cleanupExpiredSessions, {});
+      const sessionResult = await ctx.runMutation(internal.sessions.cleanupExpiredSessions, {});
+      results.sessionsDeleted = sessionResult.deletedCount;
     }
 
     // Cleanup old audit logs (older than 1 year)
@@ -487,7 +488,7 @@ export const cleanupOldAuditLogs = internalMutation({
 });
 
 // Create admin audit log
-export const createAdminAuditLog = action({
+export const createAdminAuditLog = internalAction({
   args: {
     adminUserId: v.id("users"),
     organizationId: v.optional(v.id("organizations")),

@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation, action } from "./_generated/server";
+import { query, mutation, action, internalAction } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { internal } from "./_generated/api";
 
@@ -89,7 +89,7 @@ export const saveFile = mutation({
 });
 
 // Create audit log for file operations
-export const createFileAuditLog = action({
+export const createFileAuditLog = internalAction({
   args: {
     userId: v.id("users"),
     organizationId: v.optional(v.id("organizations")),
