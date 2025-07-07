@@ -76,7 +76,7 @@
 ### Design System
 - [x] Set up TailwindCSS configuration
 - [x] Install and configure BaseUI components
-- [ ] Create design tokens and theme configuration
+- [x] Create design tokens and theme configuration
 - [x] Build common UI components (Button, Input, Modal, etc.)
 - [x] Create form components with validation
 - [ ] Build data table components

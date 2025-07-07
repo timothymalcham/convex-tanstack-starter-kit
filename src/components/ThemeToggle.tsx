@@ -30,7 +30,7 @@ export function ThemeToggle() {
 
     return (
         <Menu.Root>
-            <Menu.Trigger asChild>
+            <Menu.Trigger>
                 <Button
                     variant="ghost"
                     size="sm"
@@ -48,7 +48,9 @@ export function ThemeToggle() {
                 >
                     <Icon name="sun" size="md" />
                     <span>Light</span>
-                    {theme === "light" && <Icon name="check" size="md" className="ml-auto" />}
+                    <span className="ml-auto">
+                        {theme === "light" && <Icon name="check" size="md" />}
+                    </span>
                 </Menu.Item>
                 <Menu.Item 
                     onClick={() => setTheme("dark")}
@@ -56,7 +58,9 @@ export function ThemeToggle() {
                 >
                     <Icon name="moon" size="md" />
                     <span>Dark</span>
-                    {theme === "dark" && <Icon name="check" size="md" className="ml-auto" />}
+                    <span className="ml-auto">
+                        {theme === "dark" && <Icon name="check" size="md" />}
+                    </span>
                 </Menu.Item>
                 <Menu.Item 
                     onClick={() => setTheme("system")}
@@ -64,7 +68,9 @@ export function ThemeToggle() {
                 >
                     <Icon name="computer" size="md" />
                     <span>System</span>
-                    {theme === "system" && <Icon name="check" size="md" className="ml-auto" />}
+                    <span className="ml-auto">
+                        {theme === "system" && <Icon name="check" size="md" />}
+                    </span>
                 </Menu.Item>
             </MenuContent>
         </Menu.Root>

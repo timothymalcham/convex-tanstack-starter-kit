@@ -36,6 +36,7 @@ function LoginPage() {
         onSubmit: async ({ value }) => {
             try {
                 const formData = new FormData();
+                formData.append("flow", "signIn");
                 formData.append("email", value.email);
                 formData.append("password", value.password);
 
