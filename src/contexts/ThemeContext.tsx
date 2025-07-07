@@ -1,6 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import type { Theme } from "~/utils/theme";
-import { setTheme } from "~/utils/theme";
+import { setTheme, subscribeToSchemeChange } from "~/utils/theme";
 
 interface ThemeContextType {
     theme: Theme; // User's preference (light, dark, system)
@@ -22,6 +22,16 @@ export function ThemeProvider({
     const handleSetTheme = (newTheme: Theme) => {
         setTheme(newTheme);
     };
+
+    // Subscribe to system theme changes when user preference is "system"
+    useEffect(() => {
+        if (theme === "system") {
+            return subscribeToSchemeChange(() => {
+                // The page will reload when system theme changes
+                // This ensures consistency between server and client
+            });
+        }
+    }, [theme]);
 
     return (
         <ThemeContext.Provider value={{ theme, actualTheme, setTheme: handleSetTheme }}>

@@ -79,17 +79,16 @@
 - [x] Create design tokens and theme configuration
 - [x] Build common UI components (Button, Input, Modal, etc.)
 - [x] Create form components with validation
-- [ ] Build data table components
-- [ ] Add loading states and skeletons
-- [ ] Create responsive layout components
+- [x] Build data table components
+- [x] Add loading states and skeletons
+- [x] Create responsive layout components
 
 ### Theme & Styling
-- [ ] Implement light/dark/system theme switcher
-- [ ] Prevent flash of incorrect theme (FOIT)
-- [ ] Create theme-aware components
-- [ ] Add custom color schemes
-- [ ] Implement responsive breakpoints
-- [ ] Add CSS-in-JS with proper TypeScript support
+- [x] Implement light/dark/system theme switcher
+- [x] Prevent flash of incorrect theme (FOIT)
+- [x] Create theme-aware components
+- [x] Add custom color schemes
+- [x] Implement responsive breakpoints
 
 ### Animations
 - [ ] Install and configure Framer Motion

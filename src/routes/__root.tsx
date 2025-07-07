@@ -10,6 +10,7 @@ import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { Loader } from "~/components/Loader";
 import { NotFound } from "~/components/NotFound";
 import { ThemeToggle } from "~/components/ThemeToggle";
+import { ThemeScript } from "~/components/ThemeScript";
 import { Toast } from "~/components/ui/Toast";
 import { ThemeProvider } from "~/contexts/ThemeContext";
 import appCss from "~/styles/app.css?url";
@@ -81,9 +82,20 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-    // Handle theme detection on client side with proper hydration
-    const [userPreference, setUserPreference] = React.useState<"light" | "dark" | "system">("system");
-    const [actualTheme, setActualTheme] = React.useState<"light" | "dark">("light");
+    // Initialize theme from values set by ThemeScript to prevent hydration mismatch
+    const [userPreference, setUserPreference] = React.useState<"light" | "dark" | "system">(() => {
+        if (typeof window !== "undefined" && (window as any).__userThemePreference) {
+            return (window as any).__userThemePreference;
+        }
+        return "system";
+    });
+    
+    const [actualTheme, setActualTheme] = React.useState<"light" | "dark">(() => {
+        if (typeof window !== "undefined" && (window as any).__actualTheme) {
+            return (window as any).__actualTheme;
+        }
+        return "light";
+    });
 
     React.useEffect(() => {
         // Get user preference from cookie
@@ -100,15 +112,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         const resolvedTheme = getActualTheme(preference, detectedTheme);
         setActualTheme(resolvedTheme);
 
-        // Apply theme to document
+        // Apply theme to document (in case it wasn't already applied by ThemeScript)
         document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
     }, []);
 
     return (
-        <html className={actualTheme === "dark" ? "dark" : ""}>
+        <html>
             <head>
-                <HeadContent />
+                <ThemeScript />
                 <ClientHintCheck />
+                <HeadContent />
             </head>
             <body>
                 <ThemeProvider theme={userPreference} actualTheme={actualTheme}>

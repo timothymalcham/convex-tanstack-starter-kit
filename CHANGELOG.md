@@ -198,3 +198,49 @@
 - Replaced anchor tags with Link components on index page for proper routing
 - Fixed kitchen-sink route error by wrapping Field components in Fieldset.Root - Base UI Field components require FieldsetRootContext which is provided by Fieldset
 - Fixed HTML validation errors in kitchen-sink by adding asChild prop to Trigger components (Popover, Tooltip, Collapsible) when wrapping Button components to prevent nested button elements
+- Fixed missing flow parameter in login form causing authentication error - added flow: "signIn" to FormData
+
+### Frontend Components & UI
+- Created comprehensive design tokens and theme configuration
+  - Added design tokens using Tailwind v4's @theme directive with custom fonts, colors, spacing, shadows, and animations
+  - Created semantic color tokens for consistent theming across light/dark modes
+  - Built TypeScript utilities for type-safe token access with colorTokens, spacingTokens, shadowTokens, and animationTokens
+  - Added theme.css with semantic CSS custom properties for surfaces, content, borders, and interactive elements
+  - Integrated tokens with existing Tailwind classes for seamless usage
+- Enhanced theme switcher with improved UX
+  - Upgraded ThemeToggle component with dropdown menu instead of simple toggle
+  - Added proper SVG icons (sun, moon, computer) instead of emojis
+  - Implemented visual checkmarks for current theme selection
+  - Created both dropdown and simple toggle variants for different use cases
+  - Fixed TypeScript errors with proper Menu component usage
+- Built comprehensive DataTable component
+  - Created feature-rich table with sorting, filtering, pagination, and row selection
+  - Added support for custom cell rendering with render functions
+  - Implemented responsive design with mobile-friendly layout
+  - Built-in loading states and empty state messages
+  - Support for bulk actions on selected rows
+  - Configurable column alignment, width, and sortability
+  - TypeScript-safe with proper generic typing
+- Added loading states and skeleton components
+  - Created Skeleton component with shimmer animation for content placeholders
+  - Built preset skeletons: SkeletonText, SkeletonButton, SkeletonAvatar, SkeletonCard, SkeletonTable
+  - Added Spinner component with multiple sizes and animation speeds
+  - Created LoadingDots, LoadingBar, and LoadingOverlay for various loading scenarios
+  - Added InlineLoader for small loading indicators within text
+  - Implemented proper CSS animations for all loading states
+- Created responsive layout components
+  - Built Container component with responsive max-widths and padding
+  - Created Stack component for vertical/horizontal layouts with consistent spacing
+  - Added Grid component with responsive column support
+  - Built Section component for page sections with consistent spacing
+  - Created Columns component for multi-column layouts
+  - Added Center component for perfect centering
+  - Built SidebarLayout with collapsible sidebar, mobile drawer, and proper responsive behavior
+  - Added useSidebar hook for accessing sidebar state from any component
+- Implemented FOIT prevention using @epic-web/client-hints
+  - Created ThemeScript component that runs before React hydration
+  - Properly integrated with existing client hints system
+  - Added support for reading both user preference and system theme cookies
+  - Enhanced ThemeContext to subscribe to system theme changes
+  - Prevents flash of incorrect theme on page load
+  - Maintains consistency between server and client rendering
