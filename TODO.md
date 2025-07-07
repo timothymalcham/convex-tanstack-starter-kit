@@ -119,22 +119,13 @@
 - [ ] Add testimonials/social proof sections
 - [ ] Build FAQ section
 
-### Example CRUD Application
-- [ ] Remove existing "board/boards" route, pages, components, etc.
-- [ ] Create todo/task management example
-- [ ] Build list view with pagination
-- [ ] Add create/edit task forms
-- [ ] Implement task filtering and sorting
-- [ ] Add real-time updates
-- [ ] Create bulk operations
-- [ ] Add task categories/tags
-- [ ] Implement task sharing between users
+### Enhance existing trello style app
 
 ## Billing & Payments
 
-### Stripe Integration
-- [ ] Set up Stripe configuration
-- [ ] Create subscription plans in Stripe
+### Polar.sh Integration
+- [ ] Set up Polar configuration
+- [ ] Create subscription plans in Polar
 - [ ] Build checkout flow
 - [ ] Implement webhook handlers
 - [ ] Add subscription management
@@ -157,7 +148,6 @@
 - [ ] Build welcome email flow
 - [ ] Add password reset emails
 - [ ] Create billing notification emails
-- [ ] Add newsletter subscription
 - [ ] Implement email preferences
 - [ ] Create transactional email templates
 
@@ -168,6 +158,7 @@
 - [ ] Implement notification preferences
 - [ ] Add push notification support
 - [ ] Create notification history
+- [ ] Create system that alerts the user that the app needs to be refreshed to keep the client in sync with backend
 
 ### Toast System
 - [ ] Set up Sonner for toast notifications
@@ -175,6 +166,7 @@
 - [ ] Add persistent notifications
 - [ ] Implement toast queuing
 - [ ] Add action buttons to toasts
+- [ ] Add the ability to trigger toasts side-side (from server functions, i.e. createToastHeaders)
 
 ## =
  Data Management & Analytics

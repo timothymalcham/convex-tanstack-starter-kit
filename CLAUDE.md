@@ -13,6 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Use Zod for schema validation liberally. Things should be as typesafe as possible. 
 - Avoid using `useState` and `useEffect` as much as possible. Prefer using search params for simple page/component state.
 - Always wrap queries and mutations in custom react hooks. Like: `useUser()`, `useTodos()`, etc.
+- Reusable general-purpose UI components can be found `./src/components/ui` - components that aren't general purpose but are large enough to exist in their own file should go in `./src/components/`
 
 ## Development Commands
 

@@ -1,0 +1,105 @@
+/**
+ * Design Tokens for Tailwind CSS v4
+ * 
+ * This file contains all design tokens using Tailwind's @theme directive.
+ * Tokens are organized by category and automatically work with Tailwind utilities.
+ * 
+ * Usage:
+ * - Use standard Tailwind utilities: bg-primary-500, text-gray-900, etc.
+ * - Custom tokens can be used with arbitrary values: bg-[--my-custom-color]
+ * - All tokens are theme-aware and work with dark mode
+ */
+
+@theme {
+  /* === CUSTOM FONTS === */
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "Fira Code", "Monaco", "Cascadia Code", "Segoe UI Mono", "Roboto Mono", monospace;
+
+  /* === CUSTOM BREAKPOINTS === */
+  --breakpoint-3xl: 120rem;
+  --breakpoint-4xl: 160rem;
+
+  /* === EXTENDED COLOR PALETTE === */
+  /* Primary Brand Colors */
+  --color-brand-50: oklch(0.98 0.02 240);
+  --color-brand-100: oklch(0.95 0.05 240);
+  --color-brand-200: oklch(0.90 0.10 240);
+  --color-brand-300: oklch(0.82 0.15 240);
+  --color-brand-400: oklch(0.70 0.20 240);
+  --color-brand-500: oklch(0.55 0.25 240);
+  --color-brand-600: oklch(0.45 0.22 240);
+  --color-brand-700: oklch(0.35 0.18 240);
+  --color-brand-800: oklch(0.25 0.15 240);
+  --color-brand-900: oklch(0.15 0.12 240);
+  --color-brand-950: oklch(0.08 0.08 240);
+
+  /* Extended Semantic Colors */
+  --color-success-50: oklch(0.98 0.02 145);
+  --color-success-100: oklch(0.93 0.05 145);
+  --color-success-200: oklch(0.87 0.10 145);
+  --color-success-300: oklch(0.78 0.15 145);
+  --color-success-400: oklch(0.68 0.20 145);
+  --color-success-500: oklch(0.58 0.24 145);
+  --color-success-600: oklch(0.48 0.22 145);
+  --color-success-700: oklch(0.38 0.18 145);
+  --color-success-800: oklch(0.28 0.15 145);
+  --color-success-900: oklch(0.18 0.12 145);
+  --color-success-950: oklch(0.08 0.08 145);
+
+  --color-warning-50: oklch(0.98 0.02 65);
+  --color-warning-100: oklch(0.93 0.05 65);
+  --color-warning-200: oklch(0.87 0.10 65);
+  --color-warning-300: oklch(0.78 0.15 65);
+  --color-warning-400: oklch(0.68 0.20 65);
+  --color-warning-500: oklch(0.58 0.24 65);
+  --color-warning-600: oklch(0.48 0.22 65);
+  --color-warning-700: oklch(0.38 0.18 65);
+  --color-warning-800: oklch(0.28 0.15 65);
+  --color-warning-900: oklch(0.18 0.12 65);
+  --color-warning-950: oklch(0.08 0.08 65);
+
+  --color-error-50: oklch(0.98 0.02 15);
+  --color-error-100: oklch(0.93 0.05 15);
+  --color-error-200: oklch(0.87 0.10 15);
+  --color-error-300: oklch(0.78 0.15 15);
+  --color-error-400: oklch(0.68 0.20 15);
+  --color-error-500: oklch(0.58 0.24 15);
+  --color-error-600: oklch(0.48 0.22 15);
+  --color-error-700: oklch(0.38 0.18 15);
+  --color-error-800: oklch(0.28 0.15 15);
+  --color-error-900: oklch(0.18 0.12 15);
+  --color-error-950: oklch(0.08 0.08 15);
+
+  /* === EXTENDED SPACING === */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-100: 25rem;
+  --spacing-112: 28rem;
+  --spacing-128: 32rem;
+
+  /* === EXTENDED BORDER RADIUS === */
+  --border-radius-4xl: 2rem;
+  --border-radius-5xl: 2.5rem;
+
+  /* === EXTENDED SHADOWS === */
+  --shadow-brand: 0 10px 15px -3px oklch(0.55 0.25 240 / 0.1), 0 4px 6px -4px oklch(0.55 0.25 240 / 0.1);
+  --shadow-success: 0 10px 15px -3px oklch(0.58 0.24 145 / 0.1), 0 4px 6px -4px oklch(0.58 0.24 145 / 0.1);
+  --shadow-warning: 0 10px 15px -3px oklch(0.58 0.24 65 / 0.1), 0 4px 6px -4px oklch(0.58 0.24 65 / 0.1);
+  --shadow-error: 0 10px 15px -3px oklch(0.58 0.24 15 / 0.1), 0 4px 6px -4px oklch(0.58 0.24 15 / 0.1);
+
+  /* === ANIMATION DURATIONS === */
+  --duration-250: 250ms;
+  --duration-350: 350ms;
+  --duration-450: 450ms;
+  --duration-550: 550ms;
+  --duration-650: 650ms;
+  --duration-750: 750ms;
+  --duration-850: 850ms;
+  --duration-950: 950ms;
+
+  /* === ANIMATION TIMING FUNCTIONS === */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}

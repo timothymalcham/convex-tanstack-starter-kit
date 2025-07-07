@@ -1,7 +1,81 @@
 import { Button } from "~/components/ui/Button";
+import { Menu, MenuContent } from "~/components/ui/Menu";
 import { useTheme } from "~/contexts/ThemeContext";
+import { Icon } from "~/icons/icons";
 
 export function ThemeToggle() {
+    const { theme, setTheme } = useTheme();
+
+    const getThemeIcon = () => {
+        switch (theme) {
+            case "light":
+                return "sun";
+            case "dark":
+                return "moon";
+            case "system":
+                return "computer";
+        }
+    };
+
+    const getThemeLabel = () => {
+        switch (theme) {
+            case "light":
+                return "Light";
+            case "dark":
+                return "Dark";
+            case "system":
+                return "System";
+        }
+    };
+
+    return (
+        <Menu.Root>
+            <Menu.Trigger asChild>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2 text-content-secondary hover:text-content-primary hover:bg-surface-hover"
+                    title={`Current theme: ${getThemeLabel()}`}
+                >
+                    <Icon name={getThemeIcon()} size="md" />
+                    <span className="hidden sm:inline">{getThemeLabel()}</span>
+                </Button>
+            </Menu.Trigger>
+            <MenuContent>
+                <Menu.Item 
+                    onClick={() => setTheme("light")}
+                    className="flex items-center gap-2"
+                >
+                    <Icon name="sun" size="md" />
+                    <span>Light</span>
+                    {theme === "light" && <Icon name="check" size="md" className="ml-auto" />}
+                </Menu.Item>
+                <Menu.Item 
+                    onClick={() => setTheme("dark")}
+                    className="flex items-center gap-2"
+                >
+                    <Icon name="moon" size="md" />
+                    <span>Dark</span>
+                    {theme === "dark" && <Icon name="check" size="md" className="ml-auto" />}
+                </Menu.Item>
+                <Menu.Item 
+                    onClick={() => setTheme("system")}
+                    className="flex items-center gap-2"
+                >
+                    <Icon name="computer" size="md" />
+                    <span>System</span>
+                    {theme === "system" && <Icon name="check" size="md" className="ml-auto" />}
+                </Menu.Item>
+            </MenuContent>
+        </Menu.Root>
+    );
+}
+
+/**
+ * Simple theme toggle button (cycles through themes)
+ * Use this when you want a simple toggle button instead of a dropdown
+ */
+export function SimpleThemeToggle() {
     const { theme, setTheme } = useTheme();
 
     const toggleTheme = () => {
@@ -21,11 +95,11 @@ export function ThemeToggle() {
     const getThemeIcon = () => {
         switch (theme) {
             case "light":
-                return "☀️";
+                return "sun";
             case "dark":
-                return "🌙";
+                return "moon";
             case "system":
-                return "💻";
+                return "computer";
         }
     };
 
@@ -45,10 +119,10 @@ export function ThemeToggle() {
             variant="ghost"
             size="sm"
             onClick={toggleTheme}
-            className="flex items-center gap-2 text-white hover:bg-slate-800"
+            className="flex items-center gap-2 text-content-secondary hover:text-content-primary hover:bg-surface-hover"
             title={`Switch to ${theme === "light" ? "dark" : theme === "dark" ? "system" : "light"} mode`}
         >
-            <span className="text-base">{getThemeIcon()}</span>
+            <Icon name={getThemeIcon()} size="md" />
             <span className="hidden sm:inline">{getThemeLabel()}</span>
         </Button>
     );

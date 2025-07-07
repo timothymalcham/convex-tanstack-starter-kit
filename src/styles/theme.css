@@ -1,0 +1,240 @@
+/**
+ * Theme Configuration
+ * 
+ * This file contains semantic color tokens and theme-aware styles.
+ * These work alongside Tailwind's design tokens to provide a cohesive theme system.
+ * 
+ * Usage:
+ * - Use semantic tokens: bg-surface, text-content, border-outline
+ * - Tokens automatically switch based on light/dark mode
+ * - Components can reference these for consistent theming
+ */
+
+@layer base {
+  /* === SEMANTIC COLOR TOKENS === */
+  :root {
+    /* Surface Colors */
+    --surface-background: theme('colors.slate.50');
+    --surface-foreground: theme('colors.slate.900');
+    --surface-card: theme('colors.white');
+    --surface-card-foreground: theme('colors.slate.900');
+    --surface-popover: theme('colors.white');
+    --surface-popover-foreground: theme('colors.slate.900');
+    
+    /* Content Colors */
+    --content-primary: theme('colors.slate.900');
+    --content-secondary: theme('colors.slate.600');
+    --content-tertiary: theme('colors.slate.500');
+    --content-accent: theme('colors.blue.600');
+    --content-muted: theme('colors.slate.500');
+    --content-muted-foreground: theme('colors.slate.500');
+    
+    /* Border Colors */
+    --border-outline: theme('colors.slate.200');
+    --border-input: theme('colors.slate.200');
+    --border-ring: theme('colors.slate.950');
+    
+    /* Interactive Colors */
+    --interactive-primary: theme('colors.slate.900');
+    --interactive-primary-foreground: theme('colors.slate.50');
+    --interactive-secondary: theme('colors.slate.100');
+    --interactive-secondary-foreground: theme('colors.slate.900');
+    --interactive-accent: theme('colors.slate.900');
+    --interactive-accent-foreground: theme('colors.slate.50');
+    --interactive-destructive: theme('colors.red.500');
+    --interactive-destructive-foreground: theme('colors.slate.50');
+    --interactive-muted: theme('colors.slate.100');
+    --interactive-muted-foreground: theme('colors.slate.500');
+    
+    /* Component-Specific Colors */
+    --component-input: theme('colors.white');
+    --component-input-placeholder: theme('colors.slate.500');
+    --component-chart-1: theme('colors.blue.500');
+    --component-chart-2: theme('colors.emerald.500');
+    --component-chart-3: theme('colors.amber.500');
+    --component-chart-4: theme('colors.red.500');
+    --component-chart-5: theme('colors.purple.500');
+    
+    /* State Colors */
+    --state-success: theme('colors.green.600');
+    --state-success-foreground: theme('colors.white');
+    --state-warning: theme('colors.yellow.600');
+    --state-warning-foreground: theme('colors.white');
+    --state-error: theme('colors.red.600');
+    --state-error-foreground: theme('colors.white');
+    --state-info: theme('colors.blue.600');
+    --state-info-foreground: theme('colors.white');
+  }
+
+  /* === DARK THEME OVERRIDES === */
+  .dark {
+    /* Surface Colors */
+    --surface-background: theme('colors.slate.950');
+    --surface-foreground: theme('colors.slate.50');
+    --surface-card: theme('colors.slate.950');
+    --surface-card-foreground: theme('colors.slate.50');
+    --surface-popover: theme('colors.slate.950');
+    --surface-popover-foreground: theme('colors.slate.50');
+    
+    /* Content Colors */
+    --content-primary: theme('colors.slate.50');
+    --content-secondary: theme('colors.slate.400');
+    --content-tertiary: theme('colors.slate.500');
+    --content-accent: theme('colors.blue.400');
+    --content-muted: theme('colors.slate.500');
+    --content-muted-foreground: theme('colors.slate.400');
+    
+    /* Border Colors */
+    --border-outline: theme('colors.slate.800');
+    --border-input: theme('colors.slate.800');
+    --border-ring: theme('colors.slate.300');
+    
+    /* Interactive Colors */
+    --interactive-primary: theme('colors.slate.50');
+    --interactive-primary-foreground: theme('colors.slate.900');
+    --interactive-secondary: theme('colors.slate.800');
+    --interactive-secondary-foreground: theme('colors.slate.50');
+    --interactive-accent: theme('colors.slate.50');
+    --interactive-accent-foreground: theme('colors.slate.900');
+    --interactive-destructive: theme('colors.red.900');
+    --interactive-destructive-foreground: theme('colors.slate.50');
+    --interactive-muted: theme('colors.slate.800');
+    --interactive-muted-foreground: theme('colors.slate.400');
+    
+    /* Component-Specific Colors */
+    --component-input: theme('colors.slate.950');
+    --component-input-placeholder: theme('colors.slate.400');
+    --component-chart-1: theme('colors.blue.400');
+    --component-chart-2: theme('colors.emerald.400');
+    --component-chart-3: theme('colors.amber.400');
+    --component-chart-4: theme('colors.red.400');
+    --component-chart-5: theme('colors.purple.400');
+    
+    /* State Colors */
+    --state-success: theme('colors.green.400');
+    --state-success-foreground: theme('colors.slate.900');
+    --state-warning: theme('colors.yellow.400');
+    --state-warning-foreground: theme('colors.slate.900');
+    --state-error: theme('colors.red.400');
+    --state-error-foreground: theme('colors.slate.900');
+    --state-info: theme('colors.blue.400');
+    --state-info-foreground: theme('colors.slate.900');
+  }
+
+  /* === SEMANTIC UTILITY CLASSES === */
+  .bg-surface {
+    background-color: var(--surface-background);
+  }
+  
+  .bg-surface-card {
+    background-color: var(--surface-card);
+  }
+  
+  .bg-surface-popover {
+    background-color: var(--surface-popover);
+  }
+  
+  .text-content {
+    color: var(--content-primary);
+  }
+  
+  .text-content-secondary {
+    color: var(--content-secondary);
+  }
+  
+  .text-content-tertiary {
+    color: var(--content-tertiary);
+  }
+  
+  .text-content-accent {
+    color: var(--content-accent);
+  }
+  
+  .text-content-muted {
+    color: var(--content-muted);
+  }
+  
+  .border-outline {
+    border-color: var(--border-outline);
+  }
+  
+  .border-input {
+    border-color: var(--border-input);
+  }
+  
+  .ring-ring {
+    --tw-ring-color: var(--border-ring);
+  }
+  
+  .bg-interactive-primary {
+    background-color: var(--interactive-primary);
+  }
+  
+  .bg-interactive-secondary {
+    background-color: var(--interactive-secondary);
+  }
+  
+  .bg-interactive-accent {
+    background-color: var(--interactive-accent);
+  }
+  
+  .bg-interactive-destructive {
+    background-color: var(--interactive-destructive);
+  }
+  
+  .bg-interactive-muted {
+    background-color: var(--interactive-muted);
+  }
+  
+  .text-interactive-primary-foreground {
+    color: var(--interactive-primary-foreground);
+  }
+  
+  .text-interactive-secondary-foreground {
+    color: var(--interactive-secondary-foreground);
+  }
+  
+  .text-interactive-accent-foreground {
+    color: var(--interactive-accent-foreground);
+  }
+  
+  .text-interactive-destructive-foreground {
+    color: var(--interactive-destructive-foreground);
+  }
+  
+  .text-interactive-muted-foreground {
+    color: var(--interactive-muted-foreground);
+  }
+  
+  .bg-state-success {
+    background-color: var(--state-success);
+  }
+  
+  .bg-state-warning {
+    background-color: var(--state-warning);
+  }
+  
+  .bg-state-error {
+    background-color: var(--state-error);
+  }
+  
+  .bg-state-info {
+    background-color: var(--state-info);
+  }
+  
+  .text-state-success-foreground {
+    color: var(--state-success-foreground);
+  }
+  
+  .text-state-warning-foreground {
+    color: var(--state-warning-foreground);
+  }
+  
+  .text-state-error-foreground {
+    color: var(--state-error-foreground);
+  }
+  
+  .text-state-info-foreground {
+    color: var(--state-info-foreground);
+  }
+}
