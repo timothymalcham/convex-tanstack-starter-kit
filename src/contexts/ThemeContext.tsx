@@ -10,12 +10,12 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ 
-    children, 
-    theme, 
-    actualTheme 
-}: { 
-    children: React.ReactNode; 
+export function ThemeProvider({
+    children,
+    theme,
+    actualTheme,
+}: {
+    children: React.ReactNode;
     theme: Theme;
     actualTheme: "light" | "dark";
 }) {

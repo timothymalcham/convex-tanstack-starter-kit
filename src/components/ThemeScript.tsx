@@ -1,9 +1,9 @@
 /**
  * ThemeScript Component
- * 
+ *
  * Injects a script that runs before React hydration to prevent flash of incorrect theme.
  * This works in conjunction with @epic-web/client-hints to provide a seamless theme experience.
- * 
+ *
  * The script:
  * 1. Reads the user's theme preference from cookies
  * 2. Reads the system preference from client hints cookie
@@ -11,8 +11,8 @@
  */
 
 export function ThemeScript({ nonce }: { nonce?: string }) {
-  // This script runs before React hydration to prevent FOIT
-  const script = `
+    // This script runs before React hydration to prevent FOIT
+    const script = `
     (function() {
       // Get user's explicit theme preference
       function getUserPreference() {
@@ -43,10 +43,5 @@ export function ThemeScript({ nonce }: { nonce?: string }) {
     })();
   `;
 
-  return (
-    <script
-      nonce={nonce}
-      dangerouslySetInnerHTML={{ __html: script }}
-    />
-  );
+    return <script nonce={nonce} dangerouslySetInnerHTML={{ __html: script }} />;
 }

@@ -2,10 +2,10 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
+import { SocialLoginButtons } from "../components/SocialLoginButtons";
 import { Button } from "../components/ui/Button";
 import { Field } from "../components/ui/Field";
 import { Input } from "../components/ui/Input";
-import { SocialLoginButtons } from "../components/SocialLoginButtons";
 
 const signupSearchSchema = z.object({
     error: z.string().optional(),

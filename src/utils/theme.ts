@@ -22,28 +22,28 @@ export function getTheme(request?: Request): "light" | "dark" {
 
 export function getUserThemePreference(request?: Request): Theme {
     if (!request) return "system";
-    
+
     // Check for user's explicit theme preference in cookie
     const cookieHeader = request.headers.get("Cookie");
     const themeCookie = cookieHeader
         ?.split(";")
         .find((c) => c.trim().startsWith("theme="))
         ?.split("=")[1];
-    
+
     if (themeCookie && ThemeSchema.safeParse(themeCookie).success) {
         return themeCookie as Theme;
     }
-    
+
     return "system";
 }
 
 export function setTheme(theme: Theme) {
     // Set the theme preference cookie
     document.cookie = `theme=${theme}; path=/; max-age=${60 * 60 * 24 * 365}`;
-    
+
     // Apply the theme immediately
     applyTheme(theme);
-    
+
     // Reload the page to ensure server-side rendering picks up the new preference
     window.location.reload();
 }
@@ -54,13 +54,13 @@ export function getSystemTheme(): "light" | "dark" {
 
 export function applyTheme(theme: Theme) {
     let actualTheme: "light" | "dark";
-    
+
     if (theme === "system") {
         actualTheme = getSystemTheme();
     } else {
         actualTheme = theme;
     }
-    
+
     document.documentElement.classList.toggle("dark", actualTheme === "dark");
 }
 

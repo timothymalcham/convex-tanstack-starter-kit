@@ -66,7 +66,7 @@ export function NewCard({
                 }}
                 onChange={(event) => {
                     const el = event.currentTarget;
-                    el.style.height = el.scrollHeight + "px";
+                    el.style.height = `${el.scrollHeight}px`;
                 }}
             />
             <div className="flex justify-between">

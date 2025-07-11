@@ -30,7 +30,7 @@ export function ThemeToggle() {
 
     return (
         <Menu.Root>
-            <Menu.Trigger>
+            <Menu.Trigger asChild>
                 <Button
                     variant="ghost"
                     size="sm"
@@ -42,35 +42,20 @@ export function ThemeToggle() {
                 </Button>
             </Menu.Trigger>
             <MenuContent>
-                <Menu.Item 
-                    onClick={() => setTheme("light")}
-                    className="flex items-center gap-2"
-                >
+                <Menu.Item onClick={() => setTheme("light")} className="flex items-center gap-2">
                     <Icon name="sun" size="md" />
                     <span>Light</span>
-                    <span className="ml-auto">
-                        {theme === "light" && <Icon name="check" size="md" />}
-                    </span>
+                    <span className="ml-auto">{theme === "light" && <Icon name="check" size="md" />}</span>
                 </Menu.Item>
-                <Menu.Item 
-                    onClick={() => setTheme("dark")}
-                    className="flex items-center gap-2"
-                >
+                <Menu.Item onClick={() => setTheme("dark")} className="flex items-center gap-2">
                     <Icon name="moon" size="md" />
                     <span>Dark</span>
-                    <span className="ml-auto">
-                        {theme === "dark" && <Icon name="check" size="md" />}
-                    </span>
+                    <span className="ml-auto">{theme === "dark" && <Icon name="check" size="md" />}</span>
                 </Menu.Item>
-                <Menu.Item 
-                    onClick={() => setTheme("system")}
-                    className="flex items-center gap-2"
-                >
+                <Menu.Item onClick={() => setTheme("system")} className="flex items-center gap-2">
                     <Icon name="computer" size="md" />
                     <span>System</span>
-                    <span className="ml-auto">
-                        {theme === "system" && <Icon name="check" size="md" />}
-                    </span>
+                    <span className="ml-auto">{theme === "system" && <Icon name="check" size="md" />}</span>
                 </Menu.Item>
             </MenuContent>
         </Menu.Root>

@@ -6,12 +6,12 @@ import { api } from "convex/_generated/api";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { SessionManagement } from "~/components/SessionManagement";
 import { Button } from "~/components/ui/Button";
 import { Field } from "~/components/ui/Field";
 import { Input } from "~/components/ui/Input";
 import { Switch } from "~/components/ui/Switch";
 import { useCurrentUser } from "~/hooks/useUser";
-import { SessionManagement } from "~/components/SessionManagement";
 
 const profileFormSchema = z.object({
     name: z.string().min(1, "Name is required").max(100, "Name is too long"),
@@ -261,10 +261,13 @@ function ProfilePage() {
                                                 key={provider}
                                                 className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                                             >
-                                                {provider === "password" ? "Email/Password" : 
-                                                 provider === "github" ? "GitHub" :
-                                                 provider === "google" ? "Google" : 
-                                                 provider.charAt(0).toUpperCase() + provider.slice(1)}
+                                                {provider === "password"
+                                                    ? "Email/Password"
+                                                    : provider === "github"
+                                                      ? "GitHub"
+                                                      : provider === "google"
+                                                        ? "Google"
+                                                        : provider.charAt(0).toUpperCase() + provider.slice(1)}
                                             </span>
                                         ))}
                                     </div>

@@ -9,8 +9,8 @@ import { ClientHintCheck } from "~/components/ClientHintCheck";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
 import { Loader } from "~/components/Loader";
 import { NotFound } from "~/components/NotFound";
-import { ThemeToggle } from "~/components/ThemeToggle";
 import { ThemeScript } from "~/components/ThemeScript";
+import { ThemeToggle } from "~/components/ThemeToggle";
 import { Toast } from "~/components/ui/Toast";
 import { ThemeProvider } from "~/contexts/ThemeContext";
 import appCss from "~/styles/app.css?url";
@@ -89,7 +89,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         }
         return "system";
     });
-    
+
     const [actualTheme, setActualTheme] = React.useState<"light" | "dark">(() => {
         if (typeof window !== "undefined" && (window as any).__actualTheme) {
             return (window as any).__actualTheme;
@@ -103,7 +103,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             .split(";")
             .find((c) => c.trim().startsWith("theme="))
             ?.split("=")[1];
-        
+
         const preference = (themeCookie as "light" | "dark" | "system") || "system";
         setUserPreference(preference);
 

@@ -101,22 +101,22 @@
 ## Core Application Features
 
 ### User Dashboard
-- [ ] Create authenticated dashboard layout
-- [ ] Build user profile page
-- [ ] Add account settings management
-- [ ] Create billing management interface
-- [ ] Build notification center
-- [ ] Add activity feed/timeline
-- [ ] Create user preferences panel
+- [x] Create authenticated dashboard layout
+- [x] Build user profile page
+- [x] Add account settings management
+- [x] Create billing management interface
+- [x] Build notification center
+- [x] Add activity feed/timeline
+- [x] Create user preferences panel
 
 ### Landing Pages
-- [ ] Build marketing homepage
-- [ ] Create feature showcase sections
-- [ ] Add pricing page with plan comparison
-- [ ] Build about/contact pages
-- [ ] Create legal pages (Terms, Privacy Policy)
-- [ ] Add testimonials/social proof sections
-- [ ] Build FAQ section
+- [x] Build marketing homepage
+- [x] Create feature showcase sections
+- [x] Add pricing page with plan comparison
+- [x] Build about/contact pages
+- [x] Create legal pages (Terms, Privacy Policy)
+- [x] Add testimonials/social proof sections
+- [x] Build FAQ section
 
 ### Enhance existing trello style app
 
