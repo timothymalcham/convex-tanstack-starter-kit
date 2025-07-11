@@ -120,6 +120,78 @@
 
 ### Enhance existing trello style app
 
+#### Schema & Data Migration
+- [ ] Migrate board system from string IDs to Convex native ID system (currently uses string IDs instead of proper references)
+- [ ] Add user ownership and permissions to boards (currently no user association)
+- [ ] Create board templates and categories for better organization
+- [ ] Add board sharing and collaboration features with role-based access
+- [ ] Implement board archiving and soft deletion instead of hard deletion
+- [ ] Add created/modified timestamps and user tracking to all board entities
+- [ ] Create board activity/audit trail for tracking changes
+- [ ] Add board descriptions, tags, and metadata for better organization
+- [ ] Implement board favorites and starred boards for users
+- [ ] Add board visibility settings (private, team, organization, public)
+
+#### Enhanced Card Features
+- [ ] Add rich text content editing with markdown support to cards
+- [ ] Implement card attachments and file uploads integration
+- [ ] Add card due dates, priority levels, and status tracking
+- [ ] Create card comments and discussion threads
+- [ ] Add card checklists and subtasks functionality
+- [ ] Implement card labels/tags with color coding
+- [ ] Add card assignees and user mentions
+- [ ] Create card time tracking and effort estimation
+- [ ] Add card cover images and visual customization
+- [ ] Implement card templates for common use cases
+- [ ] Add card dependencies and blocking relationships
+- [ ] Create card voting and rating system
+
+#### Advanced Board Features
+- [ ] Add board-level filters and search functionality across cards
+- [ ] Implement board views (Kanban, List, Calendar, Timeline/Gantt)
+- [ ] Create custom fields for cards (text, number, date, dropdown, etc.)
+- [ ] Add board automation and rules (move cards on conditions)
+- [ ] Implement board analytics and reporting dashboards
+- [ ] Add board export functionality (PDF, Excel, JSON)
+- [ ] Create board backup and restore capabilities
+- [ ] Add board cloning and templating system
+- [ ] Implement board integrations with external tools
+- [ ] Add board keyboard shortcuts and power-user features
+
+#### Dashboard Integration
+- [ ] Create comprehensive project management dashboard view
+- [ ] Add board overview cards showing progress and stats
+- [ ] Implement recent boards and quick access features
+- [ ] Create board activity feed integration with main dashboard
+- [ ] Add board notifications integration with notification center
+- [ ] Create board-specific widgets for dashboard customization
+- [ ] Add board health monitoring and insights
+- [ ] Implement cross-board project portfolio views
+- [ ] Create board performance metrics and KPI tracking
+- [ ] Add board search functionality in main navigation
+
+#### User Experience Improvements
+- [ ] Redesign board interface with modern UI components from design system
+- [ ] Implement drag-and-drop improvements with better visual feedback
+- [ ] Add keyboard navigation and accessibility improvements
+- [ ] Create mobile-responsive board views and touch gestures
+- [ ] Add board themes and visual customization options
+- [ ] Implement infinite scroll and pagination for large boards
+- [ ] Add board shortcuts and quick actions
+- [ ] Create board onboarding and tutorial system
+- [ ] Add board collaboration indicators (who's viewing, editing)
+- [ ] Implement board focus mode and distraction-free views
+
+#### Real-time Collaboration
+- [ ] Add real-time multiplayer editing with live cursors
+- [ ] Implement real-time card updates and conflict resolution
+- [ ] Create real-time commenting and discussion features
+- [ ] Add user presence indicators on boards and cards
+- [ ] Implement real-time notifications for board activities
+- [ ] Create collaborative card editing with operational transforms
+- [ ] Add real-time board sharing and invitation system
+- [ ] Implement real-time board locks and editing permissions
+
 ## Billing & Payments
 
 ### Polar.sh Integration
