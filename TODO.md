@@ -121,16 +121,16 @@
 ### Enhance existing trello style app
 
 #### Schema & Data Migration
-- [ ] Migrate board system from string IDs to Convex native ID system (currently uses string IDs instead of proper references)
-- [ ] Add user ownership and permissions to boards (currently no user association)
-- [ ] Create board templates and categories for better organization
-- [ ] Add board sharing and collaboration features with role-based access
-- [ ] Implement board archiving and soft deletion instead of hard deletion
-- [ ] Add created/modified timestamps and user tracking to all board entities
-- [ ] Create board activity/audit trail for tracking changes
-- [ ] Add board descriptions, tags, and metadata for better organization
-- [ ] Implement board favorites and starred boards for users
-- [ ] Add board visibility settings (private, team, organization, public)
+- [x] ~~Migrate board system from string IDs to Convex native ID system~~ (Using new system from start)
+- [x] Add user ownership and permissions to boards with role-based access
+- [x] Create board templates and categories for better organization
+- [x] Add board sharing and collaboration features with role-based access
+- [x] Implement board archiving and soft deletion instead of hard deletion
+- [x] Add created/modified timestamps and user tracking to all board entities
+- [x] Create board activity/audit trail for tracking changes
+- [x] Add board descriptions, tags, and metadata for better organization
+- [x] Implement board favorites and starred boards for users
+- [x] Add board visibility settings (private, team, organization, public)
 
 #### Enhanced Card Features
 - [ ] Add rich text content editing with markdown support to cards

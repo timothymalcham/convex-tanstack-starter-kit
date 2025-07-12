@@ -19,6 +19,8 @@ import type * as adminOperations from "../adminOperations.js";
 import type * as auditLogs from "../auditLogs.js";
 import type * as auth from "../auth.js";
 import type * as board from "../board.js";
+import type * as boardTemplates from "../boardTemplates.js";
+import type * as boards from "../boards.js";
 import type * as crons from "../crons.js";
 import type * as dataExport from "../dataExport.js";
 import type * as files from "../files.js";
@@ -44,6 +46,8 @@ declare const fullApi: ApiFromModules<{
   auditLogs: typeof auditLogs;
   auth: typeof auth;
   board: typeof board;
+  boardTemplates: typeof boardTemplates;
+  boards: typeof boards;
   crons: typeof crons;
   dataExport: typeof dataExport;
   files: typeof files;

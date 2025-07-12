@@ -320,36 +320,191 @@ const schema = defineSchema({
     .index('by_expiresAt', ['expiresAt']),
 
   // ====================
-  // LEGACY BOARD SYSTEM (TO BE REMOVED)
+  // ENHANCED PROJECT MANAGEMENT SYSTEM
   // ====================
-  // Note: These tables will be removed as part of the migration to the new task system
   
+  // Enhanced boards with user ownership and collaboration
   boards: defineTable({
-    id: v.string(),
     name: v.string(),
+    description: v.optional(v.string()),
     color: v.string(),
-  }).index('id', ['id']),
+    createdBy: v.id("users"),
+    organizationId: v.optional(v.id("organizations")),
+    isArchived: v.optional(v.boolean()),
+    isTemplate: v.optional(v.boolean()),
+    templateCategory: v.optional(v.string()),
+    visibility: v.union(
+      v.literal("private"),
+      v.literal("team"),
+      v.literal("organization"),
+      v.literal("public")
+    ),
+    tags: v.optional(v.array(v.string())),
+    settings: v.optional(v.object({
+      allowComments: v.optional(v.boolean()),
+      allowAttachments: v.optional(v.boolean()),
+      cardAutoArchive: v.optional(v.boolean()),
+    })),
+    lastActivityAt: v.optional(v.number()),
+  })
+    .index('by_createdBy', ['createdBy'])
+    .index('by_organization', ['organizationId'])
+    .index('by_visibility', ['visibility'])
+    .index('by_isArchived', ['isArchived'])
+    .index('by_isTemplate', ['isTemplate'])
+    .index('by_templateCategory', ['templateCategory'])
+    .index('by_lastActivity', ['lastActivityAt']),
 
+  // Board members with roles and permissions
+  boardMembers: defineTable({
+    boardId: v.id("boards"),
+    userId: v.id("users"),
+    role: v.union(
+      v.literal("owner"),
+      v.literal("admin"),
+      v.literal("member"),
+      v.literal("viewer")
+    ),
+    permissions: v.optional(v.array(v.string())),
+    addedBy: v.id("users"),
+    addedAt: v.number(),
+  })
+    .index('by_board', ['boardId'])
+    .index('by_user', ['userId'])
+    .index('by_boardAndUser', ['boardId', 'userId'])
+    .index('by_role', ['role']),
+
+  // User's favorite/starred boards
+  boardFavorites: defineTable({
+    boardId: v.id("boards"),
+    userId: v.id("users"),
+  })
+    .index('by_user', ['userId'])
+    .index('by_board', ['boardId'])
+    .index('by_userAndBoard', ['userId', 'boardId']),
+
+  // Enhanced columns with better organization
   columns: defineTable({
-    id: v.string(),
-    boardId: v.string(),
+    boardId: v.id("boards"),
     name: v.string(),
+    description: v.optional(v.string()),
     order: v.number(),
+    color: v.optional(v.string()),
+    isArchived: v.optional(v.boolean()),
+    createdBy: v.id("users"),
+    wipLimit: v.optional(v.number()), // Work in Progress limit
+    settings: v.optional(v.object({
+      autoSort: v.optional(v.string()),
+      cardTemplate: v.optional(v.string()),
+    })),
   })
-    .index('id', ['id'])
-    .index('board', ['boardId']),
+    .index('by_board', ['boardId'])
+    .index('by_boardAndOrder', ['boardId', 'order'])
+    .index('by_createdBy', ['createdBy'])
+    .index('by_isArchived', ['isArchived']),
 
-  items: defineTable({
-    id: v.string(),
+  // Enhanced cards with rich features
+  cards: defineTable({
     title: v.string(),
-    content: v.optional(v.string()),
+    description: v.optional(v.string()),
+    content: v.optional(v.string()), // Rich text content
+    boardId: v.id("boards"),
+    columnId: v.id("columns"),
     order: v.number(),
-    columnId: v.string(),
-    boardId: v.string(),
+    createdBy: v.id("users"),
+    assignedTo: v.optional(v.array(v.id("users"))),
+    dueDate: v.optional(v.number()),
+    priority: v.optional(v.union(
+      v.literal("low"),
+      v.literal("medium"),
+      v.literal("high"),
+      v.literal("urgent")
+    )),
+    status: v.optional(v.string()),
+    labels: v.optional(v.array(v.string())),
+    estimatedHours: v.optional(v.number()),
+    actualHours: v.optional(v.number()),
+    isArchived: v.optional(v.boolean()),
+    coverImage: v.optional(v.string()),
+    customFields: v.optional(v.object({})), // For custom field values
+    completedAt: v.optional(v.number()),
   })
-    .index('id', ['id'])
-    .index('column', ['columnId'])
-    .index('board', ['boardId']),
+    .index('by_board', ['boardId'])
+    .index('by_column', ['columnId'])
+    .index('by_columnAndOrder', ['columnId', 'order'])
+    .index('by_createdBy', ['createdBy'])
+    .index('by_assignedTo', ['assignedTo'])
+    .index('by_dueDate', ['dueDate'])
+    .index('by_priority', ['priority'])
+    .index('by_status', ['status'])
+    .index('by_isArchived', ['isArchived']),
+
+  // Card comments for discussions
+  cardComments: defineTable({
+    cardId: v.id("cards"),
+    authorId: v.id("users"),
+    content: v.string(),
+    mentions: v.optional(v.array(v.id("users"))),
+    isEdited: v.optional(v.boolean()),
+    editedAt: v.optional(v.number()),
+  })
+    .index('by_card', ['cardId'])
+    .index('by_author', ['authorId'])
+    .index('by_creationTime', ['_creationTime']),
+
+  // Card attachments
+  cardAttachments: defineTable({
+    cardId: v.id("cards"),
+    fileName: v.string(),
+    fileSize: v.number(),
+    fileType: v.string(),
+    storageId: v.id("_storage"),
+    uploadedBy: v.id("users"),
+  })
+    .index('by_card', ['cardId'])
+    .index('by_uploadedBy', ['uploadedBy']),
+
+  // Card checklists and subtasks
+  cardChecklists: defineTable({
+    cardId: v.id("cards"),
+    title: v.string(),
+    items: v.array(v.object({
+      id: v.string(),
+      text: v.string(),
+      completed: v.boolean(),
+      assignedTo: v.optional(v.id("users")),
+      dueDate: v.optional(v.number()),
+    })),
+    createdBy: v.id("users"),
+  })
+    .index('by_card', ['cardId'])
+    .index('by_createdBy', ['createdBy']),
+
+  // Board activity/audit trail
+  boardActivities: defineTable({
+    boardId: v.id("boards"),
+    userId: v.id("users"),
+    action: v.string(), // "created_board", "added_card", "moved_card", etc.
+    entityType: v.union(
+      v.literal("board"),
+      v.literal("column"),
+      v.literal("card"),
+      v.literal("comment"),
+      v.literal("member")
+    ),
+    entityId: v.optional(v.string()),
+    details: v.optional(v.object({
+      from: v.optional(v.string()),
+      to: v.optional(v.string()),
+      title: v.optional(v.string()),
+    })),
+    metadata: v.optional(v.object({})),
+  })
+    .index('by_board', ['boardId'])
+    .index('by_user', ['userId'])
+    .index('by_boardAndTime', ['boardId', '_creationTime'])
+    .index('by_entityType', ['entityType']),
+
 })
 
 export default schema
@@ -383,42 +538,126 @@ export type ApiKey = Infer<typeof schema.tables.apiKeys.validator>
 // File types
 export type File = Infer<typeof schema.tables.files.validator>
 
-// Legacy types (to be removed)
+// Enhanced Board System types
 export type Board = Infer<typeof schema.tables.boards.validator>
+export type BoardMember = Infer<typeof schema.tables.boardMembers.validator>
+export type BoardFavorite = Infer<typeof schema.tables.boardFavorites.validator>
 export type Column = Infer<typeof schema.tables.columns.validator>
-export type Item = Infer<typeof schema.tables.items.validator>
+export type Card = Infer<typeof schema.tables.cards.validator>
+export type CardComment = Infer<typeof schema.tables.cardComments.validator>
+export type CardAttachment = Infer<typeof schema.tables.cardAttachments.validator>
+export type CardChecklist = Infer<typeof schema.tables.cardChecklists.validator>
+export type BoardActivity = Infer<typeof schema.tables.boardActivities.validator>
+
 
 // ====================
 // VALIDATION SCHEMAS
 // ====================
 
-// Legacy board schemas (to be removed)
-const board = schema.tables.boards.validator
-const column = schema.tables.columns.validator
-const item = schema.tables.items.validator
+// Enhanced Board System validation schemas
+export const createBoardSchema = v.object({
+  name: v.string(),
+  description: v.optional(v.string()),
+  color: v.string(),
+  organizationId: v.optional(v.id("organizations")),
+  visibility: v.union(
+    v.literal("private"),
+    v.literal("team"),
+    v.literal("organization"),
+    v.literal("public")
+  ),
+  tags: v.optional(v.array(v.string())),
+  isTemplate: v.optional(v.boolean()),
+  templateCategory: v.optional(v.string()),
+})
 
 export const updateBoardSchema = v.object({
-  id: board.fields.id,
-  name: v.optional(board.fields.name),
+  name: v.optional(v.string()),
+  description: v.optional(v.string()),
   color: v.optional(v.string()),
+  visibility: v.optional(v.union(
+    v.literal("private"),
+    v.literal("team"),
+    v.literal("organization"),
+    v.literal("public")
+  )),
+  tags: v.optional(v.array(v.string())),
+  settings: v.optional(v.object({
+    allowComments: v.optional(v.boolean()),
+    allowAttachments: v.optional(v.boolean()),
+    cardAutoArchive: v.optional(v.boolean()),
+  })),
+})
+
+export const createColumnSchema = v.object({
+  boardId: v.id("boards"),
+  name: v.string(),
+  description: v.optional(v.string()),
+  color: v.optional(v.string()),
+  wipLimit: v.optional(v.number()),
 })
 
 export const updateColumnSchema = v.object({
-  id: column.fields.id,
-  boardId: column.fields.boardId,
-  name: v.optional(column.fields.name),
-  order: v.optional(column.fields.order),
+  name: v.optional(v.string()),
+  description: v.optional(v.string()),
+  order: v.optional(v.number()),
+  color: v.optional(v.string()),
+  wipLimit: v.optional(v.number()),
 })
 
-export const deleteItemSchema = v.object({
-  id: item.fields.id,
-  boardId: item.fields.boardId,
+export const createCardSchema = v.object({
+  title: v.string(),
+  description: v.optional(v.string()),
+  content: v.optional(v.string()),
+  boardId: v.id("boards"),
+  columnId: v.id("columns"),
+  assignedTo: v.optional(v.array(v.id("users"))),
+  dueDate: v.optional(v.number()),
+  priority: v.optional(v.union(
+    v.literal("low"),
+    v.literal("medium"),
+    v.literal("high"),
+    v.literal("urgent")
+  )),
+  labels: v.optional(v.array(v.string())),
+  estimatedHours: v.optional(v.number()),
 })
 
-const { order, id, ...rest } = column.fields
-export const newColumnsSchema = v.object(rest)
-
-export const deleteColumnSchema = v.object({
-  boardId: column.fields.boardId,
-  id: column.fields.id,
+export const updateCardSchema = v.object({
+  title: v.optional(v.string()),
+  description: v.optional(v.string()),
+  content: v.optional(v.string()),
+  columnId: v.optional(v.id("columns")),
+  order: v.optional(v.number()),
+  assignedTo: v.optional(v.array(v.id("users"))),
+  dueDate: v.optional(v.number()),
+  priority: v.optional(v.union(
+    v.literal("low"),
+    v.literal("medium"),
+    v.literal("high"),
+    v.literal("urgent")
+  )),
+  status: v.optional(v.string()),
+  labels: v.optional(v.array(v.string())),
+  estimatedHours: v.optional(v.number()),
+  actualHours: v.optional(v.number()),
+  completedAt: v.optional(v.number()),
 })
+
+export const addBoardMemberSchema = v.object({
+  boardId: v.id("boards"),
+  userId: v.id("users"),
+  role: v.union(
+    v.literal("admin"),
+    v.literal("member"),
+    v.literal("viewer")
+  ),
+  permissions: v.optional(v.array(v.string())),
+})
+
+export const createCardCommentSchema = v.object({
+  cardId: v.id("cards"),
+  content: v.string(),
+  mentions: v.optional(v.array(v.id("users"))),
+})
+
