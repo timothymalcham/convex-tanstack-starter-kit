@@ -4,6 +4,8 @@ import { deleteItemSchema } from "../db/schema";
 import { Icon } from "../icons/icons";
 import { useDeleteCardMutation, useUpdateCardMutation } from "../queries";
 import { CONTENT_TYPES } from "../types";
+import { RichTextViewer } from "./ui/RichTextEditor";
+import { EditCardModal } from "./EditCardModal";
 
 interface CardProps {
     title: string;
@@ -19,6 +21,7 @@ interface CardProps {
 export const Card = forwardRef<HTMLLIElement, CardProps>(
     ({ title, content, id, columnId, boardId, order, nextOrder, previousOrder }, ref) => {
         const [acceptDrop, setAcceptDrop] = useState<"none" | "top" | "bottom">("none");
+        const [showEditModal, setShowEditModal] = useState(false);
 
         const deleteCard = useDeleteCardMutation();
         const moveCard = useUpdateCardMutation();
@@ -74,37 +77,71 @@ export const Card = forwardRef<HTMLLIElement, CardProps>(
             >
                 <div
                     draggable
-                    className="bg-white shadow-sm shadow-slate-300 border-slate-300 text-sm rounded-lg w-full py-1 px-2 relative"
+                    className="bg-white shadow-sm shadow-slate-300 border-slate-300 text-sm rounded-lg w-full py-1 px-2 relative group"
                     onDragStart={(event) => {
                         event.dataTransfer.effectAllowed = "move";
                         event.dataTransfer.setData(CONTENT_TYPES.card, JSON.stringify({ id, title }));
                         event.stopPropagation();
                     }}
                 >
-                    <h3>{title}</h3>
-                    <div className="mt-2">{content || <>&nbsp;</>}</div>
-                    <form
-                        onSubmit={(event) => {
-                            event.preventDefault();
+                    <h3 className="font-medium">{title}</h3>
+                    
+                    {/* Rich text content display */}
+                    <div className="mt-2 min-h-[20px]">
+                        {content ? (
+                            <RichTextViewer content={content} className="text-sm text-gray-600" />
+                        ) : (
+                            <div className="text-gray-400 text-xs italic">No content</div>
+                        )}
+                    </div>
 
-                            deleteCard.mutate(
-                                deleteItemSchema.parse({
-                                    id,
-                                    boardId,
-                                }),
-                            );
-                        }}
-                    >
+                    {/* Action buttons - shown on hover */}
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
                         <button
-                            aria-label="Delete card"
-                            className="absolute top-4 right-4 hover:text-red-500 flex gap-2 items-center"
-                            type="submit"
+                            aria-label="Edit card"
+                            className="p-1 hover:text-blue-500 rounded text-xs font-bold"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowEditModal(true);
+                            }}
+                            type="button"
                         >
-                            <div className="opacity-50 text-xs">{order}</div>
-                            <Icon name="trash" />
+                            ✏️
                         </button>
-                    </form>
+                        <form
+                            onSubmit={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                                deleteCard.mutate(
+                                    deleteItemSchema.parse({
+                                        id,
+                                        boardId,
+                                    }),
+                                );
+                            }}
+                        >
+                            <button
+                                aria-label="Delete card"
+                                className="p-1 hover:text-red-500 rounded"
+                                type="submit"
+                            >
+                                <Icon name="trash" />
+                            </button>
+                        </form>
+                    </div>
+
+                    {/* Order indicator */}
+                    <div className="absolute bottom-1 right-1 opacity-30 text-xs">{order}</div>
                 </div>
+
+                {/* Edit Modal */}
+                <EditCardModal
+                    card={{ id, title, content: content || "", order, columnId }}
+                    isOpen={showEditModal}
+                    onClose={() => setShowEditModal(false)}
+                    boardId={boardId}
+                />
             </li>
         );
     },

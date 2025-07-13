@@ -133,7 +133,7 @@
 - [x] Add board visibility settings (private, team, organization, public)
 
 #### Enhanced Card Features
-- [ ] Add rich text content editing with markdown support to cards
+- [x] Add rich text content editing with markdown support to cards
 - [ ] Implement card attachments and file uploads integration
 - [ ] Add card due dates, priority levels, and status tracking
 - [ ] Create card comments and discussion threads

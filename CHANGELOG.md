@@ -3,6 +3,16 @@
 ## [Unreleased]
 
 ### Added
+- **Rich Text Card Content Editing with Tiptap**
+  - Integrated Tiptap rich text editor with StarterKit extensions
+  - Added comprehensive text formatting (bold, italic, strikethrough, headings, lists, blockquotes, code)
+  - Created RichTextEditor component with toolbar for formatting controls
+  - Built RichTextViewer component for read-only rich text display
+  - Enhanced Card component with rich text content display and edit modal integration
+  - Updated NewCard component with expandable rich text editor
+  - Added EditCardModal for full card editing with title and rich content support
+  - Improved card UI with hover actions (edit/delete) and visual content indicators
+
 - **Enhanced Board System - Complete Rebuild with Modern Architecture**
   - Built comprehensive board template system with 13 pre-built templates across 6 categories
   - Created Project Management templates: Agile Sprint Board, Kanban Board, Product Roadmap
