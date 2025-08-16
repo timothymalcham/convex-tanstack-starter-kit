@@ -3,16 +3,21 @@
 import * as React from 'react'
 import {
     Outlet,
-    createRootRoute,
+    createRootRouteWithContext,
     HeadContent,
     Scripts,
+    useRouterState,
 } from '@tanstack/react-router'
+import type { QueryClient } from '@tanstack/react-query'
 import { DefaultCatchBoundary } from '@/components/DefaultCatchBoundary'
 import { NotFound } from '@/components/NotFound'
+import { Loader } from '@/components/Loader'
 
 import appCss from '../styles/app.css?url'
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{
+    queryClient: QueryClient
+}>()({
     head: () => ({
         meta: [
             {
@@ -56,11 +61,27 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
             <body>
                 <div className="root h-screen flex flex-col min-h-0">
                     <div className="border-b border-slate-800 flex items-center justify-between py-4 px-8 box-border">
-                        {children}
+                        <LoadingIndicator />
+                        <div className="flex-grow min-h-0 h-full flex flex-col">
+                            {children}
+                        </div>
                     </div>
                 </div>
                 <Scripts />
             </body>
         </html>
+    )
+}
+
+function LoadingIndicator() {
+    const isLoading = useRouterState({ select: (s) => s.isLoading })
+    return (
+        <div
+            className={`h-12 transition-all duration-300 ${
+                isLoading ? `opacity-100 delay-300` : `opacity-0 delay-0`
+            }`}
+        >
+            <Loader />
+        </div>
     )
 }
