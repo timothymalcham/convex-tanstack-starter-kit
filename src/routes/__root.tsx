@@ -1,12 +1,14 @@
 // src/routes/__root.tsx
 /// <reference types="vite/client" />
-import type { ReactNode } from 'react'
+import * as React from 'react'
 import {
     Outlet,
     createRootRoute,
     HeadContent,
     Scripts,
 } from '@tanstack/react-router'
+import { DefaultCatchBoundary } from '@/components/DefaultCatchBoundary'
+import { NotFound } from '@/components/NotFound'
 
 import appCss from '../styles/app.css?url'
 
@@ -26,6 +28,14 @@ export const Route = createRootRoute({
         ],
         links: [{ rel: 'stylesheet', href: appCss }],
     }),
+    errorComponent: (props) => {
+        return (
+            <RootDocument>
+                <DefaultCatchBoundary {...props} />
+            </RootDocument>
+        )
+    },
+    notFoundComponent: () => <NotFound />,
     component: RootComponent,
 })
 
@@ -37,15 +47,17 @@ function RootComponent() {
     )
 }
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html>
             <head>
                 <HeadContent />
             </head>
             <body>
-                <div className="root">
-                    {children}
+                <div className="root h-screen flex flex-col min-h-0">
+                    <div className="border-b border-slate-800 flex items-center justify-between py-4 px-8 box-border">
+                        {children}
+                    </div>
                 </div>
                 <Scripts />
             </body>
