@@ -14,7 +14,6 @@ export const create = mutation({
         title: v.string(),
     },
     handler: async (ctx, args) => {
-        console.log("This TypeScript function is running on the server, it creates a todo item.");
         await ctx.db.insert("todos", {
             title: args.title,
         })
