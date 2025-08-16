@@ -5,7 +5,7 @@ import viteReact from '@vitejs/plugin-react'
 
 export default defineConfig({
     server: {
-        port: 3000,
+        port: 3003,
     },
     plugins: [
         tsConfigPaths(),

@@ -4,11 +4,12 @@ import {
     QueryClient,
     notifyManager,
 } from '@tanstack/react-query'
-import { routerWithQueryClient } from "@tanstack/react-router-with-query";
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import { ConvexQueryClient } from "@convex-dev/react-query";
 import { ConvexProvider } from "convex/react";
 import { routeTree } from "./routeTree.gen";
+import { DefaultCatchBoundary } from './components/DefaultCatchBoundary'
+import {NotFound} from "./components/NotFound";
 
 export function createRouter() {
     if (typeof document !== 'undefined') {
