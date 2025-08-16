@@ -12,6 +12,9 @@ import type { QueryClient } from '@tanstack/react-query'
 import { DefaultCatchBoundary } from '@/components/DefaultCatchBoundary'
 import { NotFound } from '@/components/NotFound'
 import { Loader } from '@/components/Loader'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools/production'
+import { Toaster } from "@/components/ui/sonner"
 
 import appCss from '../styles/app.css?url'
 
@@ -64,9 +67,12 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
                         <LoadingIndicator />
                         <div className="flex-grow min-h-0 h-full flex flex-col">
                             {children}
+                            <Toaster />
                         </div>
                     </div>
                 </div>
+                <ReactQueryDevtools />
+                <TanStackRouterDevtools position="bottom-right" />
                 <Scripts />
             </body>
         </html>
