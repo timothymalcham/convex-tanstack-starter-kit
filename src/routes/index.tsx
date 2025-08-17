@@ -14,8 +14,8 @@ export const Route = createFileRoute('/')({
 
 function Home() {
     // Convex Queries & Mutations
-    const todosQuery = useSuspenseQuery(convexQuery(api.todo.getAll, {}))
-    const createTodoItem = useMutation(api.todo.create);
+    const todosQuery = useSuspenseQuery(convexQuery(api.todos.getAll, {}))
+    const createTodoItem = useMutation(api.todos.create);
 
     // Tanstack Form
     const form = useForm({
