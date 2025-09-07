@@ -1,0 +1,47 @@
+{
+  "/Users/timothymalcham/dev/convex-tanstack-starter-kit/src/styles/app.css": {
+    "file": "assets/app-BitDazbv.css",
+    "src": "/Users/timothymalcham/dev/convex-tanstack-starter-kit/src/styles/app.css"
+  },
+  "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/LNWAZHJI.js": {
+    "file": "assets/LNWAZHJI-D6fI8uuq.js",
+    "name": "LNWAZHJI",
+    "src": "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/LNWAZHJI.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx"
+    ]
+  },
+  "src/client.tsx": {
+    "file": "assets/main-DZ0BUplR.js",
+    "name": "main",
+    "src": "src/client.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/LNWAZHJI.js",
+      "src/routes/signin.tsx?tsr-split=component",
+      "src/routes/index.tsx?tsr-split=component"
+    ],
+    "assets": [
+      "assets/app-BitDazbv.css"
+    ]
+  },
+  "src/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-gVNp4IGg.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx"
+    ]
+  },
+  "src/routes/signin.tsx?tsr-split=component": {
+    "file": "assets/signin-XPchtkdS.js",
+    "name": "signin",
+    "src": "src/routes/signin.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx"
+    ]
+  }
+}
