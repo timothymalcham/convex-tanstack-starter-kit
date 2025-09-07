@@ -15,7 +15,7 @@ import { Route as SigninRouteImport } from './routes/signin'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as DashboardRouteImport } from './routes/_dashboard'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PublicLoginRouteImport } from './routes/_public/login'
+import { Route as PublicSignInRouteImport } from './routes/_public/sign-in'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -38,9 +38,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PublicLoginRoute = PublicLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const PublicSignInRoute = PublicSignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
   getParentRoute: () => PublicRoute,
 } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
@@ -52,12 +52,12 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
-  '/login': typeof PublicLoginRoute
+  '/sign-in': typeof PublicSignInRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
-  '/login': typeof PublicLoginRoute
+  '/sign-in': typeof PublicSignInRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -65,20 +65,20 @@ export interface FileRoutesById {
   '/_dashboard': typeof DashboardRoute
   '/_public': typeof PublicRouteWithChildren
   '/signin': typeof SigninRoute
-  '/_public/login': typeof PublicLoginRoute
+  '/_public/sign-in': typeof PublicSignInRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/signin' | '/login'
+  fullPaths: '/' | '/signin' | '/sign-in'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signin' | '/login'
+  to: '/' | '/signin' | '/sign-in'
   id:
     | '__root__'
     | '/'
     | '/_dashboard'
     | '/_public'
     | '/signin'
-    | '/_public/login'
+    | '/_public/sign-in'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -139,11 +139,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_public/login': {
-      id: '/_public/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof PublicLoginRouteImport
+    '/_public/sign-in': {
+      id: '/_public/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof PublicSignInRouteImport
       parentRoute: typeof PublicRoute
     }
   }
@@ -161,11 +161,11 @@ declare module '@tanstack/react-start/server' {
 }
 
 interface PublicRouteChildren {
-  PublicLoginRoute: typeof PublicLoginRoute
+  PublicSignInRoute: typeof PublicSignInRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
-  PublicLoginRoute: PublicLoginRoute,
+  PublicSignInRoute: PublicSignInRoute,
 }
 
 const PublicRouteWithChildren =

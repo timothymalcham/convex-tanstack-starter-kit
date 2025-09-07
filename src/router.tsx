@@ -8,8 +8,8 @@ import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query
 import { ConvexQueryClient } from "@convex-dev/react-query";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { routeTree } from "./routeTree.gen";
-import { DefaultCatchBoundary } from './components/DefaultCatchBoundary'
-import {NotFound} from "./components/NotFound";
+import { DefaultCatchBoundary } from './components/default-catch-boundary'
+import {NotFound} from "./components/not-found";
 import { toast } from 'sonner'
 
 export function createRouter() {

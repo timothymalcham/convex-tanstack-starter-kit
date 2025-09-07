@@ -4,7 +4,7 @@ export const Route = createFileRoute("/_dashboard")({
     beforeLoad: ({ context }) => {
         if (!context.userId) {
             throw redirect({
-                to: "/login",
+                to: "/sign-in",
             })
         }
     },

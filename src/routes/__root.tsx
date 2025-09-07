@@ -13,9 +13,9 @@ import {
     createServerFn,
 } from '@tanstack/react-start'
 import type { QueryClient } from '@tanstack/react-query'
-import { DefaultCatchBoundary } from '@/components/DefaultCatchBoundary'
-import { NotFound } from '@/components/NotFound'
-import { Loader } from '@/components/Loader'
+import { DefaultCatchBoundary } from '@/components/default-catch-boundary'
+import { NotFound } from '@/components/not-found'
+import { Loader } from '@/components/loader'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools/production'
 import { Toaster } from "@/components/ui/sonner"
