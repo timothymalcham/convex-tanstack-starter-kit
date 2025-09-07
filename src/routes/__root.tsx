@@ -115,9 +115,9 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
                         <LoadingIndicator />
                         <div className="flex-grow min-h-0 h-full flex flex-col">
                             {children}
-                            <Toaster />
                         </div>
                     </div>
+                            <Toaster />
                 </div>
                 <ReactQueryDevtools />
                 <TanStackRouterDevtools position="bottom-right" />
