@@ -12,7 +12,10 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SigninRouteImport } from './routes/signin'
+import { Route as PublicRouteImport } from './routes/_public'
+import { Route as DashboardRouteImport } from './routes/_dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PublicLoginRouteImport } from './routes/_public/login'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -22,10 +25,23 @@ const SigninRoute = SigninRouteImport.update({
   path: '/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PublicRoute = PublicRouteImport.update({
+  id: '/_public',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/_dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PublicLoginRoute = PublicLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => PublicRoute,
 } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
@@ -36,26 +52,39 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
+  '/login': typeof PublicLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
+  '/login': typeof PublicLoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_dashboard': typeof DashboardRoute
+  '/_public': typeof PublicRouteWithChildren
   '/signin': typeof SigninRoute
+  '/_public/login': typeof PublicLoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/signin'
+  fullPaths: '/' | '/signin' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signin'
-  id: '__root__' | '/' | '/signin'
+  to: '/' | '/signin' | '/login'
+  id:
+    | '__root__'
+    | '/'
+    | '/_dashboard'
+    | '/_public'
+    | '/signin'
+    | '/_public/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  PublicRoute: typeof PublicRouteWithChildren
   SigninRoute: typeof SigninRoute
 }
 export interface FileServerRoutesByFullPath {
@@ -89,12 +118,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SigninRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PublicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_dashboard': {
+      id: '/_dashboard'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_public/login': {
+      id: '/_public/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof PublicLoginRouteImport
+      parentRoute: typeof PublicRoute
     }
   }
 }
@@ -110,8 +160,21 @@ declare module '@tanstack/react-start/server' {
   }
 }
 
+interface PublicRouteChildren {
+  PublicLoginRoute: typeof PublicLoginRoute
+}
+
+const PublicRouteChildren: PublicRouteChildren = {
+  PublicLoginRoute: PublicLoginRoute,
+}
+
+const PublicRouteWithChildren =
+  PublicRoute._addFileChildren(PublicRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  PublicRoute: PublicRouteWithChildren,
   SigninRoute: SigninRoute,
 }
 export const routeTree = rootRouteImport
