@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
     server: {
-        port: 3003,
+        port: 5173,
     },
     plugins: [
         tsConfigPaths({
