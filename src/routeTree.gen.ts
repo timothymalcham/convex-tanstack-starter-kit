@@ -15,6 +15,8 @@ import { Route as SigninRouteImport } from './routes/signin'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as DashboardRouteImport } from './routes/_dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PublicVerifyEmailRouteImport } from './routes/_public/verify-email'
+import { Route as PublicSignUpRouteImport } from './routes/_public/sign-up'
 import { Route as PublicSignInRouteImport } from './routes/_public/sign-in'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
@@ -38,6 +40,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PublicVerifyEmailRoute = PublicVerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicSignUpRoute = PublicSignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => PublicRoute,
+} as any)
 const PublicSignInRoute = PublicSignInRouteImport.update({
   id: '/sign-in',
   path: '/sign-in',
@@ -53,11 +65,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
   '/sign-in': typeof PublicSignInRoute
+  '/sign-up': typeof PublicSignUpRoute
+  '/verify-email': typeof PublicVerifyEmailRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
   '/sign-in': typeof PublicSignInRoute
+  '/sign-up': typeof PublicSignUpRoute
+  '/verify-email': typeof PublicVerifyEmailRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -66,12 +82,14 @@ export interface FileRoutesById {
   '/_public': typeof PublicRouteWithChildren
   '/signin': typeof SigninRoute
   '/_public/sign-in': typeof PublicSignInRoute
+  '/_public/sign-up': typeof PublicSignUpRoute
+  '/_public/verify-email': typeof PublicVerifyEmailRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/signin' | '/sign-in'
+  fullPaths: '/' | '/signin' | '/sign-in' | '/sign-up' | '/verify-email'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signin' | '/sign-in'
+  to: '/' | '/signin' | '/sign-in' | '/sign-up' | '/verify-email'
   id:
     | '__root__'
     | '/'
@@ -79,6 +97,8 @@ export interface FileRouteTypes {
     | '/_public'
     | '/signin'
     | '/_public/sign-in'
+    | '/_public/sign-up'
+    | '/_public/verify-email'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -139,6 +159,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_public/verify-email': {
+      id: '/_public/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof PublicVerifyEmailRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/sign-up': {
+      id: '/_public/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof PublicSignUpRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/sign-in': {
       id: '/_public/sign-in'
       path: '/sign-in'
@@ -162,10 +196,14 @@ declare module '@tanstack/react-start/server' {
 
 interface PublicRouteChildren {
   PublicSignInRoute: typeof PublicSignInRoute
+  PublicSignUpRoute: typeof PublicSignUpRoute
+  PublicVerifyEmailRoute: typeof PublicVerifyEmailRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
   PublicSignInRoute: PublicSignInRoute,
+  PublicSignUpRoute: PublicSignUpRoute,
+  PublicVerifyEmailRoute: PublicVerifyEmailRoute,
 }
 
 const PublicRouteWithChildren =

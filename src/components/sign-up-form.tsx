@@ -7,11 +7,24 @@ import {AnyFieldApi, useForm} from '@tanstack/react-form'
 import { authClient } from "@/lib/auth-client";
 import {toast } from "sonner"
 import { z } from 'zod'
-import {Link} from "@tanstack/react-router";
+import {Link, useNavigate} from "@tanstack/react-router";
 
 const schema = z.object({
+    name: z.string(),
     email: z.email('Invalid e-mail address'),
-    password: z.string(),
+    password: z.string().min(8, "Password must be at least 8 characters").regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+        "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+    ),
+    confirmPassword: z.string(),
+}).superRefine(({ password, confirmPassword }, ctx) => {
+    if (confirmPassword !== password) {
+        ctx.addIssue({
+            code: 'custom',
+            message: 'Passwords do not match',
+            path: ['confirmPassword'],
+        })
+    }
 })
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
@@ -25,29 +38,47 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
     )
 }
 
-export function SignInForm({
+export function SignUpForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+    const navigate = useNavigate()
     const form = useForm({
         defaultValues: {
+            name: "",
             email: '',
             password: '',
+            confirmPassword: '',
         },
         validators: {
             onSubmit: schema
         },
         onSubmit: async ({ value }) => {
-            await authClient.signIn.email(
+            await authClient.signUp.email(
                 {
+                    name: value.name,
                     email: value.email,
                     password: value.password,
-                    callbackURL: "/"
                 },
                 {
                     onError: (ctx) => {
                         toast.error(ctx.error.message)
                     },
+                    onSuccess: async () => {
+                        const { error } = await authClient.emailOtp.sendVerificationOtp({
+                            email: value.email,
+                            type: "sign-in",
+                        });
+
+                        if (!error) {
+                            void navigate({
+                                to: "/verify-email",
+                                search: { email: value.email }
+                            })
+                        } else {
+                            toast.error(error.message)
+                        }
+                    }
                 }
             );
         },
@@ -70,12 +101,32 @@ export function SignInForm({
                   Login to your Acme Inc account
                 </p>
               </div>
+                <div className="grid gap-3">
+                    <form.Field
+                        name="name"
+                        children={(field) => (
+                            <>
+                                <Label htmlFor={field.name}>Email</Label>
+                                <Input
+                                    id={field.name}
+                                    name={field.name}
+                                    value={field.state.value}
+                                    placeholder="Jane Smith"
+                                    onBlur={field.handleBlur}
+                                    onChange={(e) => field.handleChange(e.target.value)}
+                                    required
+                                />
+                                <FieldInfo field={field} />
+                            </>
+                        )}
+                    />
+                </div>
               <div className="grid gap-3">
                   <form.Field
                       name="email"
                       children={(field) => (
                           <>
-                              <Label htmlFor={field.name}>Email</Label>
+                              <Label htmlFor="email">Email</Label>
                               <Input
                                   id={field.name}
                                   name={field.name}
@@ -91,6 +142,7 @@ export function SignInForm({
                   />
               </div>
               <div className="grid gap-3">
+                <Input id="password" type="password" required />
                   <form.Field
                       name="password"
                       children={(field) => (
@@ -106,7 +158,7 @@ export function SignInForm({
                               </div>
                               <Input
                                   id={field.name}
-                                  type="password"
+                                  type={field.name}
                                   name={field.name}
                                   value={field.state.value}
                                   onBlur={field.handleBlur}
@@ -118,6 +170,26 @@ export function SignInForm({
                       )}
                   />
               </div>
+                <div className="grid gap-3">
+                    <form.Field
+                        name="confirmPassword"
+                        children={(field) => (
+                            <>
+                                    <Label htmlFor={field.name}>Confirm password</Label>
+                                <Input
+                                    id={field.name}
+                                    type="password"
+                                    name={field.name}
+                                    value={field.state.value}
+                                    onBlur={field.handleBlur}
+                                    onChange={(e) => field.handleChange(e.target.value)}
+                                    required
+                                />
+                                <FieldInfo field={field} />
+                            </>
+                        )}
+                    />
+                </div>
                 <form.Subscribe
                     selector={(state) => [state.canSubmit, state.isSubmitting]}
                     children={([canSubmit, isSubmitting]) => (
