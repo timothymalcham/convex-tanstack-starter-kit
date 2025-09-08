@@ -1,10 +1,33 @@
 {
   "/Users/timothymalcham/dev/convex-tanstack-starter-kit/src/styles/app.css": {
-    "file": "assets/app-BitDazbv.css",
+    "file": "assets/app-DYg4Vm_H.css",
     "src": "/Users/timothymalcham/dev/convex-tanstack-starter-kit/src/styles/app.css"
   },
+  "_button-DvXn5wo_.js": {
+    "file": "assets/button-DvXn5wo_.js",
+    "name": "button",
+    "imports": [
+      "src/client.tsx"
+    ]
+  },
+  "_input-EtIVze3a.js": {
+    "file": "assets/input-EtIVze3a.js",
+    "name": "input",
+    "imports": [
+      "src/client.tsx",
+      "_button-DvXn5wo_.js"
+    ]
+  },
+  "_useForm-yjHLKOsa.js": {
+    "file": "assets/useForm-yjHLKOsa.js",
+    "name": "useForm",
+    "imports": [
+      "src/client.tsx",
+      "_button-DvXn5wo_.js"
+    ]
+  },
   "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/LNWAZHJI.js": {
-    "file": "assets/LNWAZHJI-D6fI8uuq.js",
+    "file": "assets/LNWAZHJI-CkaHiqjl.js",
     "name": "LNWAZHJI",
     "src": "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/LNWAZHJI.js",
     "isDynamicEntry": true,
@@ -13,30 +36,90 @@
     ]
   },
   "src/client.tsx": {
-    "file": "assets/main-DZ0BUplR.js",
+    "file": "assets/main-t1m2ejxw.js",
     "name": "main",
     "src": "src/client.tsx",
     "isEntry": true,
     "dynamicImports": [
       "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/LNWAZHJI.js",
       "src/routes/signin.tsx?tsr-split=component",
-      "src/routes/index.tsx?tsr-split=component"
+      "src/routes/_public.tsx?tsr-split=component",
+      "src/routes/_dashboard.tsx?tsr-split=component",
+      "src/routes/index.tsx?tsr-split=component",
+      "src/routes/_public/verify-email.tsx?tsr-split=component",
+      "src/routes/_public/sign-up.tsx?tsr-split=component",
+      "src/routes/_public/sign-in.tsx?tsr-split=component"
     ],
     "assets": [
-      "assets/app-BitDazbv.css"
+      "assets/app-DYg4Vm_H.css"
     ]
   },
-  "src/routes/index.tsx?tsr-split=component": {
-    "file": "assets/index-gVNp4IGg.js",
-    "name": "index",
-    "src": "src/routes/index.tsx?tsr-split=component",
+  "src/routes/_dashboard.tsx?tsr-split=component": {
+    "file": "assets/_dashboard-CyK1dR_3.js",
+    "name": "_dashboard",
+    "src": "src/routes/_dashboard.tsx?tsr-split=component",
     "isDynamicEntry": true,
     "imports": [
       "src/client.tsx"
     ]
   },
+  "src/routes/_public.tsx?tsr-split=component": {
+    "file": "assets/_public-CyK1dR_3.js",
+    "name": "_public",
+    "src": "src/routes/_public.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx"
+    ]
+  },
+  "src/routes/_public/sign-in.tsx?tsr-split=component": {
+    "file": "assets/sign-in-DpIwcRpF.js",
+    "name": "sign-in",
+    "src": "src/routes/_public/sign-in.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx",
+      "_button-DvXn5wo_.js",
+      "_useForm-yjHLKOsa.js",
+      "_input-EtIVze3a.js"
+    ]
+  },
+  "src/routes/_public/sign-up.tsx?tsr-split=component": {
+    "file": "assets/sign-up-BxL7aI46.js",
+    "name": "sign-up",
+    "src": "src/routes/_public/sign-up.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx",
+      "_button-DvXn5wo_.js",
+      "_useForm-yjHLKOsa.js",
+      "_input-EtIVze3a.js"
+    ]
+  },
+  "src/routes/_public/verify-email.tsx?tsr-split=component": {
+    "file": "assets/verify-email-Dy7rm8Ss.js",
+    "name": "verify-email",
+    "src": "src/routes/_public/verify-email.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx",
+      "_button-DvXn5wo_.js",
+      "_useForm-yjHLKOsa.js"
+    ]
+  },
+  "src/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-CICAY3-o.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/client.tsx",
+      "_button-DvXn5wo_.js",
+      "_input-EtIVze3a.js"
+    ]
+  },
   "src/routes/signin.tsx?tsr-split=component": {
-    "file": "assets/signin-XPchtkdS.js",
+    "file": "assets/signin-Bv_koOzd.js",
     "name": "signin",
     "src": "src/routes/signin.tsx?tsr-split=component",
     "isDynamicEntry": true,

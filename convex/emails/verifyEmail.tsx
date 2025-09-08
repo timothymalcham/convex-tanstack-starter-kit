@@ -1,6 +1,6 @@
 import React from "react";
 import { Heading, Text } from "@react-email/components";
-import { BaseEmail, styles } from "./components/base-email";
+import { BaseEmail, styles } from "./components/baseEmail";
 
 interface VerifyEmailOTPProps {
     code: string;

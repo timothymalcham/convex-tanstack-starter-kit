@@ -3,7 +3,7 @@ import {VerifyEmailForm} from "@/components/verify-email-form";
 import {z} from "zod";
 
 const searchParamsSchema = z.object({
-    email: z.email()
+    email: z.string().email()
 })
 
 export const Route = createFileRoute('/_public/verify-email')({

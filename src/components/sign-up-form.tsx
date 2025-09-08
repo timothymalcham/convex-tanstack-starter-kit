@@ -11,7 +11,7 @@ import {Link, useNavigate} from "@tanstack/react-router";
 
 const schema = z.object({
     name: z.string(),
-    email: z.email('Invalid e-mail address'),
+    email: z.string().email('Invalid e-mail address'),
     password: z.string().min(8, "Password must be at least 8 characters").regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
         "Password must contain at least one uppercase letter, one lowercase letter, and one number",
@@ -31,7 +31,7 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
     return (
         <>
             {field.state.meta.isTouched && !field.state.meta.isValid ? (
-                <em>{field.state.meta.errors.map((err) => err.message).join(',')}</em>
+                <span className="text-red-500 text-xs">{field.state.meta.errors.map((err) => err.message).join(',')}</span>
             ) : null}
             {field.state.meta.isValidating ? 'Validating...' : null}
         </>
@@ -62,12 +62,13 @@ export function SignUpForm({
                 },
                 {
                     onError: (ctx) => {
-                        toast.error(ctx.error.message)
+                        console.error(ctx.error)
+                        toast.error(ctx?.error?.message ?? "There was an error signing up. Please try again.")
                     },
                     onSuccess: async () => {
                         const { error } = await authClient.emailOtp.sendVerificationOtp({
                             email: value.email,
-                            type: "sign-in",
+                            type: "email-verification",
                         });
 
                         if (!error) {
@@ -76,7 +77,8 @@ export function SignUpForm({
                                 search: { email: value.email }
                             })
                         } else {
-                            toast.error(error.message)
+                            console.error(error)
+                            toast.error(error.message ?? "There was an error creating your account.")
                         }
                     }
                 }
@@ -96,9 +98,9 @@ export function SignUpForm({
           }}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
+                <h1 className="text-2xl font-bold">Welcome</h1>
                 <p className="text-muted-foreground text-balance">
-                  Login to your Acme Inc account
+                  Create your account
                 </p>
               </div>
                 <div className="grid gap-3">
@@ -106,7 +108,7 @@ export function SignUpForm({
                         name="name"
                         children={(field) => (
                             <>
-                                <Label htmlFor={field.name}>Email</Label>
+                                <Label htmlFor={field.name}>Full name</Label>
                                 <Input
                                     id={field.name}
                                     name={field.name}
@@ -142,20 +144,11 @@ export function SignUpForm({
                   />
               </div>
               <div className="grid gap-3">
-                <Input id="password" type="password" required />
                   <form.Field
                       name="password"
                       children={(field) => (
                           <>
-                              <div className="flex items-center">
                                   <Label htmlFor={field.name}>Password</Label>
-                                  <a
-                                      href="#"
-                                      className="ml-auto text-sm underline-offset-2 hover:underline"
-                                  >
-                                      Forgot your password?
-                                  </a>
-                              </div>
                               <Input
                                   id={field.name}
                                   type={field.name}
@@ -165,6 +158,7 @@ export function SignUpForm({
                                   onChange={(e) => field.handleChange(e.target.value)}
                                   required
                               />
+                              <span className="text-xs text-muted-foreground">Password must contain at least one uppercase letter, one lowercase letter, and one number</span>
                               <FieldInfo field={field} />
                           </>
                       )}
@@ -199,9 +193,9 @@ export function SignUpForm({
                     )}
                 />
               <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link to="/sign-up" className="underline underline-offset-4">
-                  Sign up
+                Already have an account?{" "}
+                <Link to="/sign-in" className="underline underline-offset-4">
+                  Sign in
                 </Link>
               </div>
             </div>

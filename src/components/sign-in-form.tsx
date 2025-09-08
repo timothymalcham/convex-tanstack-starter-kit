@@ -7,10 +7,10 @@ import {AnyFieldApi, useForm} from '@tanstack/react-form'
 import { authClient } from "@/lib/auth-client";
 import {toast } from "sonner"
 import { z } from 'zod'
-import {Link} from "@tanstack/react-router";
+import {Link, useNavigate} from "@tanstack/react-router";
 
 const schema = z.object({
-    email: z.email('Invalid e-mail address'),
+    email: z.string().email('Invalid e-mail address'),
     password: z.string(),
 })
 
@@ -29,6 +29,7 @@ export function SignInForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+    const navigate = useNavigate()
     const form = useForm({
         defaultValues: {
             email: '',
@@ -45,8 +46,27 @@ export function SignInForm({
                     callbackURL: "/"
                 },
                 {
-                    onError: (ctx) => {
-                        toast.error(ctx.error.message)
+                    onError: async (ctx) => {
+                        console.error(ctx.error)
+
+                        if (ctx?.error?.code === "EMAIL_NOT_VERIFIED") {
+                            const { error: sendVerificationError } = await authClient.emailOtp.sendVerificationOtp({
+                                email: value.email,
+                                type: "sign-in",
+                            });
+
+                            console.error(sendVerificationError);
+
+                            if (!sendVerificationError) {
+                                void navigate({
+                                    to: "/verify-email",
+                                    search: {email: value.email}
+                                })
+                            }
+                        }
+
+                            toast.error(ctx?.error?.message ?? "There was an error signing into your account. Have you signed up?")
+
                     },
                 }
             );

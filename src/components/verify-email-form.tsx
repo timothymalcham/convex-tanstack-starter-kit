@@ -37,43 +37,46 @@ export function VerifyEmailForm({
             onSubmit: schema
         },
         onSubmit: async ({ value }) => {
-            const { error: validCodeError } = await authClient.emailOtp.checkVerificationOtp({
-                email,
-                type: "sign-in",
-                otp: value.code,
-            });
+            // const { error } = await authClient.emailOtp.checkVerificationOtp({
+            //     email,
+            //     type: "email-verification",
+            //     otp: value.code,
+            // })
+            //
+            // if (error) {
+            //     console.log(email, value.code.toString())
+            //     console.error(error)
+            //     toast.error("The code could not be verified");
+            //     return;
+            // }
 
-            if (validCodeError) {
-                console.error(validCodeError)
-                toast.error("Invalid code");
-                return
-            }
-
-            const { error: verificationError } = await authClient.emailOtp.verifyEmail({
+           const { error: verificationError } = await authClient.emailOtp.verifyEmail({
                 email,
-                otp: value.code
+                otp: value.code.toString()
             });
 
             if (verificationError) {
+                console.log(email, value.code.toString())
                 console.error(verificationError)
                 toast.error("Your email could not be verified at this time");
-                return;
+            } else {
+                void navigate({ to: "/" })
             }
 
             // the user has already signed up, so let's sign them in automatically:
-            const { error: signInError } = await authClient.signIn.emailOtp({
-                email,
-                otp: value.code,
-            });
+            // const { error: signInError } = await authClient.signIn.emailOtp({
+            //     email,
+            //     otp: value.code,
+            // });
 
-            if (signInError) {
-                console.error(signInError)
-                toast.error("Authentication failed");
-                return
-            }
+            // if (signInError) {
+            //     console.error(signInError)
+            //     toast.error("Authentication failed");
+            //     return
+            // }
 
             // if all went well, let's redirect them to the dashboard since they are fully authenticated now
-            void navigate({ to: "/" })
+
         },
     })
 
@@ -97,16 +100,15 @@ export function VerifyEmailForm({
                       children={(field) => (
                           <>
                               <Label htmlFor={field.name}>Code</Label>
-                              {/*<Input*/}
-                              {/*    id={field.name}*/}
-                              {/*    name={field.name}*/}
-                              {/*    value={field.state.value}*/}
-                              {/*    placeholder="email@example.com"*/}
-                              {/*    onBlur={field.handleBlur}*/}
-                              {/*    onChange={(e) => field.handleChange(e.target.value)}*/}
-                              {/*    required*/}
-                              {/*/>*/}
-                              <InputOTP maxLength={6}>
+                              <InputOTP
+                                  id={field.name}
+                                  name={field.name}
+                                  value={field.state.value}
+                                  onBlur={field.handleBlur}
+                                  onChange={(value) => field.handleChange(value)}
+                                  maxLength={6}
+                                  required
+                              >
                                   <InputOTPGroup>
                                       <InputOTPSlot index={0} />
                                       <InputOTPSlot index={1} />

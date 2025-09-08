@@ -24,13 +24,11 @@ import { ConvexReactClient } from 'convex/react'
 import { getCookie, getWebRequest } from '@tanstack/react-start/server'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { authClient } from "@/lib/auth-client";
+import appCss from '@/styles/app.css?url'
 import {
     fetchSession,
     getCookieName,
 } from '@/lib/server-auth-utils'
-
-// CSS Imports
-import appCss from '../styles/app.css?url'
 
 // Server side session request
 const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
@@ -96,9 +94,9 @@ function RootComponent() {
             client={context.convexClient}
             authClient={authClient}
         >
-        <RootDocument>
-            <Outlet />
-        </RootDocument>
+            <RootDocument>
+                <Outlet />
+            </RootDocument>
         </ConvexBetterAuthProvider>
     )
 }

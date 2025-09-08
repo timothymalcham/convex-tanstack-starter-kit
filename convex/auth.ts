@@ -29,9 +29,15 @@ export const {
     isAuthenticated,
 } =
     betterAuthComponent.createAuthFunctions<DataModel>({
-        // Must create a user and return the user id
+        // Sync email field between our user table and Better Auth
         onCreateUser: async (ctx, user) => {
-            return ctx.db.insert("users", {});
+            return ctx.db.insert("users", { email: user.email })
+        },
+
+        onUpdateUser: async (ctx, user) => {
+            await ctx.db.patch(user.userId as Id<"users">, {
+                email: user.email,
+            })
         },
 
         // Delete the user when they are deleted from Better Auth
