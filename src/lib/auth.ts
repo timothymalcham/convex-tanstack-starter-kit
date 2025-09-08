@@ -1,10 +1,11 @@
 import { convexAdapter } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
-import { requireEnv } from "@convex-dev/better-auth/utils";
+import {requireEnv, requireMutationCtx} from "@convex-dev/better-auth/utils";
 import { betterAuth } from "better-auth";
 import { emailOTP } from "better-auth/plugins"
 import { betterAuthComponent } from "~/auth";
 import { type GenericCtx } from "~/_generated/server";
+import {sendOTPVerification} from "~/emails";
 
 const siteUrl = requireEnv("SITE_URL");
 
@@ -25,14 +26,11 @@ export const createAuth = (ctx: GenericCtx) =>
             convex(),
             // Handle emailed One Time Passwords (OTPs)
             emailOTP({
-                async sendVerificationOTP({ email, otp, type }) {
-                    if (type === "sign-in") {
-                        // Send the OTP for sign in
-                    } else if (type === "email-verification") {
-                        // Send the OTP for email verification
-                    } else {
-                        // Send the OTP for password reset
-                    }
+                async sendVerificationOTP({ email, otp }) {
+                    await sendOTPVerification(requireMutationCtx(ctx), {
+                        to: email,
+                        code: otp,
+                    })
                 },
             })
         ],
