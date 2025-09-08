@@ -11,10 +11,10 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "..",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["./convex/*"]
+      "@/*": ["../src/*"],
+      "~/*": ["./*"]
     },
 
     /* These compiler options are required by Convex */
