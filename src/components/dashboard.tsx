@@ -40,9 +40,9 @@ export function Dashboard({ children }: { children: React.ReactNode }) {
                         </BreadcrumbList>
                     </Breadcrumb>
                 </header>
-                <main className="flex flex-1 flex-col gap-4 p-4">
+                <section className="flex flex-1 flex-col gap-4 p-4">
                     {children}
-                </main>
+                </section>
             </SidebarInset>
         </SidebarProvider>
     )

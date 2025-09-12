@@ -107,33 +107,15 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
             <head>
                 <HeadContent />
             </head>
-            <body>
-                <div className="root h-screen flex flex-col min-h-0">
-                    <div className="border-b border-slate-800 flex items-center justify-between py-4 px-8 box-border">
-                        <LoadingIndicator />
-                        <div className="flex-grow min-h-0 h-full flex flex-col">
+            <body className="root h-screen flex min-h-0 bg-sidebar">
+                <div className="flex-grow min-h-0 h-full flex flex-col">
                             {children}
-                        </div>
-                    </div>
-                            <Toaster />
                 </div>
+                            <Toaster />
                 <ReactQueryDevtools />
                 <TanStackRouterDevtools position="bottom-right" />
                 <Scripts />
             </body>
         </html>
-    )
-}
-
-function LoadingIndicator() {
-    const isLoading = useRouterState({ select: (s) => s.isLoading })
-    return (
-        <div
-            className={`h-12 transition-all duration-300 ${
-                isLoading ? `opacity-100 delay-300` : `opacity-0 delay-0`
-            }`}
-        >
-            <Loader />
-        </div>
     )
 }
