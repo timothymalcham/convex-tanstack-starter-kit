@@ -3,12 +3,17 @@ import * as React from "react"
 import { LandingPage } from "@/components/marketing/landing-page"
 import { Authenticated, Unauthenticated, AuthLoading } from "convex/react"
 import { Dashboard } from "@/components/dashboard"
+import { convexQuery } from "@convex-dev/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { api } from "~/_generated/api";
+
 
 export const Route = createFileRoute("/")({
     component: RouteComponent,
 })
 
 function RouteComponent() {
+    const { data: user } = useSuspenseQuery(convexQuery(api.users.getUser, {}))
     return (
         <>
             <AuthLoading>
@@ -24,7 +29,7 @@ function RouteComponent() {
                 <LandingPage />
             </Unauthenticated>
             <Authenticated>
-                <Dashboard>
+                <Dashboard user={{ email: user?.email, name: user?.name }}>
                     <Outlet />
                 </Dashboard>
             </Authenticated>

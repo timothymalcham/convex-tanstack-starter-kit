@@ -15,9 +15,10 @@ const zMutation = zCustomMutation(mutation, NoOp)
 export const getUser = zQuery({
     args: {},
     handler: async (ctx) => {
-        const userId = await betterAuthComponent.getAuthUserId(ctx)
-        if (!userId) return null
-        return await ctx.db.get(userId as Id<"users">)
+        const betterAuthUser = await betterAuthComponent.getAuthUser(ctx)
+        if (!betterAuthUser) return null
+        const convexUser = await ctx.db.get(betterAuthUser.userId as Id<"users">)
+        return { ...betterAuthUser, ...convexUser }
     },
 })
 

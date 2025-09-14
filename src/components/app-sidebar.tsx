@@ -11,7 +11,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+    SidebarFooter
 } from "@/components/ui/sidebar"
+import {NavUser} from "@/components/nav-user";
 
 // This is sample data.
 const data = {
@@ -48,7 +50,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ user, ...props }: { user: { avatar?:string, name?: string, email?: string }} & React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -73,6 +75,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroup>
         ))}
       </SidebarContent>
+        <SidebarFooter>
+            <NavUser user={user} />
+        </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )
