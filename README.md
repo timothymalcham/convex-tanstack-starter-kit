@@ -48,3 +48,4 @@ This project was created using `bun init` in bun v1.2.10. [Bun](https://bun.sh) 
 - Sentry setup guide
 - Logging setup guide
 - Analytics setup guide
+- Save sidebar state to cookie
