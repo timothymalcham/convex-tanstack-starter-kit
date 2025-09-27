@@ -17,6 +17,7 @@ This project was created using `bun init` in bun v1.2.10. [Bun](https://bun.sh) 
 
 ## Stack
 
+- Bun
 - Typescript
 - Convex 
 - Tanstack (start/router/query/forms/etc.)
