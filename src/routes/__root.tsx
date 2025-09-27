@@ -4,6 +4,8 @@ import { createRootRouteWithContext } from "@tanstack/react-router";
 import { Outlet, Scripts, HeadContent } from "@tanstack/react-router";
 import * as React from "react";
 
+import appCss from "@/styles/app.css?url"
+
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient;
 }>()({
@@ -18,6 +20,12 @@ export const Route = createRootRouteWithContext<{
             },
             {
                 title: "TanStack Start Starter",
+            },
+        ],
+        links: [
+            {
+                rel: "stylesheet",
+                href: appCss,
             },
         ],
     }),
