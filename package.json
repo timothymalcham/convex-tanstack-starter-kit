@@ -1,8 +1,11 @@
 {
   "name": "convex-tanstack-starter-kit",
-  "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/react": "^19.1.14",
