@@ -16,9 +16,13 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@convex-dev/react-query": "^0.0.0-alpha.11",
+    "@tanstack/react-query": "^5.90.2",
     "@tanstack/react-router": "^1.132.7",
+    "@tanstack/react-router-with-query": "^1.130.17",
     "@tanstack/react-start": "^1.132.15",
     "@vitejs/plugin-react": "^5.0.4",
+    "convex": "^1.27.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "vite": "^7.1.7"
