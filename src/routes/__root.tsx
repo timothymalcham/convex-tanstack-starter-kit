@@ -10,6 +10,8 @@ import { getCookie, getRequest } from '@tanstack/react-start/server'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
 import { authClient } from "@/lib/auth-client";
+import { ThemeProvider, useTheme } from "@/components/theme-provider";
+import { getThemeServerFn } from "@/lib/theme";
 
 import appCss from "@/styles/app.css?url"
 
@@ -61,33 +63,40 @@ export const Route = createRootRouteWithContext<{
         }
         return { userId, token }
     },
+    loader: () => getThemeServerFn(),
     component: RootComponent,
 });
 
 function RootComponent() {
     const context = useRouteContext({ from: Route.id })
+    const data = Route.useLoaderData();
+
     return (
         <ConvexBetterAuthProvider
             client={context.convexClient}
             authClient={authClient}
         >
-            <RootDocument>
-                <Outlet />
-            </RootDocument>
+            <ThemeProvider theme={data}>
+                <RootDocument>
+                    <Outlet />
+                </RootDocument>
+            </ThemeProvider>
         </ConvexBetterAuthProvider>
     )
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+    const { theme } = useTheme();
+
     return (
-        <html>
-        <head>
-            <HeadContent />
-        </head>
-        <body className="bg-neutral-950 text-neutral-50">
-            {children}
-            <Scripts />
-        </body>
+        <html className={theme}>
+            <head>
+                <HeadContent />
+            </head>
+            <body className="bg-neutral-950 text-neutral-50">
+                {children}
+                <Scripts />
+            </body>
         </html>
     );
 }
