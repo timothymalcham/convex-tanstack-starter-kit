@@ -1,19 +1,45 @@
-import { createClient, type GenericCtx } from "@convex-dev/better-auth";
+import {
+    AuthFunctions,
+    createClient,
+    type GenericCtx,
+} from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
-import { components } from "./_generated/api";
-import { DataModel } from "./_generated/dataModel";
+import { components, internal } from "./_generated/api";
+import { DataModel, Id } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import { betterAuth } from "better-auth";
 
 const siteUrl = process.env.SITE_URL!;
 
+const authFunctions: AuthFunctions = internal.auth;
+
 // The component client has methods needed for integrating Convex with Better Auth,
 // as well as helper methods for general use.
-export const authComponent = createClient<DataModel>(components.betterAuth);
+export const authComponent = createClient<DataModel>(components.betterAuth, {
+    authFunctions,
+    triggers: {
+        user: {
+            onCreate: async (ctx, authUser) => {
+                // Any `onCreateUser` logic should be moved here
+                await ctx.db.insert("users", {
+                    email: authUser.email,
+                });
+            },
+            onUpdate: async (ctx, oldUser, newUser) => {
+                // Any `onUpdateUser` logic should be moved here
+            },
+            onDelete: async (ctx, authUser) => {
+                await ctx.db.delete(authUser.userId as Id<"users">);
+            },
+        },
+    },
+});
+
+export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();
 
 export const createAuth = (
     ctx: GenericCtx<DataModel>,
-    { optionsOnly } = { optionsOnly: false },
+    { optionsOnly } = { optionsOnly: false }
 ) => {
     return betterAuth({
         // disable logging when createAuth is called just to generate options.

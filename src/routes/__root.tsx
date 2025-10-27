@@ -16,21 +16,21 @@ import { getThemeServerFn } from "@/lib/theme";
 import appCss from "@/styles/app.css?url"
 
 // Get auth information for SSR using available cookies
-const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
-    const { createAuth } = await import('../../convex/auth')
-    const { session } = await fetchSession(getRequest())
-    const sessionCookieName = getCookieName(createAuth)
-    const token = getCookie(sessionCookieName)
+const fetchAuth = createServerFn({ method: "GET" }).handler(async () => {
+    const { createAuth } = await import("../../convex/auth");
+    const { session } = await fetchSession(getRequest());
+    const sessionCookieName = getCookieName(createAuth);
+    const token = getCookie(sessionCookieName);
     return {
         userId: session?.user.id,
         token,
-    }
-})
+    };
+});
 
 export const Route = createRootRouteWithContext<{
-    queryClient: QueryClient
-    convexClient: ConvexReactClient
-    convexQueryClient: ConvexQueryClient
+    queryClient: QueryClient;
+    convexClient: ConvexReactClient;
+    convexQueryClient: ConvexQueryClient;
 }>()({
     head: () => ({
         meta: [
@@ -55,20 +55,20 @@ export const Route = createRootRouteWithContext<{
     beforeLoad: async (ctx) => {
         // all queries, mutations and action made with TanStack Query will be
         // authenticated by an identity token.
-        const { userId, token } = await fetchAuth()
+        const { userId, token } = await fetchAuth();
         // During SSR only (the only time serverHttpClient exists),
         // set the auth token to make HTTP queries with.
         if (token) {
-            ctx.context.convexQueryClient.serverHttpClient?.setAuth(token)
+            ctx.context.convexQueryClient.serverHttpClient?.setAuth(token);
         }
-        return { userId, token }
+        return { userId, token };
     },
     loader: () => getThemeServerFn(),
     component: RootComponent,
 });
 
 function RootComponent() {
-    const context = useRouteContext({ from: Route.id })
+    const context = useRouteContext({ from: Route.id });
     const data = Route.useLoaderData();
 
     return (
@@ -82,7 +82,7 @@ function RootComponent() {
                 </RootDocument>
             </ThemeProvider>
         </ConvexBetterAuthProvider>
-    )
+    );
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
