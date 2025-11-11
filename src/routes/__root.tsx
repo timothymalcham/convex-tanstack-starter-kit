@@ -93,7 +93,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             <head>
                 <HeadContent />
             </head>
-            <body className="bg-neutral-950 text-neutral-50">
+            <body className="bg-sidebar text-neutral-50">
                 {children}
                 <Scripts />
             </body>
