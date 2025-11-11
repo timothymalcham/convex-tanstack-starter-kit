@@ -3,14 +3,22 @@ import { Home, Inbox, Search, Settings, ChevronDown } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel, SidebarHeader,
+    SidebarGroupLabel,
+    SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/sidebar";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { NavUser } from "@/components/nav-user";
 
 // Menu items.
 const items = [
@@ -34,7 +42,7 @@ const items = [
         url: "#",
         icon: Settings,
     },
-]
+];
 
 export function AppSidebar() {
     return (
@@ -81,7 +89,16 @@ export function AppSidebar() {
                         </SidebarGroupContent>
                     </SidebarGroup>
                 </SidebarContent>
+                <SidebarFooter>
+                    <NavUser
+                        user={{
+                            name: "User Name",
+                            email: "user.name@gmail.com",
+                            avatar: "https://placehold.net/3.png",
+                        }}
+                    />
+                </SidebarFooter>
             </SidebarContent>
         </Sidebar>
-    )
+    );
 }
