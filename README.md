@@ -9,10 +9,21 @@ bun install
 To run:
 
 ```bash
-bun run index.ts
+bun run dev 
+bunx convex dev
 ```
 
-This project was created using `bun init` in bun v1.2.10. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+To build:
+
+```bash
+bun run build
+```
+
+To deploy:
+
+```bash
+bunx convex deploy
+```
 
 
 ## Stack
