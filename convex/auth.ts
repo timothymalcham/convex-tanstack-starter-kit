@@ -18,6 +18,7 @@ const authFunctions: AuthFunctions = internal.auth;
 // as well as helper methods for general use.
 export const authComponent = createClient<DataModel>(components.betterAuth, {
     authFunctions,
+    verbose: true,
     triggers: {
         user: {
             onCreate: async (ctx, authUser) => {
@@ -57,6 +58,24 @@ export const createAuth = (
         emailAndPassword: {
             enabled: true,
             requireEmailVerification: false,
+            minPasswordLength: 8,
+            maxPasswordLength: 128,
+            autoSignIn: true,
+            resetPasswordTokenExpiresIn: 900, // 15 minutes
+            sendResetPassword: async ({ user, url }) => {
+                // await sendResetPassword(requireActionCtx(ctx), {
+                //     to: user.email,
+                //     url,
+                // });
+            },
+            emailVerification: {
+                // sendVerificationEmail: async ({ user, url }) => {
+                //     await sendEmailVerification(requireActionCtx(ctx), {
+                //         to: user.email,
+                //         url,
+                //     });
+                // },
+            },
         },
         plugins: [
             // The Convex plugin is required for Convex compatibility
