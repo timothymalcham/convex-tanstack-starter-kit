@@ -12,6 +12,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
     const { data } = useSuspenseQuery(convexQuery(api.tasks.get, {}));
+    const user = useSuspenseQuery(convexQuery(api.auth.getCurrentUser, {}));
 
     return (
         <SidebarProvider
