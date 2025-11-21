@@ -73,7 +73,7 @@ export function SignUp() {
                                 <Label htmlFor="first-name">First name</Label>
                                 <Input
                                     id="first-name"
-                                    placeholder="Max"
+                                    placeholder="Jane"
                                     required
                                     onChange={(e) => {
                                         setFirstName(e.target.value);
@@ -85,7 +85,7 @@ export function SignUp() {
                                 <Label htmlFor="last-name">Last name</Label>
                                 <Input
                                     id="last-name"
-                                    placeholder="Robinson"
+                                    placeholder="Doe"
                                     required
                                     onChange={(e) => {
                                         setLastName(e.target.value);
@@ -99,7 +99,7 @@ export function SignUp() {
                             <Input
                                 id="email"
                                 type="email"
-                                placeholder="m@example.com"
+                                placeholder="example@email.com"
                                 required
                                 onChange={(e) => {
                                     setEmail(e.target.value);
@@ -158,13 +158,4 @@ export function SignUp() {
             </p>
         </Container>
     );
-}
-
-async function convertImageToBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
 }
