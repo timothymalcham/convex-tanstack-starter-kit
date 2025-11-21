@@ -16,148 +16,155 @@ import { Loader2 } from 'lucide-react'
 import { authClient } from '@/lib/auth-client'
 import { Container } from '@/components/ui/container'
 
-export const Route = createFileRoute('/sign-up')({
-  component: RouteComponent,
-})
+export const Route = createFileRoute("/sign-up")({
+    component: SignUp,
+});
 
-function RouteComponent() {
-    const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [otpLoading, setOtpLoading] = useState(false)
-  const [forgotLoading, setForgotLoading] = useState(false)
+export function SignUp() {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSignIn = async () => {
-        const { data, error } = await authClient.signIn.email(
-        {
-            email,
-            password,
-        },
-        {
-            onRequest: () => {
-                setOtpLoading(true)
+    const handleSignUp = async () => {
+        const { data, error } = await authClient.signUp.email(
+            {
+                email,
+                password,
+                name: `${firstName} ${lastName}`,
             },
-            onSuccess: async (ctx) => {
-                setOtpLoading(false)
-                if (ctx.data.twoFactorRedirect) {
-                    //await navigate({ to: '/verify-2fa' })
-                } else {
-                    await navigate({ to: '/' })
-                }
-            },
-            onError: (ctx) => {
-                setOtpLoading(false)
-                alert(ctx.error.message)
-            },
-        },
-    )
+            {
+                onRequest: () => {
+                    setLoading(true);
+                },
+                onSuccess: async () => {
+                    setLoading(false);
+                    await navigate({ to: "/" });
+                },
+                onError: async (ctx) => {
+                    setLoading(false);
+                    console.error(ctx.error);
+                    console.error("response", ctx.response);
+                    alert(ctx.error.message);
+                },
+            }
+        );
+        console.log({ data, error });
+    };
 
-    console.log({ data, error })
-  }
+    return (
+        <Container>
+            <Card className="max-w-md">
+                <CardHeader>
+                    <CardTitle className="text-lg md:text-xl">
+                        Sign Up
+                    </CardTitle>
+                    <CardDescription className="text-xs md:text-sm">
+                        Enter your information to create an account
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="grid gap-4">
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="grid gap-2">
+                                <Label htmlFor="first-name">First name</Label>
+                                <Input
+                                    id="first-name"
+                                    placeholder="Max"
+                                    required
+                                    onChange={(e) => {
+                                        setFirstName(e.target.value);
+                                    }}
+                                    value={firstName}
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="last-name">Last name</Label>
+                                <Input
+                                    id="last-name"
+                                    placeholder="Robinson"
+                                    required
+                                    onChange={(e) => {
+                                        setLastName(e.target.value);
+                                    }}
+                                    value={lastName}
+                                />
+                            </div>
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="m@example.com"
+                                required
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                }}
+                                value={email}
+                            />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="password">Password</Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                autoComplete="new-password"
+                                placeholder="Password"
+                            />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="password">Confirm Password</Label>
+                            <Input
+                                id="password_confirmation"
+                                type="password"
+                                value={passwordConfirmation}
+                                onChange={(e) =>
+                                    setPasswordConfirmation(e.target.value)
+                                }
+                                autoComplete="new-password"
+                                placeholder="Confirm Password"
+                            />
+                        </div>
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={loading}
+                            onClick={handleSignUp}
+                        >
+                            {loading ? (
+                                <Loader2 size={16} className="animate-spin" />
+                            ) : (
+                                "Create an account"
+                            )}
+                        </Button>
+                    </div>
+                </CardContent>
+            </Card>
 
-  const handleResetPassword = async () => {
-    setForgotLoading(true)
-    try {
-          await authClient.forgetPassword({
-              email,
-              redirectTo: `${import.meta.env.VITE_SITE_URL}/reset-password`,
-          });
-        alert("Check your email for the reset password link!");
-    } catch {
-      alert('Failed to send reset password link. Please try again.')
-    } finally {
-      setForgotLoading(false)
-    }
-  }
+            <p className="text-center mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+                Already have an account?{" "}
+                <Link
+                    to="/sign-in"
+                    className="text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
+                >
+                    Sign in
+                </Link>
+            </p>
+        </Container>
+    );
+}
 
-  return (
-    <Container>
-      <Card className="max-w-md">
-        <CardHeader>
-          <CardTitle className="text-lg md:text-xl">Sign In</CardTitle>
-          <CardDescription className="text-xs md:text-sm">
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-                void handleSignIn()
-            }}
-            className="grid gap-4"
-          >
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                onChange={(e) => {
-                  setEmail(e.target.value)
-                }}
-                value={email}
-              />
-            </div>
-
-
-              <div className="grid gap-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <Button
-                    variant="link"
-                    size="sm"
-                    type="button"
-                    onClick={handleResetPassword}
-                    className="cursor-pointer"
-                    disabled={forgotLoading || !email}
-                  >
-                    {forgotLoading ? (
-                      <Loader2 size={14} className="animate-spin mr-1" />
-                    ) : null}
-                    Forgot your password?
-                  </Button>
-                </div>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="password"
-                  autoComplete="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-
-            <div className="flex flex-col gap-2">
-                <Button type="submit" className="w-full" disabled={otpLoading}>
-                  Sign in with Password
-                </Button>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-neutral-800" />
-              </div>
-              <div className="relative flex justify-center text-xs">
-                <span className="bg-card px-2 text-neutral-500">
-                  or continue with
-                </span>
-              </div>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
-      <p className="text-center mt-4 text-sm text-neutral-600 dark:text-neutral-400">
-        Don&apos;t have an account?{' '}
-        <Link
-          to="/sign-up"
-          className="text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
-        >
-          Sign up
-        </Link>
-      </p>
-    </Container>
-  )
+async function convertImageToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
 }
