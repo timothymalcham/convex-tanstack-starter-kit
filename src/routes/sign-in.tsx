@@ -70,94 +70,89 @@ function SignIn() {
 
     return (
         <Container>
-      <Card className="max-w-md">
-        <CardHeader>
-          <CardTitle className="text-lg md:text-xl">Sign In</CardTitle>
-          <CardDescription className="text-xs md:text-sm">
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              void handleSignIn()
-            }}
-            className="grid gap-4"
-          >
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="example@email.com"
-                required
-                onChange={(e) => {
-                  setEmail(e.target.value)
-                }}
-                value={email}
-              />
-            </div>
+            <Card className="max-w-md">
+                <CardHeader>
+                    <CardTitle className="text-lg md:text-xl">
+                        Sign In
+                    </CardTitle>
+                    <CardDescription className="text-xs md:text-sm">
+                        Enter your email below to login to your account
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            void handleSignIn();
+                        }}
+                        className="grid gap-4"
+                    >
+                        <div className="grid gap-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="example@email.com"
+                                required
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                }}
+                                value={email}
+                            />
+                        </div>
 
-              <div className="grid gap-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <Button
-                    variant="link"
-                    size="sm"
-                    type="button"
-                    onClick={handleResetPassword}
-                    className="cursor-pointer"
-                    disabled={forgotLoading || !email}
-                  >
-                    {forgotLoading ? (
-                      <Loader2 size={14} className="animate-spin mr-1" />
-                    ) : null}
-                    Forgot your password?
-                  </Button>
-                </div>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="password"
-                  autoComplete="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
+                        <div className="grid gap-2">
+                            <div className="flex items-center justify-between">
+                                <Label htmlFor="password">Password</Label>
+                                <Button
+                                    variant="link"
+                                    size="sm"
+                                    type="button"
+                                    onClick={handleResetPassword}
+                                    className="cursor-pointer"
+                                    disabled={forgotLoading || !email}
+                                >
+                                    {forgotLoading ? (
+                                        <Loader2
+                                            size={14}
+                                            className="animate-spin mr-1"
+                                        />
+                                    ) : null}
+                                    Forgot your password?
+                                </Button>
+                            </div>
+                            <Input
+                                id="password"
+                                type="password"
+                                placeholder="password"
+                                autoComplete="password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
 
-            <div className="flex flex-col gap-2">
-                <Button type="submit" className="w-full" disabled={otpLoading}>
-                  Sign in with Password
-                </Button>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter>
-          <div className="flex justify-center w-full border-t py-4">
-            <p className="text-center text-xs text-neutral-500">
-              Powered by{' '}
-              <a
-                href="https://better-auth.com"
-                className="underline"
-                target="_blank"
-              >
-                <span className="dark:text-orange-200/90">better-auth.</span>
-              </a>
+                        <div className="flex flex-col gap-2">
+                            <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={otpLoading}
+                            >
+                                Sign in with Password
+                            </Button>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+            <p className="text-center mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+                Don&apos;t have an account?{" "}
+                <Link
+                    to="/sign-up"
+                    className="text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
+                >
+                    Sign up
+                </Link>
             </p>
-          </div>
-        </CardFooter>
-      </Card>
-      <p className="text-center mt-4 text-sm text-neutral-600 dark:text-neutral-400">
-        Don&apos;t have an account?{' '}
-        <Link
-          to="/sign-up"
-          className="text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
-        >
-          Sign up
-        </Link>
-      </p>
-    </Container>
-    )
+        </Container>
+    );
 }
