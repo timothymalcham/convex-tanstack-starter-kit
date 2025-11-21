@@ -65,6 +65,7 @@ export const Route = createRootRouteWithContext<{
     },
     loader: () => getThemeServerFn(),
     component: RootComponent,
+    notFoundComponent: () => <div>Not Found</div>,
 });
 
 function RootComponent() {

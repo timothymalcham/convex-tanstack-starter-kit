@@ -60,7 +60,7 @@ function SignIn() {
                 email,
                 redirectTo: `${import.meta.env.VITE_SITE_URL}/reset-password`,
             })
-            alert('Check your email for the reset password link!')
+            alert("Check your email for the reset password link!");
         } catch {
             alert('Failed to send reset password link. Please try again.')
         } finally {

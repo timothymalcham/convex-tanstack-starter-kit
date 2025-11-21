@@ -6,8 +6,9 @@ import {
 import { convex } from "@convex-dev/better-auth/plugins";
 import { components, internal } from "./_generated/api";
 import { DataModel, Id } from "./_generated/dataModel";
-import { query } from "./_generated/server";
+import { query, QueryCtx } from "./_generated/server";
 import { betterAuth } from "better-auth";
+import { withoutSystemFields } from "convex-helpers";
 
 const siteUrl = process.env.SITE_URL!;
 
@@ -27,6 +28,9 @@ export const authComponent = createClient<DataModel>(components.betterAuth, {
             },
             onUpdate: async (ctx, oldUser, newUser) => {
                 // Any `onUpdateUser` logic should be moved here
+                await ctx.db.patch(newUser.userId as Id<"users">, {
+                    email: newUser.email,
+                });
             },
             onDelete: async (ctx, authUser) => {
                 await ctx.db.delete(authUser.userId as Id<"users">);
@@ -63,6 +67,18 @@ export const createAuth = (
 
 // Example function for getting the current user
 // Feel free to edit, omit, etc.
+export const safeGetUser = async (ctx: QueryCtx) => {
+    const authUser = await authComponent.safeGetAuthUser(ctx);
+    if (!authUser) {
+        return;
+    }
+    const user = await ctx.db.get(authUser.userId as Id<"users">);
+    if (!user) {
+        return;
+    }
+    return { ...user, ...withoutSystemFields(authUser) };
+};
+
 export const getCurrentUser = query({
     args: {},
     handler: async (ctx) => {
