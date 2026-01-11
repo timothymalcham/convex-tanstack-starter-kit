@@ -22,6 +22,6 @@ export function ThemeProvider({ children, theme }: Props) {
 
 export function useTheme() {
     const val = use(ThemeContext);
-    if (!val) throw new Error("useTheme called outside of ThemeProvider!");
+    // if (!val) throw new Error("useTheme called outside of ThemeProvider!");
     return val;
 }

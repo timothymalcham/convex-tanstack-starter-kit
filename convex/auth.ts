@@ -61,10 +61,7 @@ export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();
 
 export const { getAuthUser } = authComponent.clientApi();
 
-export const createAuth = (
-    ctx: GenericCtx<DataModel>,
-    { optionsOnly } = { optionsOnly: false }
-) => {
+export const createAuth = (ctx: GenericCtx<DataModel>) => {
     return betterAuth({
         baseURL: siteUrl,
         database: authComponent.adapter(ctx),
@@ -72,11 +69,6 @@ export const createAuth = (
             accountLinking: {
                 enabled: true,
             },
-        },
-        // disable logging when createAuth is called just to generate options.
-        // this is not required, but there's a lot of noise in logs without it.
-        logger: {
-            disabled: optionsOnly,
         },
         emailAndPassword: {
             enabled: true,

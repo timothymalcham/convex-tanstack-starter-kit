@@ -1,46 +1,51 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useState } from 'react'
-import { authClient } from '@/lib/auth-client'
-import { Container } from '@/components/ui/container'
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { Container } from "@/components/ui/container";
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
-export const Route = createFileRoute('/forgot-password')({
+export const Route = createFileRoute("/forgot-password")({
     component: ForgotPassword,
-})
+    beforeLoad: ({ context }) => {
+        if (context.isAuthenticated) {
+            throw redirect({ to: "/" });
+        }
+    },
+});
 
 function ForgotPassword() {
-    const [email, setEmail] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [emailSent, setEmailSent] = useState(false)
-    const [error, setError] = useState<string | null>(null)
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [emailSent, setEmailSent] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleResetPassword = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setLoading(true)
-        setError(null)
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
 
         try {
-            await authClient.forgetPassword({
+            await authClient.requestPasswordReset({
                 email,
                 redirectTo: `${import.meta.env.VITE_SITE_URL}/reset-password`,
-            })
-            setEmailSent(true)
+            });
+            setEmailSent(true);
         } catch {
-            setError('Failed to send reset password link. Please try again.')
+            setError("Failed to send reset password link. Please try again.");
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     if (emailSent) {
         return (
@@ -51,8 +56,10 @@ function ForgotPassword() {
                             Check your email
                         </CardTitle>
                         <CardDescription className="text-xs md:text-sm">
-                            We've sent a password reset link to{' '}
-                            <span className="font-medium text-neutral-200">{email}</span>
+                            We've sent a password reset link to{" "}
+                            <span className="font-medium text-neutral-200">
+                                {email}
+                            </span>
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -63,7 +70,7 @@ function ForgotPassword() {
                     </CardContent>
                 </Card>
                 <p className="text-center mt-4 text-sm text-neutral-600 dark:text-neutral-400">
-                    Remember your password?{' '}
+                    Remember your password?{" "}
                     <Link
                         to="/sign-in"
                         className="text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
@@ -72,7 +79,7 @@ function ForgotPassword() {
                     </Link>
                 </p>
             </Container>
-        )
+        );
     }
 
     return (
@@ -83,7 +90,8 @@ function ForgotPassword() {
                         Forgot your password?
                     </CardTitle>
                     <CardDescription className="text-xs md:text-sm">
-                        Enter your email and we'll send you a link to reset your password
+                        Enter your email and we'll send you a link to reset your
+                        password
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -104,18 +112,22 @@ function ForgotPassword() {
                             <p className="text-sm text-red-500">{error}</p>
                         )}
 
-                        <Button type="submit" className="w-full" disabled={loading}>
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={loading}
+                        >
                             {loading ? (
                                 <Loader2 size={16} className="animate-spin" />
                             ) : (
-                                'Send reset link'
+                                "Send reset link"
                             )}
                         </Button>
                     </form>
                 </CardContent>
             </Card>
             <p className="text-center mt-4 text-sm text-neutral-600 dark:text-neutral-400">
-                Remember your password?{' '}
+                Remember your password?{" "}
                 <Link
                     to="/sign-in"
                     className="text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
@@ -124,5 +136,5 @@ function ForgotPassword() {
                 </Link>
             </p>
         </Container>
-    )
+    );
 }

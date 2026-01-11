@@ -19,7 +19,6 @@ export function getRouter() {
     }
     const convexQueryClient = new ConvexQueryClient(convexUrl, {
         expectAuth: true,
-        verbose: true,
     });
 
     const queryClient: QueryClient = new QueryClient({
@@ -29,11 +28,11 @@ export function getRouter() {
                 queryFn: convexQueryClient.queryFn(),
             },
         },
-        mutationCache: new MutationCache({
-            onError: (error) => {
-                // toast(error.message, { className: "bg-red-500 text-white" });
-            },
-        }),
+        // mutationCache: new MutationCache({
+        //     onError: (error) => {
+        //         toast(error.message, { className: "bg-red-500 text-white" });
+        //     },
+        // }),
     });
     convexQueryClient.connect(queryClient);
 

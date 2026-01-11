@@ -5,11 +5,13 @@ import { createServerFn } from "@tanstack/react-start";
 import { ConvexBetterAuthProvider } from "@convex-dev/better-auth/react";
 import type { ConvexQueryClient } from "@convex-dev/react-query";
 import * as React from "react";
-import { ConvexReactClient } from "convex/react";
+import { Suspense } from "react";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { getThemeServerFn } from "@/lib/theme";
 import { authClient } from "@/lib/auth-client";
 import { getToken } from "@/lib/auth-server";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import appCss from "@/styles/app.css?url";
 
@@ -20,7 +22,6 @@ const getAuth = createServerFn({ method: "GET" }).handler(async () => {
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient;
-    convexClient: ConvexReactClient;
     convexQueryClient: ConvexQueryClient;
 }>()({
     head: () => ({
@@ -52,19 +53,21 @@ export const Route = createRootRouteWithContext<{
             // set the auth token to make HTTP queries with.
             ctx.context.convexQueryClient.serverHttpClient?.setAuth(token);
         }
+
+        // Get the theme from the cookie
+        const theme = await getThemeServerFn();
+
         return {
             isAuthenticated: !!token,
             token,
+            theme,
         };
     },
-    loader: () => getThemeServerFn(),
     component: RootComponent,
-    notFoundComponent: () => <div>Not Found</div>,
 });
 
 function RootComponent() {
     const context = useRouteContext({ from: Route.id });
-    const data = Route.useLoaderData();
 
     return (
         <ConvexBetterAuthProvider
@@ -72,25 +75,35 @@ function RootComponent() {
             authClient={authClient}
             initialToken={context.token}
         >
-            <ThemeProvider theme={data}>
-                <RootDocument>
-                    <Outlet />
-                </RootDocument>
-            </ThemeProvider>
+            {/* <ThemeProvider theme={context.theme}> */}
+            <RootDocument>
+                {/* <Suspense
+                        fallback={
+                            <div className="flex h-screen items-center justify-center">
+                                Loading...
+                            </div>
+                        }
+                    > */}
+                <Outlet />
+                {/* </Suspense> */}
+            </RootDocument>
+            {/* </ThemeProvider> */}
         </ConvexBetterAuthProvider>
     );
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-    const { theme } = useTheme();
+    // const { theme } = useTheme();
 
     return (
-        <html className={theme}>
+        <html className="dark">
             <head>
                 <HeadContent />
             </head>
             <body className="bg-sidebar text-neutral-50">
                 {children}
+                <ReactQueryDevtools />
+                <TanStackRouterDevtools position="bottom-right" />
                 <Scripts />
             </body>
         </html>

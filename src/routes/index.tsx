@@ -10,6 +10,11 @@ import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
 
 export const Route = createFileRoute("/")({
     component: Home,
+    beforeLoad: ({ context }) => {
+        if (context.isAuthenticated) {
+            console.log("Authenticated");
+        }
+    },
 });
 
 function Home() {
@@ -57,7 +62,7 @@ function Home() {
                     <SidebarInset>
                         <AppHeader />
                         <main>
-                            <Outlet />
+                            <h1>INDEX</h1>
                         </main>
                     </SidebarInset>
                 </SidebarProvider>

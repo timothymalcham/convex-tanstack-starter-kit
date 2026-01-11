@@ -1,21 +1,26 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button } from '@/components/ui/button'
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { useState } from 'react'
-import { Loader2 } from 'lucide-react'
-import { authClient } from '@/lib/auth-client'
-import { Container } from '@/components/ui/container'
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+    CardDescription,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { Container } from "@/components/ui/container";
 
 export const Route = createFileRoute("/sign-up")({
     component: SignUp,
+    beforeLoad: ({ context }) => {
+        if (context.isAuthenticated) {
+            throw redirect({ to: "/" });
+        }
+    },
 });
 
 type FieldErrors = {
@@ -117,13 +122,17 @@ function SignUp() {
                             Check your email
                         </CardTitle>
                         <CardDescription className="text-xs md:text-sm">
-                            We've sent a verification link to <span className="font-medium text-foreground">{email}</span>
+                            We've sent a verification link to{" "}
+                            <span className="font-medium text-foreground">
+                                {email}
+                            </span>
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <p className="text-sm text-muted-foreground">
-                            Click the link in the email to verify your account and get started.
-                            If you don't see it, check your spam folder.
+                            Click the link in the email to verify your account
+                            and get started. If you don't see it, check your
+                            spam folder.
                         </p>
                     </CardContent>
                 </Card>
@@ -188,12 +197,18 @@ function SignUp() {
                                 required
                                 onChange={(e) => {
                                     setEmail(e.target.value);
-                                    if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+                                    if (errors.email)
+                                        setErrors((prev) => ({
+                                            ...prev,
+                                            email: undefined,
+                                        }));
                                 }}
                                 value={email}
                             />
-                            <p className={`text-xs h-4 ${errors.email ? 'text-destructive' : 'invisible'}`}>
-                                {errors.email || '\u00A0'}
+                            <p
+                                className={`text-xs h-4 ${errors.email ? "text-destructive" : "invisible"}`}
+                            >
+                                {errors.email || "\u00A0"}
                             </p>
                         </div>
                         <div className="grid gap-2">
@@ -204,30 +219,44 @@ function SignUp() {
                                 value={password}
                                 onChange={(e) => {
                                     setPassword(e.target.value);
-                                    if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
+                                    if (errors.password)
+                                        setErrors((prev) => ({
+                                            ...prev,
+                                            password: undefined,
+                                        }));
                                 }}
                                 autoComplete="new-password"
                                 placeholder="Password"
                             />
-                            <p className={`text-xs h-4 ${errors.password ? 'text-destructive' : 'invisible'}`}>
-                                {errors.password || '\u00A0'}
+                            <p
+                                className={`text-xs h-4 ${errors.password ? "text-destructive" : "invisible"}`}
+                            >
+                                {errors.password || "\u00A0"}
                             </p>
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="password_confirmation">Confirm Password</Label>
+                            <Label htmlFor="password_confirmation">
+                                Confirm Password
+                            </Label>
                             <Input
                                 id="password_confirmation"
                                 type="password"
                                 value={passwordConfirmation}
                                 onChange={(e) => {
                                     setPasswordConfirmation(e.target.value);
-                                    if (errors.passwordConfirmation) setErrors((prev) => ({ ...prev, passwordConfirmation: undefined }));
+                                    if (errors.passwordConfirmation)
+                                        setErrors((prev) => ({
+                                            ...prev,
+                                            passwordConfirmation: undefined,
+                                        }));
                                 }}
                                 autoComplete="new-password"
                                 placeholder="Confirm Password"
                             />
-                            <p className={`text-xs h-4 ${errors.passwordConfirmation ? 'text-destructive' : 'invisible'}`}>
-                                {errors.passwordConfirmation || '\u00A0'}
+                            <p
+                                className={`text-xs h-4 ${errors.passwordConfirmation ? "text-destructive" : "invisible"}`}
+                            >
+                                {errors.passwordConfirmation || "\u00A0"}
                             </p>
                         </div>
                         <Button
