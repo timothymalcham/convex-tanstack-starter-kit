@@ -1,13 +1,11 @@
-import { createFileRoute, Link, redirect } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect, useNavigate } from '@tanstack/react-router'
 import { authClient } from "@/lib/auth-client";
-import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Container } from "@/components/ui/container";
 import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -29,8 +27,7 @@ function SignIn() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [otpLoading, setOtpLoading] = useState(false);
-    const [forgotLoading, setForgotLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleSignIn = async () => {
         const { data, error } = await authClient.signIn.email(
@@ -40,10 +37,10 @@ function SignIn() {
             },
             {
                 onRequest: () => {
-                    setOtpLoading(true);
+                    setLoading(true);
                 },
                 onSuccess: async (ctx) => {
-                    setOtpLoading(false);
+                    setLoading(false);
                     if (ctx.data.twoFactorRedirect) {
                         //await navigate({ to: '/verify-2fa' })
                     } else {
@@ -51,7 +48,7 @@ function SignIn() {
                     }
                 },
                 onError: (ctx) => {
-                    setOtpLoading(false);
+                    setLoading(false);
                     alert(ctx.error.message);
                 },
             }
@@ -96,22 +93,12 @@ function SignIn() {
                         <div className="grid gap-2">
                             <div className="flex items-center justify-between">
                                 <Label htmlFor="password">Password</Label>
-                                <Button
-                                    variant="link"
-                                    size="sm"
-                                    type="button"
-                                    onClick={handleResetPassword}
-                                    className="cursor-pointer"
-                                    disabled={forgotLoading || !email}
+                                <Link
+                                    to="/forgot-password"
+                                    className="text-sm text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
                                 >
-                                    {forgotLoading ? (
-                                        <Loader2
-                                            size={14}
-                                            className="animate-spin mr-1"
-                                        />
-                                    ) : null}
                                     Forgot your password?
-                                </Button>
+                                </Link>
                             </div>
                             <Input
                                 id="password"
@@ -124,15 +111,17 @@ function SignIn() {
                             />
                         </div>
 
-                        <div className="flex flex-col gap-2">
-                            <Button
-                                type="submit"
-                                className="w-full"
-                                disabled={otpLoading}
-                            >
-                                Sign in with Password
-                            </Button>
-                        </div>
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <Loader2 size={16} className="animate-spin" />
+                            ) : (
+                                "Sign in"
+                            )}
+                        </Button>
                     </form>
                 </CardContent>
             </Card>
