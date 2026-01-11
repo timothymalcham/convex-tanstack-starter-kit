@@ -7,6 +7,9 @@ import { v } from "convex/values"
 import { render, pretty } from "@react-email/render"
 import { Text, Html, Button, Section } from "@react-email/components"
 
+// Check if Resend is configured - if not, we'll log URLs to console for local dev
+const isResendConfigured = !!process.env.RESEND_API_KEY
+
 export const resend: Resend = new Resend(components.resend, {
     testMode: false,
 })
@@ -25,6 +28,17 @@ export const sendVerificationEmail = internalAction({
     },
     returns: v.null(),
     handler: async (ctx, args) => {
+        // Dev mode: log URL to console instead of sending email
+        if (!isResendConfigured) {
+            console.log("\n" + "=".repeat(60))
+            console.log("📧 VERIFICATION EMAIL (dev mode - no email sent)")
+            console.log("=".repeat(60))
+            console.log(`To: ${args.email}`)
+            console.log(`Verification URL: ${args.url}`)
+            console.log("=".repeat(60) + "\n")
+            return null
+        }
+
         const html = await pretty(
             await render(
                 <Html>
@@ -96,6 +110,17 @@ export const sendPasswordResetEmail = internalAction({
     },
     returns: v.null(),
     handler: async (ctx, args) => {
+        // Dev mode: log URL to console instead of sending email
+        if (!isResendConfigured) {
+            console.log("\n" + "=".repeat(60))
+            console.log("🔐 PASSWORD RESET EMAIL (dev mode - no email sent)")
+            console.log("=".repeat(60))
+            console.log(`To: ${args.email}`)
+            console.log(`Reset URL: ${args.url}`)
+            console.log("=".repeat(60) + "\n")
+            return null
+        }
+
         const html = await pretty(
             await render(
                 <Html>
