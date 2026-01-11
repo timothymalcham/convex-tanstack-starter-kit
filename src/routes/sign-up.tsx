@@ -20,7 +20,7 @@ export const Route = createFileRoute("/sign-up")({
     component: SignUp,
 });
 
-export function SignUp() {
+function SignUp() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
