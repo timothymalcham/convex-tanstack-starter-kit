@@ -18,6 +18,36 @@ export const Route = createFileRoute("/sign-up")({
     component: SignUp,
 });
 
+type FieldErrors = {
+    email?: string;
+    password?: string;
+    passwordConfirmation?: string;
+};
+
+function parseErrorMessage(message: string): FieldErrors {
+    const errors: FieldErrors = {};
+
+    if (message.includes("Invalid email") || message.includes("[body.email]")) {
+        errors.email = "Please enter a valid email address";
+    }
+    if (message.includes("[body.password]") || message.includes("Too small")) {
+        errors.password = "Password is required";
+    }
+    if (message.includes("Password must be at least")) {
+        errors.password = message;
+    }
+    if (message.includes("User already exists")) {
+        errors.email = "An account with this email already exists";
+    }
+
+    // If we couldn't parse specific errors, show the original
+    if (Object.keys(errors).length === 0) {
+        errors.email = message;
+    }
+
+    return errors;
+}
+
 function SignUp() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -26,8 +56,34 @@ function SignUp() {
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [loading, setLoading] = useState(false);
     const [signUpComplete, setSignUpComplete] = useState(false);
+    const [errors, setErrors] = useState<FieldErrors>({});
+
+    const validate = (): boolean => {
+        const newErrors: FieldErrors = {};
+
+        if (!email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            newErrors.email = "Please enter a valid email address";
+        }
+
+        if (!password) {
+            newErrors.password = "Password is required";
+        } else if (password.length < 8) {
+            newErrors.password = "Password must be at least 8 characters";
+        }
+
+        if (password && password !== passwordConfirmation) {
+            newErrors.passwordConfirmation = "Passwords do not match";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSignUp = async () => {
+        if (!validate()) return;
+
         const { data, error } = await authClient.signUp.email(
             {
                 email,
@@ -37,6 +93,7 @@ function SignUp() {
             {
                 onRequest: () => {
                     setLoading(true);
+                    setErrors({});
                 },
                 onSuccess: async () => {
                     setLoading(false);
@@ -44,9 +101,7 @@ function SignUp() {
                 },
                 onError: async (ctx) => {
                     setLoading(false);
-                    console.error(ctx.error);
-                    console.error("response", ctx.response);
-                    alert(ctx.error.message);
+                    setErrors(parseErrorMessage(ctx.error.message));
                 },
             }
         );
@@ -62,11 +117,11 @@ function SignUp() {
                             Check your email
                         </CardTitle>
                         <CardDescription className="text-xs md:text-sm">
-                            We've sent a verification link to <span className="font-medium text-neutral-200">{email}</span>
+                            We've sent a verification link to <span className="font-medium text-foreground">{email}</span>
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-sm text-neutral-400">
+                        <p className="text-sm text-muted-foreground">
                             Click the link in the email to verify your account and get started.
                             If you don't see it, check your spam folder.
                         </p>
@@ -133,9 +188,13 @@ function SignUp() {
                                 required
                                 onChange={(e) => {
                                     setEmail(e.target.value);
+                                    if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
                                 }}
                                 value={email}
                             />
+                            <p className={`text-xs h-4 ${errors.email ? 'text-destructive' : 'invisible'}`}>
+                                {errors.email || '\u00A0'}
+                            </p>
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="password">Password</Label>
@@ -143,23 +202,33 @@ function SignUp() {
                                 id="password"
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
+                                }}
                                 autoComplete="new-password"
                                 placeholder="Password"
                             />
+                            <p className={`text-xs h-4 ${errors.password ? 'text-destructive' : 'invisible'}`}>
+                                {errors.password || '\u00A0'}
+                            </p>
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="password">Confirm Password</Label>
+                            <Label htmlFor="password_confirmation">Confirm Password</Label>
                             <Input
                                 id="password_confirmation"
                                 type="password"
                                 value={passwordConfirmation}
-                                onChange={(e) =>
-                                    setPasswordConfirmation(e.target.value)
-                                }
+                                onChange={(e) => {
+                                    setPasswordConfirmation(e.target.value);
+                                    if (errors.passwordConfirmation) setErrors((prev) => ({ ...prev, passwordConfirmation: undefined }));
+                                }}
                                 autoComplete="new-password"
                                 placeholder="Confirm Password"
                             />
+                            <p className={`text-xs h-4 ${errors.passwordConfirmation ? 'text-destructive' : 'invisible'}`}>
+                                {errors.passwordConfirmation || '\u00A0'}
+                            </p>
                         </div>
                         <Button
                             type="submit"
