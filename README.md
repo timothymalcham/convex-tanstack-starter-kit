@@ -3,32 +3,31 @@
 To install dependencies:
 
 ```bash
-bun install
+npm install
 ```
 
 To run:
 
 ```bash
-bun run dev 
-bunx convex dev
+npm run dev 
+npx convex dev
 ```
 
 To build:
 
 ```bash
-bun run build
+npm run build
 ```
 
 To deploy:
 
 ```bash
-bunx convex deploy
+npx convex deploy
 ```
 
 
 ## Stack
 
-- Bun
 - Typescript
 - Convex 
 - Tanstack (start/router/query/forms/etc.)

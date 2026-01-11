@@ -1,30 +1,21 @@
 /// <reference types="vite/client" />
 import { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, useRouteContext, Outlet, Scripts, HeadContent } from "@tanstack/react-router";
-import {  createServerFn,
-} from '@tanstack/react-start'
+import { createServerFn } from "@tanstack/react-start";
+import { ConvexBetterAuthProvider } from "@convex-dev/better-auth/react";
+import type { ConvexQueryClient } from "@convex-dev/react-query";
 import * as React from "react";
-import { ConvexQueryClient } from '@convex-dev/react-query'
-import { ConvexReactClient } from 'convex/react'
-import { getCookie, getRequest } from '@tanstack/react-start/server'
-import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
-import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
-import { authClient } from "@/lib/auth-client";
+import { ConvexReactClient } from "convex/react";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { getThemeServerFn } from "@/lib/theme";
+import { authClient } from "@/lib/auth-client";
+import { getToken } from "@/lib/auth-server";
 
-import appCss from "@/styles/app.css?url"
+import appCss from "@/styles/app.css?url";
 
 // Get auth information for SSR using available cookies
-const fetchAuth = createServerFn({ method: "GET" }).handler(async () => {
-    const { createAuth } = await import("../../convex/auth");
-    const { session } = await fetchSession(getRequest());
-    const sessionCookieName = getCookieName(createAuth);
-    const token = getCookie(sessionCookieName);
-    return {
-        userId: session?.user.id,
-        token,
-    };
+const getAuth = createServerFn({ method: "GET" }).handler(async () => {
+    return await getToken();
 });
 
 export const Route = createRootRouteWithContext<{
@@ -53,15 +44,18 @@ export const Route = createRootRouteWithContext<{
         ],
     }),
     beforeLoad: async (ctx) => {
-        // all queries, mutations and action made with TanStack Query will be
-        // authenticated by an identity token.
-        const { userId, token } = await fetchAuth();
-        // During SSR only (the only time serverHttpClient exists),
-        // set the auth token to make HTTP queries with.
+        const token = await getAuth();
+        // all queries, mutations and actions through TanStack Query will be
+        // authenticated during SSR if we have a valid token
         if (token) {
+            // During SSR only (the only time serverHttpClient exists),
+            // set the auth token to make HTTP queries with.
             ctx.context.convexQueryClient.serverHttpClient?.setAuth(token);
         }
-        return { userId, token };
+        return {
+            isAuthenticated: !!token,
+            token,
+        };
     },
     loader: () => getThemeServerFn(),
     component: RootComponent,
@@ -74,8 +68,9 @@ function RootComponent() {
 
     return (
         <ConvexBetterAuthProvider
-            client={context.convexClient}
+            client={context.convexQueryClient.convexClient}
             authClient={authClient}
+            initialToken={context.token}
         >
             <ThemeProvider theme={data}>
                 <RootDocument>
