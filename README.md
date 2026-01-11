@@ -39,7 +39,6 @@ npx convex deploy
 ## TODO
 
 - Reset Passwords (via Better Auth component)
-- Verify email - show link to page to verify email instead of entering in code
 - Account page
 - Account page: Change password
 - Subscriptions / Billing page - show subscription 
