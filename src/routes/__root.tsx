@@ -75,28 +75,20 @@ function RootComponent() {
             authClient={authClient}
             initialToken={context.token}
         >
-            {/* <ThemeProvider theme={context.theme}> */}
-            <RootDocument>
-                {/* <Suspense
-                        fallback={
-                            <div className="flex h-screen items-center justify-center">
-                                Loading...
-                            </div>
-                        }
-                    > */}
-                <Outlet />
-                {/* </Suspense> */}
-            </RootDocument>
-            {/* </ThemeProvider> */}
+            <ThemeProvider theme={context.theme}>
+                <RootDocument>
+                    <Outlet />
+                </RootDocument>
+            </ThemeProvider>
         </ConvexBetterAuthProvider>
     );
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-    // const { theme } = useTheme();
+    const { theme } = useTheme();
 
     return (
-        <html className="dark">
+        <html className={theme}>
             <head>
                 <HeadContent />
             </head>
