@@ -17,7 +17,6 @@ function Home() {
 
     return (
         <>
-            <div>MEOW</div>
             <AuthLoading>
                 <div>Loading...</div>
             </AuthLoading>
@@ -57,9 +56,7 @@ function Home() {
                     <AppSidebar />
                     <SidebarInset>
                         <AppHeader />
-                        <main>
-                            <h1>INDEX</h1>
-                        </main>
+                        <main> </main>
                     </SidebarInset>
                 </SidebarProvider>
             </Authenticated>

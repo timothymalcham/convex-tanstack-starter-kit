@@ -85,10 +85,10 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-    const { theme } = useTheme();
+    const { resolvedTheme } = useTheme();
 
     return (
-        <html className={theme}>
+        <html className={resolvedTheme}>
             <head>
                 <HeadContent />
             </head>
