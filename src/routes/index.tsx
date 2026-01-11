@@ -10,18 +10,14 @@ import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
 
 export const Route = createFileRoute("/")({
     component: Home,
-    beforeLoad: ({ context }) => {
-        if (context.isAuthenticated) {
-            console.log("Authenticated");
-        }
-    },
 });
 
 function Home() {
-    const { data } = useSuspenseQuery(convexQuery(api.tasks.get, {}));
+    // const { data } = useSuspenseQuery(convexQuery(api.tasks.get, {}));
 
     return (
         <>
+            <div>MEOW</div>
             <AuthLoading>
                 <div>Loading...</div>
             </AuthLoading>
