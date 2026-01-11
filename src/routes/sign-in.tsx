@@ -1,29 +1,36 @@
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
-import { authClient } from '@/lib/auth-client'
-import { useNavigate } from '@tanstack/react-router'
-import { useState } from 'react'
-import { Container } from '@/components/ui/container'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
+import { authClient } from "@/lib/auth-client";
+import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { Container } from "@/components/ui/container";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
-export const Route = createFileRoute('/sign-in')({
-  component: SignIn,
-  beforeLoad: ({ context }) => {
-    if (context.userId) {
-      throw redirect({ to: '/' })
-    }
-  },
-})
+export const Route = createFileRoute("/sign-in")({
+    component: SignIn,
+    beforeLoad: ({ context }) => {
+        if (context.isAuthenticated) {
+            throw redirect({ to: "/" });
+        }
+    },
+});
 
 function SignIn() {
-    const navigate = useNavigate()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [otpLoading, setOtpLoading] = useState(false)
-     const [forgotLoading, setForgotLoading] = useState(false)
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [otpLoading, setOtpLoading] = useState(false);
+    const [forgotLoading, setForgotLoading] = useState(false);
 
     const handleSignIn = async () => {
         const { data, error } = await authClient.signIn.email(
@@ -33,40 +40,25 @@ function SignIn() {
             },
             {
                 onRequest: () => {
-                    setOtpLoading(true)
+                    setOtpLoading(true);
                 },
                 onSuccess: async (ctx) => {
-                    setOtpLoading(false)
+                    setOtpLoading(false);
                     if (ctx.data.twoFactorRedirect) {
                         //await navigate({ to: '/verify-2fa' })
                     } else {
-                        await navigate({ to: '/' })
+                        await navigate({ to: "/" });
                     }
                 },
                 onError: (ctx) => {
-                    setOtpLoading(false)
-                    alert(ctx.error.message)
+                    setOtpLoading(false);
+                    alert(ctx.error.message);
                 },
-            },
-        )
+            }
+        );
 
-        console.log({ data, error })
-   }
-
-   const handleResetPassword = async () => {
-        setForgotLoading(true)
-        try {
-            await authClient.forgetPassword({
-                email,
-                redirectTo: `${import.meta.env.VITE_SITE_URL}/reset-password`,
-            })
-            alert("Check your email for the reset password link!");
-        } catch {
-            alert('Failed to send reset password link. Please try again.')
-        } finally {
-            setForgotLoading(false)
-        }
-   }
+        console.log({ data, error });
+    };
 
     return (
         <Container>

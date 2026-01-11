@@ -1,5 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -7,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardFooter,
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -27,7 +25,7 @@ function SignUp() {
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const [signUpComplete, setSignUpComplete] = useState(false);
 
     const handleSignUp = async () => {
         const { data, error } = await authClient.signUp.email(
@@ -42,7 +40,7 @@ function SignUp() {
                 },
                 onSuccess: async () => {
                     setLoading(false);
-                    await navigate({ to: "/" });
+                    setSignUpComplete(true);
                 },
                 onError: async (ctx) => {
                     setLoading(false);
@@ -54,6 +52,38 @@ function SignUp() {
         );
         console.log({ data, error });
     };
+
+    if (signUpComplete) {
+        return (
+            <Container>
+                <Card className="max-w-md">
+                    <CardHeader>
+                        <CardTitle className="text-lg md:text-xl">
+                            Check your email
+                        </CardTitle>
+                        <CardDescription className="text-xs md:text-sm">
+                            We've sent a verification link to <span className="font-medium text-neutral-200">{email}</span>
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm text-neutral-400">
+                            Click the link in the email to verify your account and get started.
+                            If you don't see it, check your spam folder.
+                        </p>
+                    </CardContent>
+                </Card>
+                <p className="text-center mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+                    Already verified?{" "}
+                    <Link
+                        to="/sign-in"
+                        className="text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-200 underline"
+                    >
+                        Sign in
+                    </Link>
+                </p>
+            </Container>
+        );
+    }
 
     return (
         <Container>
