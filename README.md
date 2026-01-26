@@ -31,6 +31,15 @@ To deploy:
 npx convex deploy
 ```
 
+If you ever need to update the local Better Auth schema, run:
+
+```bash
+cd convex/betterAuth
+npx @better-auth/cli generate -y
+```
+
+Note: certain options changes may require schema generation. The Better Auth docs will often note when this is the case.
+
 ## Stack
 
 - Typescript
@@ -43,6 +52,7 @@ npx convex deploy
 
 ## TODO
 
+- [ ] [Local Better Auth setup](https://labs.convex.dev/better-auth/features/local-install)
 - [x] Reset Passwords (via Better Auth component)
 - [ ] Account page
 - [ ] Account page: Change password

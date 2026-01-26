@@ -7,62 +7,71 @@ import { convex } from "@convex-dev/better-auth/plugins";
 import { components, internal } from "./_generated/api";
 import { DataModel, Id } from "./_generated/dataModel";
 import { internalAction, query, QueryCtx } from "./_generated/server";
-import { betterAuth } from "better-auth";
+import { betterAuth, type BetterAuthOptions } from "better-auth/minimal";
 import { withoutSystemFields } from "convex-helpers";
 import authConfig from "./auth.config";
 import { ConvexError } from "convex/values";
+import betterAuthSchema from "./betterAuth/schema";
 
-const siteUrl = process.env.SITE_URL!;
+const siteUrl = process.env.SITE_URL;
 
 const authFunctions: AuthFunctions = internal.auth;
 
 // The component client has methods needed for integrating Convex with Better Auth,
 // as well as helper methods for general use.
-export const authComponent = createClient<DataModel>(components.betterAuth, {
-    authFunctions,
-    verbose: false,
-    triggers: {
-        user: {
-            onCreate: async (ctx, authUser) => {
-                const userId = await ctx.db.insert("users", {
-                    email: authUser.email,
-                });
-                // TODO: remove the deprecated setUserId call
-                await authComponent.setUserId(ctx, authUser._id, userId);
-            },
-            onUpdate: async (ctx, newUser, oldUser) => {
-                if (oldUser.email === newUser.email) {
-                    return;
-                }
+export const authComponent = createClient<DataModel, typeof betterAuthSchema>(
+    components.betterAuth,
+    {
+        authFunctions,
+        verbose: false,
+        local: {
+            schema: betterAuthSchema,
+        },
+        triggers: {
+            user: {
+                onCreate: async (ctx, authUser) => {
+                    const userId = await ctx.db.insert("users", {
+                        email: authUser.email,
+                    });
+                    // TODO: remove the deprecated setUserId call
+                    await authComponent.setUserId(ctx, authUser._id, userId);
+                },
+                onUpdate: async (ctx, newUser, oldUser) => {
+                    if (oldUser.email === newUser.email) {
+                        return;
+                    }
 
-                await ctx.db.patch(newUser.userId as Id<"users">, {
-                    email: newUser.email,
-                });
-            },
-            onDelete: async (ctx, authUser) => {
-                const user = await ctx.db.get(authUser.userId as Id<"users">);
-                if (!user) return;
+                    await ctx.db.patch(newUser.userId as Id<"users">, {
+                        email: newUser.email,
+                    });
+                },
+                onDelete: async (ctx, authUser) => {
+                    const user = await ctx.db.get(
+                        authUser.userId as Id<"users">,
+                    );
+                    if (!user) return;
 
-                // Cascade-style deletions here for user data
-                // const todos = await ctx.db
-                //     .query("todos")
-                //     .withIndex("userId", (q) => q.eq("userId", user._id))
-                //     .collect()
-                // await asyncMap(todos, async (todo) => {
-                //     await ctx.db.delete(todo._id)
-                // })
-                // await ctx.db.delete(user._id)
+                    // Cascade-style deletions here for user data
+                    // const todos = await ctx.db
+                    //     .query("todos")
+                    //     .withIndex("userId", (q) => q.eq("userId", user._id))
+                    //     .collect()
+                    // await asyncMap(todos, async (todo) => {
+                    //     await ctx.db.delete(todo._id)
+                    // })
+                    // await ctx.db.delete(user._id)
+                },
             },
         },
     },
-});
+);
 
 export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();
 
 export const { getAuthUser } = authComponent.clientApi();
 
-export const createAuth = (ctx: GenericCtx<DataModel>) => {
-    return betterAuth({
+export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
+    ({
         baseURL: siteUrl,
         database: authComponent.adapter(ctx),
         account: {
@@ -126,8 +135,10 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
                 jwksRotateOnTokenGenerationError: true,
             }),
         ],
-    });
-};
+    }) satisfies BetterAuthOptions;
+
+export const createAuth = (ctx: GenericCtx<DataModel>) =>
+    betterAuth(createAuthOptions(ctx));
 
 export const rotateKeys = internalAction({
     args: {},
