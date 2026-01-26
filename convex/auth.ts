@@ -20,7 +20,7 @@ const authFunctions: AuthFunctions = internal.auth;
 // as well as helper methods for general use.
 export const authComponent = createClient<DataModel>(components.betterAuth, {
     authFunctions,
-    verbose: true,
+    verbose: false,
     triggers: {
         user: {
             onCreate: async (ctx, authUser) => {
@@ -81,7 +81,7 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
                 // scheduler is only available in action/mutation contexts
                 // This callback is only invoked during auth flows (HTTP actions)
                 if ("scheduler" in ctx) {
-                    ctx.scheduler
+                    await ctx.scheduler
                         .runAfter(0, internal.emails.sendPasswordResetEmail, {
                             email: user.email,
                             url,
@@ -89,7 +89,7 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
                         .catch((err) => {
                             console.error(
                                 "sendPasswordResetEmail scheduler failed",
-                                { err, email: user.email }
+                                { err, email: user.email },
                             );
                         });
                 }
@@ -102,7 +102,7 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
                 // scheduler is only available in action/mutation contexts
                 // This callback is only invoked during auth flows (HTTP actions)
                 if ("scheduler" in ctx) {
-                    ctx.scheduler
+                    await ctx.scheduler
                         .runAfter(0, internal.emails.sendVerificationEmail, {
                             email: user.email,
                             url,
@@ -110,7 +110,7 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
                         .catch((err) => {
                             console.error(
                                 "sendVerificationEmail scheduler failed",
-                                { err, email: user.email }
+                                { err, email: user.email },
                             );
                         });
                 }

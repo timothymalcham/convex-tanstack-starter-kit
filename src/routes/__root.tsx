@@ -7,6 +7,7 @@ import type { ConvexQueryClient } from "@convex-dev/react-query";
 import * as React from "react";
 import { Suspense } from "react";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { getThemeServerFn } from "@/lib/theme";
 import { authClient } from "@/lib/auth-client";
 import { getToken } from "@/lib/auth-server";
@@ -94,6 +95,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             </head>
             <body className="bg-sidebar text-neutral-50">
                 {children}
+                <Toaster />
                 <ReactQueryDevtools />
                 <TanStackRouterDevtools position="bottom-right" />
                 <Scripts />

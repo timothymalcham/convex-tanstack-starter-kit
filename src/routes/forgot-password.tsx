@@ -35,9 +35,13 @@ function ForgotPassword() {
         setError(null);
 
         try {
+            const base =
+                import.meta.env.VITE_SITE_URL ??
+                (typeof window !== "undefined" ? window.location.origin : "");
+            const redirectTo = new URL("/reset-password", base).toString();
             await authClient.requestPasswordReset({
                 email,
-                redirectTo: `${import.meta.env.VITE_SITE_URL}/reset-password`,
+                redirectTo,
             });
             setEmailSent(true);
         } catch {

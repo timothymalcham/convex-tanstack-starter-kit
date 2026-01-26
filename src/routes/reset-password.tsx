@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useSearch } from '@tanstack/react-router'
-import { redirect } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import {
   Card,
   CardContent,
@@ -15,6 +15,7 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import { authClient } from '@/lib/auth-client'
+import { toast } from 'sonner'
 
 export const Route = createFileRoute('/reset-password')({
   component: ResetPassword,
@@ -24,6 +25,7 @@ export function ResetPassword() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
   const searchParams = useSearch({ strict: false })
   const token: string | undefined = (searchParams as any).token
 
@@ -32,7 +34,7 @@ export function ResetPassword() {
     if (!token) return
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match')
+      toast.error('Passwords do not match')
       return
     }
 
@@ -47,11 +49,12 @@ export function ResetPassword() {
         },
         onSuccess: () => {
           setLoading(false)
-          redirect({ to: '/' })
+          toast.success('Password reset successfully. Please sign in.')
+          navigate({ to: '/sign-in' })
         },
         onError: (ctx) => {
           setLoading(false)
-          alert(ctx.error.message)
+          toast.error(ctx.error.message)
         },
       },
     )
