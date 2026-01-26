@@ -1,8 +1,12 @@
-# convex-tanstack-starter-kit
+# Legend Stack
+
+A highly opinionated "batteries included" starter kit that lets devs build serious software quickly, using Convex, Tanstack Start, and Effect.
+
+Heavily inspired by [Epic Stack](https://github.com/epicweb-dev/epic-stack).
 
 ## WARNING
 
-This is a work in progress and is not yet ready for production use. My goal is to create a highly opinionated "batteries included" starter kit that lets devs build serious software quickly, using Convex, Tanstack Start, and Effect. I'm actively working on finishing up the initial work, docs, and instructions.
+This is a work in progress and is not yet ready for production use. I'm actively working on finishing up the initial work, docs, and instructions.
 
 ## Getting Started
 
