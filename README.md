@@ -52,8 +52,14 @@ Note: certain options changes may require schema generation. The Better Auth doc
 
 ## TODO
 
-- [ ] [Local Better Auth setup](https://labs.convex.dev/better-auth/features/local-install)
+- [x] [Local Better Auth setup](https://labs.convex.dev/better-auth/features/local-install)
+- [x] Sign In / Sign Up (via Better Auth component)
 - [x] Reset Passwords (via Better Auth component)
+- [x] Email Verification (via Better Auth component)
+- [x] Sign Out (via Better Auth component)
+- [ ] Oxfmt & Oxlint setup
+- [ ] Lint stage pre-commit hook
+- [ ] Convex Effect setup
 - [ ] Account page
 - [ ] Account page: Change password
 - [ ] Subscriptions / Billing page - show subscription
@@ -65,7 +71,6 @@ Note: certain options changes may require schema generation. The Better Auth doc
 - [ ] Presence Component
 - [ ] Team / Org setup
 - [ ] Dark / light mode
-- [ ] User Impersonation
 - [ ] Social Sign-On: Google / Github / Apple
 - [ ] Last Login Method (Better Auth utility w/social sign-on)
 - [ ] Two factor auth (Better Auth util)
